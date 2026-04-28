@@ -175,6 +175,24 @@
     input:checked + .toggle-slider { background: var(--green); }
     input:checked + .toggle-slider::before { transform: translateX(20px); }
 
+    /* CATEGORIES ADMIN */
+    .categories-admin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    @media (max-width: 768px) { .categories-admin-grid { grid-template-columns: 1fr; } }
+    .cat-admin-card { background: #f9fafb; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); }
+    .cat-admin-card:hover { border-color: var(--red); box-shadow: var(--shadow); }
+    .cat-admin-preview { width: 100%; height: 180px; position: relative; background: linear-gradient(135deg, var(--gold-light), var(--gold)); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .cat-admin-preview.oil-bg { background: linear-gradient(135deg, #4A7C2E, #355A1F); }
+    .cat-admin-preview.cream-bg { background: linear-gradient(135deg, #E5C982, #C9A961); }
+    .cat-admin-preview.ointment-bg { background: linear-gradient(135deg, #E63946, #9A0C24); }
+    .cat-admin-preview.butter-bg { background: linear-gradient(135deg, #F4D77B, #C9A961); }
+    .cat-admin-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .cat-admin-preview .cat-icon-placeholder { font-size: 60px; color: rgba(255,255,255,0.5); z-index: 1; }
+    .cat-admin-info { padding: 16px 20px; }
+    .cat-admin-info h4 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+    .cat-admin-info p { font-size: 12px; color: var(--text-soft); margin-bottom: 14px; }
+    .cat-admin-info .cat-status { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 10px; display: none; }
+    .cat-admin-info .cat-status.visible { display: block; }
+
     /* DRAG n DROP zone */
     .drop-zone { border: 2px dashed var(--border); border-radius: 10px; padding: 30px; text-align: center; color: var(--text-soft); cursor: pointer; transition: var(--transition); }
     .drop-zone:hover, .drop-zone.drag-over { border-color: var(--red); background: var(--red-light); color: var(--red); }
@@ -233,6 +251,10 @@
             <i class="fas fa-boxes"></i>
             <span data-ar="المنتجات" data-en="Products">المنتجات</span>
             <span class="nav-badge" id="productsCount">0</span>
+        </div>
+        <div class="nav-item" onclick="showPage('categories')" data-page="categories">
+            <i class="fas fa-th-large"></i>
+            <span data-ar="الفئات" data-en="Categories">الفئات</span>
         </div>
         <div class="nav-item" onclick="showPage('settings')" data-page="settings">
             <i class="fas fa-cog"></i>
@@ -358,6 +380,103 @@
                         </thead>
                         <tbody id="productsTableBody"></tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIES PAGE -->
+        <div class="page" id="page-categories">
+            <div class="card">
+                <div class="card-header">
+                    <h2 data-ar="إدارة فئات المنتجات" data-en="Manage Product Categories">إدارة فئات المنتجات</h2>
+                    <span style="font-size:12px;color:var(--text-soft);" data-ar="ارفع صورة لكل فئة من جهازك" data-en="Upload an image for each category from your device">ارفع صورة لكل فئة من جهازك</span>
+                </div>
+                <div class="card-body">
+                    <div class="categories-admin-grid">
+
+                        <div class="cat-admin-card" data-slug="oils">
+                            <div class="cat-admin-preview oil-bg" id="cat-preview-oils">
+                                <span class="cat-icon-placeholder"><i class="fas fa-tint"></i></span>
+                            </div>
+                            <div class="cat-admin-info">
+                                <h4 data-ar="الزيوت الطبيعية" data-en="Natural Oils">الزيوت الطبيعية</h4>
+                                <p>Natural Oils</p>
+                                <div class="cat-status" id="cat-status-oils" data-ar="✅ تم رفع الصورة" data-en="✅ Image uploaded">✅ تم رفع الصورة</div>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                    <button class="btn btn-primary btn-sm" onclick="triggerCatUpload('oils')">
+                                        <i class="fas fa-upload"></i>
+                                        <span data-ar="رفع صورة" data-en="Upload Image">رفع صورة</span>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="removeCatImage('oils')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cat-admin-card" data-slug="creams">
+                            <div class="cat-admin-preview cream-bg" id="cat-preview-creams">
+                                <span class="cat-icon-placeholder"><i class="fas fa-pump-medical"></i></span>
+                            </div>
+                            <div class="cat-admin-info">
+                                <h4 data-ar="الكريمات" data-en="Creams">الكريمات</h4>
+                                <p>Creams</p>
+                                <div class="cat-status" id="cat-status-creams" data-ar="✅ تم رفع الصورة" data-en="✅ Image uploaded">✅ تم رفع الصورة</div>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                    <button class="btn btn-primary btn-sm" onclick="triggerCatUpload('creams')">
+                                        <i class="fas fa-upload"></i>
+                                        <span data-ar="رفع صورة" data-en="Upload Image">رفع صورة</span>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="removeCatImage('creams')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cat-admin-card" data-slug="ointments">
+                            <div class="cat-admin-preview ointment-bg" id="cat-preview-ointments">
+                                <span class="cat-icon-placeholder"><i class="fas fa-prescription-bottle"></i></span>
+                            </div>
+                            <div class="cat-admin-info">
+                                <h4 data-ar="الدهانات" data-en="Ointments">الدهانات</h4>
+                                <p>Ointments</p>
+                                <div class="cat-status" id="cat-status-ointments" data-ar="✅ تم رفع الصورة" data-en="✅ Image uploaded">✅ تم رفع الصورة</div>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                    <button class="btn btn-primary btn-sm" onclick="triggerCatUpload('ointments')">
+                                        <i class="fas fa-upload"></i>
+                                        <span data-ar="رفع صورة" data-en="Upload Image">رفع صورة</span>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="removeCatImage('ointments')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cat-admin-card" data-slug="butter">
+                            <div class="cat-admin-preview butter-bg" id="cat-preview-butter">
+                                <span class="cat-icon-placeholder"><i class="fas fa-cookie-bite"></i></span>
+                            </div>
+                            <div class="cat-admin-info">
+                                <h4 data-ar="الزبدة الطبيعية" data-en="Natural Butter">الزبدة الطبيعية</h4>
+                                <p>Natural Butter</p>
+                                <div class="cat-status" id="cat-status-butter" data-ar="✅ تم رفع الصورة" data-en="✅ Image uploaded">✅ تم رفع الصورة</div>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                    <button class="btn btn-primary btn-sm" onclick="triggerCatUpload('butter')">
+                                        <i class="fas fa-upload"></i>
+                                        <span data-ar="رفع صورة" data-en="Upload Image">رفع صورة</span>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" onclick="removeCatImage('butter')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Hidden file input shared across all categories -->
+                    <input type="file" id="catFileInput" accept="image/*" style="display:none" onchange="handleCatImageUpload(event)">
                 </div>
             </div>
         </div>
@@ -758,6 +877,7 @@ function setAdminLang(lang) {
 const pageTitles = {
     dashboard: { ar: 'لوحة البيانات', en: 'Dashboard' },
     products: { ar: 'إدارة المنتجات', en: 'Manage Products' },
+    categories: { ar: 'إدارة الفئات', en: 'Manage Categories' },
     settings: { ar: 'الإعدادات', en: 'Settings' },
     content: { ar: 'محتوى الموقع', en: 'Site Content' }
 };
@@ -772,6 +892,7 @@ function showPage(name) {
     if (name === 'content') loadContentForm();
     if (name === 'dashboard') renderDashboard();
     if (name === 'products') renderProductsTable();
+    if (name === 'categories') loadCategoriesPage();
     window.scrollTo(0, 0);
 }
 
@@ -1244,7 +1365,103 @@ async function loadFromSupabase() {
     } catch(e) { console.warn('Supabase load error:', e); }
 }
 
-// ===== INIT =====
+// ===== CATEGORIES =====
+let _currentCatSlug = null;
+
+function triggerCatUpload(slug) {
+    _currentCatSlug = slug;
+    document.getElementById('catFileInput').value = '';
+    document.getElementById('catFileInput').click();
+}
+
+function handleCatImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file || !_currentCatSlug) return;
+    if (!file.type.startsWith('image/')) {
+        toast(adminLang === 'ar' ? '❌ يرجى اختيار ملف صورة' : '❌ Please select an image file', 'danger');
+        return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+        toast(adminLang === 'ar' ? '❌ الصورة أكبر من 5MB' : '❌ Image must be < 5MB', 'danger');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        saveCatImage(_currentCatSlug, e.target.result);
+    };
+    reader.readAsDataURL(file);
+}
+
+function saveCatImage(slug, base64) {
+    const preview = document.getElementById('cat-preview-' + slug);
+    if (preview) {
+        const existing = preview.querySelector('img');
+        if (existing) existing.remove();
+        const img = document.createElement('img');
+        img.src = base64;
+        preview.insertBefore(img, preview.firstChild);
+    }
+    const status = document.getElementById('cat-status-' + slug);
+    if (status) status.classList.add('visible');
+    syncCategoryToSupabase(slug, base64);
+    toast(adminLang === 'ar' ? '✅ تم رفع صورة الفئة' : '✅ Category image saved', 'success');
+}
+
+function removeCatImage(slug) {
+    const preview = document.getElementById('cat-preview-' + slug);
+    if (preview) {
+        const existing = preview.querySelector('img');
+        if (existing) existing.remove();
+    }
+    const status = document.getElementById('cat-status-' + slug);
+    if (status) status.classList.remove('visible');
+    syncCategoryToSupabase(slug, null);
+    toast(adminLang === 'ar' ? '🗑️ تم حذف صورة الفئة' : '🗑️ Category image removed', 'danger');
+}
+
+async function syncCategoryToSupabase(slug, imageUrl) {
+    if (!_supabase) return;
+    try {
+        const catNames = {
+            oils:      { ar: 'الزيوت الطبيعية', en: 'Natural Oils' },
+            creams:    { ar: 'الكريمات',         en: 'Creams'       },
+            ointments: { ar: 'الدهانات',          en: 'Ointments'    },
+            butter:    { ar: 'الزبدة الطبيعية',  en: 'Natural Butter'}
+        };
+        const names = catNames[slug] || { ar: slug, en: slug };
+        await _supabase.from('categories').upsert({
+            slug: slug,
+            name_ar: names.ar,
+            name_en: names.en,
+            image_url: imageUrl
+        }, { onConflict: 'slug' });
+    } catch(e) { console.warn('Category sync error:', e); }
+}
+
+async function loadCategoriesPage() {
+    if (!_supabase) return;
+    try {
+        const { data: cats, error } = await _supabase.from('categories').select('*');
+        if (!error && cats) {
+            cats.forEach(cat => {
+                if (cat.image_url) {
+                    const preview = document.getElementById('cat-preview-' + cat.slug);
+                    if (preview) {
+                        const existing = preview.querySelector('img');
+                        if (existing) existing.remove();
+                        const img = document.createElement('img');
+                        img.src = cat.image_url;
+                        preview.insertBefore(img, preview.firstChild);
+                    }
+                    const status = document.getElementById('cat-status-' + cat.slug);
+                    if (status) status.classList.add('visible');
+                }
+            });
+        }
+    } catch(e) { console.warn('loadCategoriesPage error:', e); }
+}
+
+// ===== FIRST INIT =====
 (function() {
     // Check auth
     if (sessionStorage.getItem('admin-auth') !== '1') {
