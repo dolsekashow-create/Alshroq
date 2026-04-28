@@ -130,6 +130,31 @@
     .admin-toast.success i { color: #4caf50; }
     .admin-toast.danger i { color: var(--red); }
 
+    /* LOGIN SCREEN */
+    .login-screen { position: fixed; inset: 0; background: var(--sidebar-bg); z-index: 9999; display: flex; align-items: center; justify-content: center; }
+    .login-box { background: var(--white); border-radius: 20px; padding: 48px 40px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .login-box .logo-icon { width: 72px; height: 72px; background: linear-gradient(135deg, var(--red), var(--red-dark)); border-radius: 18px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #fff; }
+    .login-box h2 { font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+    .login-box p { font-size: 13px; color: var(--text-soft); margin-bottom: 28px; }
+    .login-box input { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 16px; text-align: center; letter-spacing: 4px; outline: none; transition: var(--transition); margin-bottom: 16px; }
+    .login-box input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.1); }
+    .login-box button { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--red), var(--red-dark)); color: #fff; border: none; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+    .login-box button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200,16,46,0.3); }
+    .login-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+    /* IMAGE UPLOAD */
+    .img-upload-wrap { position: relative; }
+    .img-preview { width: 100%; height: 160px; border-radius: 10px; object-fit: cover; display: none; margin-bottom: 8px; border: 2px solid var(--border); }
+    .img-preview.visible { display: block; }
+    .img-actions { display: flex; gap: 8px; margin-top: 8px; }
+    .img-placeholder-display { width: 100%; height: 100px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 8px; }
+
+    /* SQL PANEL */
+    .sql-panel { background: #1a1a2e; border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+    .sql-panel.visible { display: block; }
+    .sql-panel pre { color: #a8ff78; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; }
+    .sql-panel .sql-title { color: var(--gold); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
     /* SETTINGS */
     .settings-tabs { display: flex; gap: 4px; background: #f3f4f6; border-radius: 10px; padding: 4px; margin-bottom: 24px; }
     .settings-tab { flex: 1; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 700; color: var(--text-soft); transition: var(--transition); border: none; background: transparent; font-family: inherit; }
@@ -180,6 +205,18 @@
     </style>
 </head>
 <body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <div class="logo-icon"><i class="fas fa-lock"></i></div>
+        <h2>لوحة التحكم</h2>
+        <p>الشروق أورجانيك — أدخل كلمة المرور للدخول</p>
+        <input type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
+        <button onclick="doLogin()"><i class="fas fa-sign-in-alt" style="margin-left:8px;"></i> دخول</button>
+        <div class="login-error" id="loginError">⛔ كلمة المرور غير صحيحة</div>
+    </div>
+</div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -318,6 +355,7 @@
                             <tr>
                                 <th data-ar="الاسم (عربي)" data-en="Name (AR)">الاسم (عربي)</th>
                                 <th data-ar="الاسم (إنجليزي)" data-en="Name (EN)">الاسم (إنجليزي)</th>
+                                <th data-ar="الصورة" data-en="Image">الصورة</th>
                                 <th data-ar="الفئة" data-en="Category">الفئة</th>
                                 <th data-ar="السعر" data-en="Price">السعر</th>
                                 <th data-ar="شارة" data-en="Badge">شارة</th>
@@ -607,6 +645,37 @@
                         <option value="ointment-1">أحمر</option>
                     </select>
                 </div>
+                <div class="form-group full">
+                    <label data-ar="صورة المنتج" data-en="Product Image">صورة المنتج</label>
+                    <div class="img-upload-wrap">
+                        <img id="imgPreview" class="img-preview" src="" alt="معاينة الصورة">
+                        <div class="drop-zone" id="imgDropZone" onclick="document.getElementById('imgFileInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span data-ar="اضغط أو اسحب صورة هنا (JPG, PNG, WEBP)" data-en="Click or drag image here (JPG, PNG, WEBP)">اضغط أو اسحب صورة هنا (JPG, PNG, WEBP)</span>
+                        </div>
+                        <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+                        <div class="img-actions">
+                            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('imgFileInput').click()">
+                                <i class="fas fa-upload"></i>
+                                <span data-ar="رفع صورة" data-en="Upload Image">رفع صورة</span>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" id="removeImgBtn" style="display:none" onclick="removeProductImage()">
+                                <i class="fas fa-trash"></i>
+                                <span data-ar="حذف الصورة" data-en="Remove Image">حذف الصورة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group full">
+                    <button type="button" class="btn btn-outline btn-sm" onclick="toggleSqlPanel()">
+                        <i class="fas fa-database"></i>
+                        <span data-ar="عرض SQL للصور" data-en="Show Image SQL">عرض SQL للصور</span>
+                    </button>
+                    <div class="sql-panel" id="sqlPanel">
+                        <div class="sql-title">📋 Supabase SQL — جدول الصور</div>
+                        <pre id="sqlContent"></pre>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -769,13 +838,19 @@ function renderProductsTable(filter = '') {
     const filtered = filter ? products.filter(p =>
         p.nameAr.toLowerCase().includes(filter) || p.nameEn.toLowerCase().includes(filter)
     ) : products;
+    const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
     tbody.innerHTML = filtered.map(p => {
         const cat = catNames[p.cat] ? catNames[p.cat][lang] : p.cat;
         const badgeClass = p.badge === 'new' ? 'badge-green' : (p.badge ? 'badge-red' : '');
         const badgeText = p.badge === 'new' ? (lang==='ar'?'جديد':'NEW') : (p.badge || '—');
+        const imgSrc = productImages[p.id] || p.imageUrl || '';
+        const imgCell = imgSrc
+            ? `<img src="${imgSrc}" style="width:48px;height:48px;object-fit:cover;border-radius:8px;border:2px solid var(--border);" alt="">`
+            : `<div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;"><i class="fas ${p.icon}"></i></div>`;
         return `<tr>
             <td>${p.nameAr}</td>
             <td>${p.nameEn}</td>
+            <td>${imgCell}</td>
             <td><span class="badge badge-gold">${cat}</span></td>
             <td><strong style="color:var(--red)">${p.price} ${lang==='ar'?'ج.م':'EGP'}</strong>${p.oldPrice?`<span style="margin-right:6px;text-decoration:line-through;color:var(--text-soft);font-size:12px"> ${p.oldPrice}</span>`:''}</td>
             <td>${p.badge ? `<span class="badge ${badgeClass}">${badgeText}</span>` : '<span style="color:var(--text-soft)">—</span>'}</td>
@@ -786,7 +861,7 @@ function renderProductsTable(filter = '') {
         </tr>`;
     }).join('');
     if (!filtered.length) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--text-soft)">${lang==='ar'?'لا توجد منتجات':'No products found'}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--text-soft)">${lang==='ar'?'لا توجد منتجات':'No products found'}</td></tr>`;
     }
 }
 
@@ -800,6 +875,13 @@ function openProductModal(id = null) {
     const lang = adminLang;
     document.getElementById('editProductId').value = id || '';
     const title = document.getElementById('modalTitle');
+    // Reset image state
+    document.getElementById('imgPreview').classList.remove('visible');
+    document.getElementById('imgPreview').src = '';
+    document.getElementById('imgDropZone').style.display = '';
+    document.getElementById('removeImgBtn').style.display = 'none';
+    document.getElementById('sqlPanel').classList.remove('visible');
+
     if (id) {
         title.textContent = lang === 'ar' ? 'تعديل المنتج' : 'Edit Product';
         const p = products.find(pr => pr.id === id);
@@ -817,6 +899,15 @@ function openProductModal(id = null) {
             document.getElementById('p-icon').value = p.icon;
             document.getElementById('p-placeholder').value = p.placeholder;
             if (document.getElementById('p-nameRu')) document.getElementById('p-nameRu').value = p.nameRu || '';
+            // Load existing image
+            const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+            const existingImg = productImages[p.id] || p.imageUrl || '';
+            if (existingImg) {
+                document.getElementById('imgPreview').src = existingImg;
+                document.getElementById('imgPreview').classList.add('visible');
+                document.getElementById('imgDropZone').style.display = 'none';
+                document.getElementById('removeImgBtn').style.display = '';
+            }
         }
     } else {
         title.textContent = lang === 'ar' ? 'إضافة منتج جديد' : 'Add New Product';
@@ -876,7 +967,10 @@ function saveProduct() {
     }
     localStorage.setItem('shorouq-products', JSON.stringify(products));
     const savedProd = editId ? products.find(p => p.id === parseInt(editId)) : products[products.length-1];
-    if (savedProd) syncProductToSupabase(savedProd);
+    if (savedProd) {
+        saveProductImageForId(savedProd.id);
+        syncProductToSupabase(savedProd);
+    }
     closeProductModal();
     renderAll();
     toast(lang === 'ar' ? '✅ تم حفظ المنتج بنجاح' : '✅ Product saved successfully', 'success');
@@ -897,9 +991,13 @@ function confirmDelete() {
     syncProductToSupabase(delProd, true);
     products = products.filter(p => p.id !== deleteTargetId);
     localStorage.setItem('shorouq-products', JSON.stringify(products));
+    // Remove associated image
+    const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+    delete productImages[deleteTargetId];
+    localStorage.setItem('shorouq-product-images', JSON.stringify(productImages));
     closeDeleteModal();
     renderAll();
-    toast(adminLang === 'ar' ? '🗑️ تم حذف المنتج' : '🗑️ Product deleted', 'danger');
+    toast(adminLang === 'ar' ? '🗑️ تم حذف المنتج والصورة' : '🗑️ Product & image deleted', 'danger');
 }
 
 // ===== SETTINGS =====
@@ -1022,7 +1120,146 @@ function toast(msg, type = 'success') {
     el._t = setTimeout(() => el.classList.remove('show'), 2800);
 }
 
-// Close modals on overlay click
+// ===== LOGIN =====
+const ADMIN_PASSWORD = 'Alex321';
+function doLogin() {
+    const val = document.getElementById('loginPassword').value;
+    if (val === ADMIN_PASSWORD) {
+        document.getElementById('loginScreen').style.display = 'none';
+        sessionStorage.setItem('admin-auth', '1');
+    } else {
+        const err = document.getElementById('loginError');
+        err.style.display = 'block';
+        document.getElementById('loginPassword').value = '';
+        document.getElementById('loginPassword').focus();
+        setTimeout(() => err.style.display = 'none', 3000);
+    }
+}
+
+// ===== IMAGE UPLOAD =====
+let currentEditImgProductId = null;
+
+function handleImageUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+        toast(adminLang === 'ar' ? '❌ يرجى اختيار ملف صورة صحيح' : '❌ Please select a valid image file', 'danger');
+        return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+        toast(adminLang === 'ar' ? '❌ حجم الصورة يجب أن يكون أقل من 5MB' : '❌ Image must be less than 5MB', 'danger');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64 = e.target.result;
+        document.getElementById('imgPreview').src = base64;
+        document.getElementById('imgPreview').classList.add('visible');
+        document.getElementById('imgDropZone').style.display = 'none';
+        document.getElementById('removeImgBtn').style.display = '';
+        // Store temporarily until product is saved
+        window._pendingProductImage = base64;
+    };
+    reader.readAsDataURL(file);
+    event.target.value = '';
+}
+
+function removeProductImage() {
+    document.getElementById('imgPreview').src = '';
+    document.getElementById('imgPreview').classList.remove('visible');
+    document.getElementById('imgDropZone').style.display = '';
+    document.getElementById('removeImgBtn').style.display = 'none';
+    window._pendingProductImage = null;
+    window._removeProductImage = true;
+}
+
+function saveProductImageForId(productId) {
+    const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+    if (window._pendingProductImage) {
+        productImages[productId] = window._pendingProductImage;
+        localStorage.setItem('shorouq-product-images', JSON.stringify(productImages));
+        window._pendingProductImage = null;
+        window._removeProductImage = false;
+    } else if (window._removeProductImage) {
+        delete productImages[productId];
+        localStorage.setItem('shorouq-product-images', JSON.stringify(productImages));
+        window._removeProductImage = false;
+    }
+}
+
+// Drag & Drop
+document.addEventListener('DOMContentLoaded', function() {
+    const zone = document.getElementById('imgDropZone');
+    if (zone) {
+        zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+        zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+        zone.addEventListener('drop', e => {
+            e.preventDefault();
+            zone.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const fakeEvent = { target: { files: [file], value: '' } };
+                handleImageUpload(fakeEvent);
+            }
+        });
+    }
+});
+
+// ===== SQL PANEL =====
+function toggleSqlPanel() {
+    const panel = document.getElementById('sqlPanel');
+    panel.classList.toggle('visible');
+    if (panel.classList.contains('visible')) {
+        generateSqlContent();
+    }
+}
+
+function generateSqlContent() {
+    const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+    const ids = Object.keys(productImages);
+    let sql = `-- =============================================\n`;
+    sql += `-- Al Shorouq Organic - Product Images SQL\n`;
+    sql += `-- =============================================\n\n`;
+    sql += `-- 1. إنشاء جدول الصور في Supabase:\n`;
+    sql += `CREATE TABLE IF NOT EXISTS product_images (\n`;
+    sql += `  id          SERIAL PRIMARY KEY,\n`;
+    sql += `  product_id  INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,\n`;
+    sql += `  image_url   TEXT NOT NULL,\n`;
+    sql += `  is_primary  BOOLEAN DEFAULT TRUE,\n`;
+    sql += `  created_at  TIMESTAMPTZ DEFAULT NOW()\n`;
+    sql += `);\n\n`;
+    sql += `-- 2. Row Level Security:\n`;
+    sql += `ALTER TABLE product_images ENABLE ROW LEVEL SECURITY;\n`;
+    sql += `CREATE POLICY "public_read" ON product_images FOR SELECT USING (true);\n`;
+    sql += `CREATE POLICY "auth_write" ON product_images FOR ALL USING (auth.role() = 'service_role');\n\n`;
+    sql += `-- 3. Index للأداء:\n`;
+    sql += `CREATE INDEX idx_product_images_product_id ON product_images(product_id);\n\n`;
+    if (ids.length > 0) {
+        sql += `-- 4. عدد الصور المحفوظة حاليًا (localStorage): ${ids.length} صورة\n`;
+        sql += `-- Product IDs with images: ${ids.join(', ')}\n\n`;
+        sql += `-- 5. مثال INSERT للصور الموجودة:\n`;
+        ids.forEach(pid => {
+            sql += `INSERT INTO product_images (product_id, image_url, is_primary)\n`;
+            sql += `  VALUES (${pid}, '[base64_or_cdn_url_here]', TRUE)\n`;
+            sql += `  ON CONFLICT DO NOTHING;\n`;
+        });
+    } else {
+        sql += `-- 4. لا توجد صور محملة حتى الآن.\n`;
+    }
+    document.getElementById('sqlContent').textContent = sql;
+}
+
+// ===== INIT =====
+(function() {
+    // Check auth
+    if (sessionStorage.getItem('admin-auth') !== '1') {
+        document.getElementById('loginScreen').style.display = 'flex';
+    } else {
+        document.getElementById('loginScreen').style.display = 'none';
+    }
+})();
+
+// ===== CLOSE MODALS =====
 document.getElementById('productModal').addEventListener('click', function(e) { if(e.target === this) closeProductModal(); });
 document.getElementById('deleteModal').addEventListener('click', function(e) { if(e.target === this) closeDeleteModal(); });
 
