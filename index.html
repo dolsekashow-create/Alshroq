@@ -138,8 +138,13 @@
     .hero { position: relative; min-height: 90vh; display: flex; align-items: center; overflow: hidden; background: var(--color-bg-dark); }
     .hero-video-wrap { position: absolute; inset: 0; overflow: hidden; z-index: 1; }
     .hero-video-wrap iframe { position: absolute; top: 50%; left: 50%; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; transform: translate(-50%, -50%); pointer-events: none; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26, 26, 26, 0.75) 0%, rgba(154, 12, 36, 0.45) 50%, rgba(26, 26, 26, 0.7) 100%); z-index: 2; }
-    .hero-content { position: relative; z-index: 3; width: 100%; color: var(--color-white); padding: 100px 0; }
+    .category-image.has-img { background: none !important; }
+    .category-image.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; z-index: 0; }
+    .category-image.has-img::before { z-index: 1; }
+    .category-image.has-img .category-icon { z-index: 2; display: none; }
+
+    .hero-overlay { display: none; }
+    .hero-content { position: relative; z-index: 3; width: 100%; color: var(--color-white); padding: 100px 0; text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.9); }
     .hero-badge { display: inline-block; padding: 8px 20px; background: rgba(201, 169, 97, 0.15); border: 1px solid var(--color-gold); color: var(--color-gold-light); border-radius: var(--radius-full); font-size: 13px; font-weight: 600; margin-bottom: 24px; backdrop-filter: blur(10px); animation: fadeInUp 0.8s ease 0.2s both; }
     .hero-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px; }
     .hero-title-sub { font-size: 0.4em; color: var(--color-gold); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; animation: fadeInUp 0.8s ease 0.3s both; }
@@ -802,12 +807,34 @@
                 siteSettings = Object.assign({}, defaultSettings, settingsData.settings);
                 localStorage.setItem('shorouq-settings', JSON.stringify(siteSettings));
             }
+            // Load category images
+            const { data: cats, error: catErr } = await _supabase
+                .from('categories')
+                .select('*');
+            if (!catErr && cats) {
+                cats.forEach(cat => {
+                    if (cat.image_url) applyCategoryImage(cat.slug, cat.image_url);
+                });
+            }
         } catch(e) { console.warn('Supabase load error:', e); }
-        // Load fresh data from Supabase
-        loadFromSupabase();
         renderProducts();
         updateCategoryCounts();
         applySiteSettings();
+    }
+
+    function applyCategoryImage(slug, imageUrl) {
+        document.querySelectorAll(`.category-card[data-cat-filter="${slug}"]`).forEach(card => {
+            const imgWrap = card.querySelector('.category-image');
+            if (!imgWrap) return;
+            imgWrap.classList.add('has-img');
+            const existing = imgWrap.querySelector('img.cat-bg-img');
+            if (existing) existing.remove();
+            const img = document.createElement('img');
+            img.className = 'cat-bg-img';
+            img.src = imageUrl;
+            img.alt = slug;
+            imgWrap.insertBefore(img, imgWrap.firstChild);
+        });
     }
 
 
