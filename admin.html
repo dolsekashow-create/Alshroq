@@ -198,6 +198,8 @@
     .drop-zone:hover, .drop-zone.drag-over { border-color: var(--red); background: var(--red-light); color: var(--red); }
     .drop-zone i { font-size: 32px; margin-bottom: 8px; display: block; }
 
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     /* Responsive */
     @media (max-width: 1100px) {
         .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -683,22 +685,25 @@
         <div class="modal-body">
             <input type="hidden" id="editProductId">
             <div class="form-grid">
-                <div class="form-group">
-                    <label data-ar="الاسم (عربي)" data-en="Name (Arabic)">الاسم (عربي)</label>
+                <div class="form-group full">
+                    <label data-ar="اسم المنتج (عربي)" data-en="Product Name (Arabic)">اسم المنتج (عربي)</label>
                     <input type="text" id="p-nameAr" placeholder="زيت حبة البركة">
                 </div>
-                <div class="form-group">
-                    <label data-ar="الاسم (إنجليزي)" data-en="Name (English)">الاسم (إنجليزي)</label>
-                    <input type="text" id="p-nameEn" placeholder="Black Seed Oil">
-                </div>
                 <div class="form-group full">
-                    <label data-ar="الوصف (عربي)" data-en="Description (Arabic)">الوصف (عربي)</label>
-                    <textarea id="p-descAr" rows="2" placeholder="وصف المنتج بالعربية..."></textarea>
+                    <label data-ar="وصف المنتج (عربي)" data-en="Product Description (Arabic)">وصف المنتج (عربي)</label>
+                    <textarea id="p-descAr" rows="3" placeholder="اكتب وصف المنتج بالعربية فقط — سيُترجم تلقائياً للإنجليزي والروسي..."></textarea>
                 </div>
-                <div class="form-group full">
-                    <label data-ar="الوصف (إنجليزي)" data-en="Description (English)">الوصف (إنجليزي)</label>
-                    <textarea id="p-descEn" rows="2" placeholder="Product description in English..."></textarea>
+                <div class="form-group full" id="translateStatusWrap" style="display:none;">
+                    <div style="background:linear-gradient(135deg,#e8f0fe,#f3e8ff);border:1.5px solid #c5d4f8;border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+                        <div id="translateSpinner" style="width:20px;height:20px;border:3px solid #c5d4f8;border-top-color:#4285f4;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;"></div>
+                        <div>
+                            <div style="font-size:13px;font-weight:700;color:#4285f4;" data-ar="⚡ جاري الترجمة التلقائية..." data-en="⚡ Auto-translating...">⚡ جاري الترجمة التلقائية...</div>
+                            <div style="font-size:11px;color:#6b7280;margin-top:2px;" data-ar="الاسم والوصف سيُترجمان للإنجليزي والروسي" data-en="Name & description will be translated to English & Russian">الاسم والوصف سيُترجمان للإنجليزي والروسي</div>
+                        </div>
+                    </div>
                 </div>
+                <input type="hidden" id="p-nameEn">
+                <input type="hidden" id="p-descEn">
                 <div class="form-group">
                     <label data-ar="الفئة" data-en="Category">الفئة</label>
                     <select id="p-cat">
@@ -993,9 +998,7 @@ function openProductModal(id = null) {
         const p = products.find(pr => pr.id === id);
         if (p) {
             document.getElementById('p-nameAr').value = p.nameAr;
-            document.getElementById('p-nameEn').value = p.nameEn;
             document.getElementById('p-descAr').value = p.descAr || '';
-            document.getElementById('p-descEn').value = p.descEn || '';
             document.getElementById('p-cat').value = p.cat;
             document.getElementById('p-price').value = p.price;
             document.getElementById('p-oldPrice').value = p.oldPrice || '';
@@ -1004,7 +1007,6 @@ function openProductModal(id = null) {
             document.getElementById('p-badge').value = p.badge || '';
             document.getElementById('p-icon').value = p.icon;
             document.getElementById('p-placeholder').value = p.placeholder;
-            if (document.getElementById('p-nameRu')) document.getElementById('p-nameRu').value = p.nameRu || '';
             // Load existing image
             const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
             const existingImg = productImages[p.id] || p.imageUrl || '';
@@ -1018,9 +1020,7 @@ function openProductModal(id = null) {
     } else {
         title.textContent = lang === 'ar' ? 'إضافة منتج جديد' : 'Add New Product';
         document.getElementById('p-nameAr').value = '';
-        document.getElementById('p-nameEn').value = '';
         document.getElementById('p-descAr').value = '';
-        document.getElementById('p-descEn').value = '';
         document.getElementById('p-cat').value = 'oils';
         document.getElementById('p-price').value = '';
         document.getElementById('p-oldPrice').value = '';
@@ -1029,7 +1029,6 @@ function openProductModal(id = null) {
         document.getElementById('p-badge').value = '';
         document.getElementById('p-icon').value = 'fa-tint';
         document.getElementById('p-placeholder').value = 'oil-1';
-        if (document.getElementById('p-nameRu')) document.getElementById('p-nameRu').value = '';
     }
     document.getElementById('productModal').classList.add('active');
 }
@@ -1038,23 +1037,74 @@ function closeProductModal() {
     document.getElementById('productModal').classList.remove('active');
 }
 
+// ===== AUTO TRANSLATION =====
+async function translateProductArabicToEnAndRu(nameAr, descAr) {
+    const statusWrap = document.getElementById('translateStatusWrap');
+    if (statusWrap) statusWrap.style.display = '';
+    try {
+        const prompt = `You are a professional translator for an Egyptian organic cosmetics/natural products store called "الشروق أورجانيك" (Al Shorouk Organic).
+
+Translate the following Arabic product name and description accurately to both English and Russian.
+The translation must be natural, professional, and suitable for an e-commerce product listing.
+
+Arabic Name: ${nameAr}
+Arabic Description: ${descAr || ''}
+
+Respond ONLY with valid JSON in this exact format (no other text, no markdown):
+{"nameEn":"...","descEn":"...","nameRu":"...","descRu":"..."}`;
+
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-20250514',
+                max_tokens: 1000,
+                messages: [{ role: 'user', content: prompt }]
+            })
+        });
+        const data = await resp.json();
+        const text = (data.content || []).map(b => b.text || '').join('').trim();
+        // strip possible markdown fences
+        const clean = text.replace(/```json|```/g, '').trim();
+        return JSON.parse(clean);
+    } catch(e) {
+        console.error('Translation error:', e);
+        return null;
+    } finally {
+        if (statusWrap) statusWrap.style.display = 'none';
+    }
+}
+
 async function saveProduct() {
     const lang = adminLang;
     const nameAr = document.getElementById('p-nameAr').value.trim();
-    const nameEn = document.getElementById('p-nameEn').value.trim();
     const price = parseFloat(document.getElementById('p-price').value);
-    if (!nameAr || !nameEn || isNaN(price)) {
-        toast(lang === 'ar' ? '⚠️ يرجى تعبئة الحقول الإلزامية' : '⚠️ Please fill required fields', 'danger');
+    if (!nameAr || isNaN(price)) {
+        toast(lang === 'ar' ? '⚠️ يرجى كتابة اسم المنتج والسعر' : '⚠️ Please enter product name and price', 'danger');
         return;
     }
+    const descAr = document.getElementById('p-descAr').value.trim();
+
+    // ترجمة تلقائية
+    toast(lang === 'ar' ? '⚡ جاري الترجمة التلقائية...' : '⚡ Auto-translating...', 'success');
+    const translated = await translateProductArabicToEnAndRu(nameAr, descAr);
+    const nameEn = (translated && translated.nameEn) ? translated.nameEn : nameAr;
+    const descEn = (translated && translated.descEn) ? translated.descEn : descAr;
+    const nameRu = (translated && translated.nameRu) ? translated.nameRu : nameEn;
+    const descRu = (translated && translated.descRu) ? translated.descRu : descEn;
+
+    // اجعل الحقول المخفية تحتوي على القيم المترجمة
+    document.getElementById('p-nameEn').value = nameEn;
+    document.getElementById('p-descEn').value = descEn;
+
     const editId = document.getElementById('editProductId').value;
     const oldPrice = parseFloat(document.getElementById('p-oldPrice').value) || null;
     const badge = document.getElementById('p-badge').value || null;
-    const nameRu = document.getElementById('p-nameRu') ? document.getElementById('p-nameRu').value.trim() : '';
     const productData = {
         nameAr, nameEn, nameRu,
-        descAr: document.getElementById('p-descAr').value.trim(),
-        descEn: document.getElementById('p-descEn').value.trim(),
+        descAr,
+        descEn,
+        descRu,
         cat: document.getElementById('p-cat').value,
         price,
         oldPrice,
