@@ -360,6 +360,96 @@
     .modal-overlay-bg { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 2050; display: none; }
     .modal-overlay-bg.active { display: block; }
 
+    /* ===== Show More Button ===== */
+    .show-more-btn {
+        display: inline-flex; align-items: center; gap: 12px;
+        padding: 16px 36px;
+        background: linear-gradient(135deg, var(--color-red), var(--color-red-dark, #9A0C24));
+        color: var(--color-white); font-size: 15px; font-weight: 800;
+        border: none; border-radius: var(--radius-full);
+        cursor: pointer; transition: var(--transition);
+        box-shadow: 0 4px 16px rgba(230, 57, 70, 0.3);
+        letter-spacing: 0.5px;
+    }
+    .show-more-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(230, 57, 70, 0.45); }
+    .show-more-btn:active { transform: translateY(-1px); }
+    .show-more-btn i { font-size: 13px; transition: transform 0.3s ease; }
+    .show-more-btn:hover i { transform: translateY(3px); }
+
+    /* ===== All Products Modal ===== */
+    .all-products-modal {
+        position: fixed; inset: 0;
+        background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px);
+        z-index: 3000;
+        display: none;
+        align-items: flex-start; justify-content: center;
+        padding: 40px 20px;
+        overflow-y: auto;
+    }
+    .all-products-modal.active { display: flex; animation: fadeIn 0.3s ease; }
+    .all-products-content {
+        background: var(--color-bg, #FAF6EC);
+        border-radius: var(--radius-lg);
+        max-width: 1200px; width: 100%;
+        max-height: calc(100vh - 80px);
+        overflow: hidden;
+        display: flex; flex-direction: column;
+        animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }
+    .all-products-header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 24px 32px;
+        background: var(--color-white);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        position: sticky; top: 0; z-index: 2;
+    }
+    .all-products-header h2 {
+        font-size: 24px; font-weight: 900;
+        color: var(--color-text); margin: 0;
+    }
+    .all-products-close {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        background: var(--color-bg-soft, #F0E8D8);
+        color: var(--color-text);
+        border: none; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 18px;
+        transition: var(--transition);
+    }
+    .all-products-close:hover { background: var(--color-red); color: var(--color-white); transform: rotate(90deg); }
+    .all-products-filter {
+        display: flex; justify-content: center; gap: 8px;
+        padding: 20px 32px;
+        background: var(--color-white);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        flex-wrap: wrap;
+        position: sticky; top: 90px; z-index: 1;
+    }
+    .all-products-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding: 32px;
+        overflow-y: auto;
+        flex: 1;
+    }
+    body.modal-open { overflow: hidden; }
+
+    @media (max-width: 1100px) {
+        .all-products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .all-products-modal { padding: 0; }
+        .all-products-content { max-height: 100vh; height: 100vh; border-radius: 0; }
+        .all-products-grid { grid-template-columns: 1fr; padding: 20px; gap: 20px; }
+        .all-products-header { padding: 16px 20px; }
+        .all-products-header h2 { font-size: 18px; }
+        .all-products-filter { padding: 14px 20px; top: 70px; }
+        .all-products-filter .filter-btn { font-size: 12px; padding: 6px 14px; }
+    }
+
     @media (max-width: 1100px) {
         .features-grid { grid-template-columns: repeat(2, 1fr); }
         .categories-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
@@ -573,8 +663,34 @@
                 <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-ru="Масло ши">الزبدة</button>
             </div>
             <div class="products-grid" id="productsGrid"></div>
+            <div id="showMoreWrap" style="display:none; text-align:center; margin-top:48px;">
+                <button id="showMoreBtn" class="show-more-btn" data-ar="عرض المزيد" data-en="Show More" data-ru="Показать больше">
+                    <span>عرض المزيد</span>
+                    <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
         </div>
     </section>
+
+    <!-- All Products Modal -->
+    <div class="all-products-modal" id="allProductsModal">
+        <div class="all-products-content">
+            <div class="all-products-header">
+                <h2 id="allProductsTitle" data-ar="كل المنتجات" data-en="All Products" data-ru="Все товары">كل المنتجات</h2>
+                <button class="all-products-close" id="allProductsClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="all-products-filter" id="allProductsFilter">
+                <button class="filter-btn active" data-filter="all" data-ar="الكل" data-en="All" data-ru="Все">الكل</button>
+                <button class="filter-btn" data-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла">الزيوت</button>
+                <button class="filter-btn" data-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</button>
+                <button class="filter-btn" data-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</button>
+                <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши">الزبدة</button>
+            </div>
+            <div class="all-products-grid" id="allProductsGrid"></div>
+        </div>
+    </div>
 
     <section class="about" id="about">
         <div class="container">
@@ -870,6 +986,7 @@
 
         // Re-render dynamic content in new language
         if (typeof renderProducts === 'function') renderProducts();
+        if (typeof renderAllProductsModal === 'function') renderAllProductsModal();
         if (typeof renderCart === 'function') renderCart();
         if (typeof updateCategoryCounts === 'function') updateCategoryCounts();
 
@@ -928,11 +1045,96 @@
     }
 
     // ===== Render Products =====
+    const PRODUCTS_LIMIT = 9;  // عدد المنتجات الظاهرة قبل "عرض المزيد"
+
+    function buildProductCardHTML(p, lang, productImages) {
+        const catNames = {
+            oils: { ar: 'زيوت', en: 'Oils', ru: 'Масла' },
+            creams: { ar: 'كريمات', en: 'Creams', ru: 'Кремы' },
+            ointments: { ar: 'دهانات', en: 'Ointments', ru: 'Мази' },
+            butter: { ar: 'زبدة', en: 'Butter', ru: 'Масло ши' }
+        };
+        const currency = lang === 'ar' ? 'ج.م' : 'EGP';
+        const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
+        const cat = catNames[p.cat] ? (catNames[p.cat][lang] || catNames[p.cat]['en']) : p.cat;
+        const isInWishlist = wishlist.includes(p.id);
+        const badgeText = p.badge === 'new' ? (lang === 'ar' ? 'جديد' : lang === 'ru' ? 'НОВИНКА' : 'NEW') : p.badge;
+        const badgeClass = p.badge === 'new' ? 'product-badge new' : 'product-badge';
+        const imgSrc = productImages[p.id] || p.imageUrl || '';
+
+        return `
+            <article class="product-card" data-product-id="${p.id}">
+                <div class="product-image">
+                    ${p.badge ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                    ${imgSrc
+                        ? `<img src="${imgSrc}" alt="${name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;">`
+                        : `<div class="product-placeholder ${p.placeholder}"><i class="fas ${p.icon}"></i></div>`
+                    }
+                    <div class="product-actions">
+                        <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" data-product-id="${p.id}" aria-label="Wishlist">
+                            <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+                        </button>
+                        <button class="quickview-btn" data-product-id="${p.id}" aria-label="Quick View">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="add-cart-btn" data-product-id="${p.id}" aria-label="Add to Cart">
+                            <i class="fas fa-shopping-bag"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">${cat}</span>
+                    <h3>${name}</h3>
+                    <div class="product-rating">
+                        <div class="stars">${renderStars(p.rating)}</div>
+                        <span>(${p.reviews})</span>
+                    </div>
+                    <div class="product-price">
+                        ${p.oldPrice ? `<span class="price-old">${p.oldPrice} ${currency}</span>` : ''}
+                        <span class="price-new">${p.price} ${currency}</span>
+                    </div>
+                    <button class="add-to-cart-full" data-product-id="${p.id}">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>${lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : 'Add to Cart'}</span>
+                    </button>
+                </div>
+            </article>`;
+    }
+
     function renderProducts() {
         const grid = document.getElementById('productsGrid');
         if (!grid) return;
         const lang = currentLanguage;
         const filtered = currentFilter === 'all' ? products : products.filter(p => p.cat === currentFilter);
+        const showMoreWrap = document.getElementById('showMoreWrap');
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--color-text-light);">
+                <i class="fas fa-box-open" style="font-size: 60px; margin-bottom: 16px; display: block;"></i>
+                <p>${lang === 'ar' ? 'لا توجد منتجات في هذه الفئة' : lang === 'ru' ? 'Нет товаров в этой категории' : 'No products in this category'}</p>
+            </div>`;
+            if (showMoreWrap) showMoreWrap.style.display = 'none';
+            return;
+        }
+
+        const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+        const visible = filtered.slice(0, PRODUCTS_LIMIT);
+        grid.innerHTML = visible.map(p => buildProductCardHTML(p, lang, productImages)).join('');
+
+        // إظهار زرار "عرض المزيد" لو في منتجات أكتر من الـ limit
+        if (showMoreWrap) showMoreWrap.style.display = (filtered.length > PRODUCTS_LIMIT) ? 'block' : 'none';
+
+        attachProductListeners();
+    }
+
+    // ===== All Products Modal =====
+    let modalCurrentFilter = 'all';
+
+    function renderAllProductsModal() {
+        const grid = document.getElementById('allProductsGrid');
+        if (!grid) return;
+        const lang = currentLanguage;
+        const filtered = modalCurrentFilter === 'all' ? products : products.filter(p => p.cat === modalCurrentFilter);
 
         if (filtered.length === 0) {
             grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--color-text-light);">
@@ -942,65 +1144,27 @@
             return;
         }
 
-        const currency = lang === 'ar' ? 'ج.م' : 'EGP'; // same for all non-AR
-        const catNames = {
-            oils: { ar: 'زيوت', en: 'Oils', ru: 'Масла' },
-            creams: { ar: 'كريمات', en: 'Creams', ru: 'Кремы' },
-            ointments: { ar: 'دهانات', en: 'Ointments', ru: 'Мази' },
-            butter: { ar: 'زبدة', en: 'Butter', ru: 'Масло ши' }
-        };
-
-        // Load product images from localStorage
         const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
-
-        grid.innerHTML = filtered.map(p => {
-            const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
-            const cat = catNames[p.cat] ? (catNames[p.cat][lang] || catNames[p.cat]['en']) : p.cat;
-            const isInWishlist = wishlist.includes(p.id);
-            const badgeText = p.badge === 'new' ? (lang === 'ar' ? 'جديد' : lang === 'ru' ? 'НОВИНКА' : 'NEW') : p.badge;
-            const badgeClass = p.badge === 'new' ? 'product-badge new' : 'product-badge';
-            const imgSrc = productImages[p.id] || p.imageUrl || '';
-
-            return `
-                <article class="product-card" data-product-id="${p.id}">
-                    <div class="product-image">
-                        ${p.badge ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
-                        ${imgSrc
-                            ? `<img src="${imgSrc}" alt="${name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;">`
-                            : `<div class="product-placeholder ${p.placeholder}"><i class="fas ${p.icon}"></i></div>`
-                        }
-                        <div class="product-actions">
-                            <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" data-product-id="${p.id}" aria-label="Wishlist">
-                                <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
-                            </button>
-                            <button class="quickview-btn" data-product-id="${p.id}" aria-label="Quick View">
-                                <i class="far fa-eye"></i>
-                            </button>
-                            <button class="add-cart-btn" data-product-id="${p.id}" aria-label="Add to Cart">
-                                <i class="fas fa-shopping-bag"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat">${cat}</span>
-                        <h3>${name}</h3>
-                        <div class="product-rating">
-                            <div class="stars">${renderStars(p.rating)}</div>
-                            <span>(${p.reviews})</span>
-                        </div>
-                        <div class="product-price">
-                            ${p.oldPrice ? `<span class="price-old">${p.oldPrice} ${currency}</span>` : ''}
-                            <span class="price-new">${p.price} ${currency}</span>
-                        </div>
-                        <button class="add-to-cart-full" data-product-id="${p.id}">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span>${lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : 'Add to Cart'}</span>
-                        </button>
-                    </div>
-                </article>`;
-        }).join('');
-
+        grid.innerHTML = filtered.map(p => buildProductCardHTML(p, lang, productImages)).join('');
         attachProductListeners();
+    }
+
+    function openAllProductsModal() {
+        modalCurrentFilter = currentFilter;  // يبدأ بنفس الفلتر اللي مختاره المستخدم في الصفحة
+        // نسوي الفلتر داخل الـ modal
+        document.querySelectorAll('#allProductsFilter .filter-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.filter === modalCurrentFilter);
+        });
+        renderAllProductsModal();
+        const modal = document.getElementById('allProductsModal');
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeAllProductsModal() {
+        const modal = document.getElementById('allProductsModal');
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
     }
 
     function renderStars(rating) {
@@ -1342,20 +1506,55 @@
                 e.preventDefault();
                 const cat = this.dataset.catFilter;
                 currentFilter = cat;
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
+                // نطبق على الفلتر الرئيسى بس (مش بتاع الـ modal)
+                document.querySelectorAll('#productsFilter .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
                 renderProducts();
                 document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // Filter buttons - الفلتر الرئيسى
+        document.querySelectorAll('#productsFilter .filter-btn').forEach(btn => {
             btn.onclick = function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('#productsFilter .filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 currentFilter = this.dataset.filter;
                 renderProducts();
             };
+        });
+
+        // Filter buttons - فلتر الـ modal (كل المنتجات)
+        document.querySelectorAll('#allProductsFilter .filter-btn').forEach(btn => {
+            btn.onclick = function() {
+                document.querySelectorAll('#allProductsFilter .filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                modalCurrentFilter = this.dataset.filter;
+                renderAllProductsModal();
+            };
+        });
+
+        // Show More button
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        if (showMoreBtn) showMoreBtn.onclick = openAllProductsModal;
+
+        // Close modal
+        const closeBtn = document.getElementById('allProductsClose');
+        if (closeBtn) closeBtn.onclick = closeAllProductsModal;
+
+        // Close on backdrop click
+        const allModal = document.getElementById('allProductsModal');
+        if (allModal) {
+            allModal.addEventListener('click', function(e) {
+                if (e.target === allModal) closeAllProductsModal();
+            });
+        }
+
+        // Close with ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const m = document.getElementById('allProductsModal');
+                if (m && m.classList.contains('active')) closeAllProductsModal();
+            }
         });
 
         // Search
