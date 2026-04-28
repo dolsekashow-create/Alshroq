@@ -138,8 +138,8 @@
     .hero { position: relative; min-height: 90vh; display: flex; align-items: center; overflow: hidden; background: var(--color-bg-dark); }
     .hero-video-wrap { position: absolute; inset: 0; overflow: hidden; z-index: 1; }
     .hero-video-wrap iframe { position: absolute; top: 50%; left: 50%; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; transform: translate(-50%, -50%); pointer-events: none; }
-    .category-image.has-img { background: none !important; }
-    .category-image.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; z-index: 0; }
+    .category-image.has-img { background: #000 !important; position: absolute; inset: 0; overflow: hidden; }
+    .category-image.has-img .cat-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block; border-radius: inherit; }
     .category-image.has-img::before { z-index: 1; }
     .category-image.has-img .category-icon { z-index: 2; display: none; }
 
@@ -1271,6 +1271,8 @@
         renderProducts();
         renderCart();
         updateCartCount();
+        // Load live data from Supabase (products + settings + category images)
+        loadFromSupabase();
 
         // Language switcher
         const langBtn = document.getElementById('langBtn');
