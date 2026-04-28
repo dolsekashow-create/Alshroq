@@ -3,1925 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الشروق أورجانيك | Al Shorouq Organic - زيوت طبيعية ومنتجات عضوية</title>
+    <title>الشروق أورجانيك | Al Shorouq Organic</title>
     <meta name="description" content="الشروق أورجانيك - من الشركات الرائدة في مجال استخلاص وتعبئة الزيوت الطبيعية والكريمات والدهانات والزبدة">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+
     <style>
-/* ============================================
-   Al Shorouq Organic - Main Styles
-   Brand Colors from Logo:
-   - Red: #C8102E (Pomegranate Red)
-   - Gold: #C9A961 (Premium Gold)
-   - Green: #4A7C2E (Natural Green)
-   - Dark: #1a1a1a
-   ============================================ */
-
-:root {
-    /* Brand Colors */
-    --color-red: #C8102E;
-    --color-red-dark: #9A0C24;
-    --color-red-light: #E63946;
-    --color-gold: #C9A961;
-    --color-gold-dark: #A88B47;
-    --color-gold-light: #E5C982;
-    --color-green: #4A7C2E;
-    --color-green-dark: #355A1F;
-    --color-green-light: #6FA84A;
-    
-    /* Neutral Colors */
-    --color-bg: #FFFEF9;
-    --color-bg-soft: #F8F4EB;
-    --color-bg-dark: #1a1a1a;
-    --color-text: #2C2825;
-    --color-text-soft: #5C5550;
-    --color-text-light: #8A827C;
-    --color-border: #E8E0D0;
-    --color-white: #FFFFFF;
-    
-    /* Typography */
-    --font-arabic: 'Cairo', sans-serif;
-    --font-display: 'Playfair Display', 'Cormorant Garamond', serif;
-    --font-body: 'Inter', sans-serif;
-    
-    /* Spacing */
-    --container-max: 1400px;
-    --section-py: 100px;
-    
-    /* Effects */
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-    --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
-    --shadow-gold: 0 8px 24px rgba(201, 169, 97, 0.25);
-    --shadow-red: 0 8px 24px rgba(200, 16, 46, 0.2);
-    
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 24px;
-    --radius-full: 999px;
-    
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Base Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--font-arabic);
-    color: var(--color-text);
-    background: var(--color-bg);
-    line-height: 1.7;
-    overflow-x: hidden;
-}
-
-[dir="ltr"] body {
-    font-family: var(--font-body);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    list-style: none;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-family: inherit;
-}
-
-.container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-/* ============= Announcement Bar ============= */
-.announcement-bar {
-    background: linear-gradient(90deg, var(--color-red-dark), var(--color-red), var(--color-red-dark));
-    color: var(--color-white);
-    text-align: center;
-    padding: 10px 0;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    position: relative;
-    overflow: hidden;
-}
-
-.announcement-bar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-    animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-/* ============= Header ============= */
-.main-header {
-    background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: var(--transition);
-}
-
-.main-header.scrolled {
-    box-shadow: var(--shadow-md);
-}
-
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-    gap: 32px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-}
-
-.logo img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: var(--color-bg-dark);
-    padding: 4px;
-    transition: var(--transition);
-}
-
-.logo:hover img {
-    transform: rotate(-5deg) scale(1.05);
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-}
-
-.logo-name {
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--color-red);
-    letter-spacing: -0.5px;
-}
-
-.logo-tagline {
-    font-size: 11px;
-    color: var(--color-gold-dark);
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-/* Main Nav */
-.main-nav ul {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.main-nav a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--color-text);
-    border-radius: var(--radius-full);
-    transition: var(--transition);
-    position: relative;
-}
-
-.main-nav a:hover {
-    color: var(--color-red);
-    background: rgba(200, 16, 46, 0.06);
-}
-
-.main-nav .has-dropdown {
-    position: relative;
-}
-
-.main-nav .dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: var(--color-white);
-    box-shadow: var(--shadow-lg);
-    border-radius: var(--radius-md);
-    padding: 12px;
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: var(--transition);
-    border-top: 3px solid var(--color-gold);
-}
-
-.main-nav .has-dropdown:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.main-nav .dropdown li {
-    display: block;
-}
-
-.main-nav .dropdown a {
-    display: block;
-    padding: 10px 16px;
-    border-radius: var(--radius-sm);
-}
-
-/* Header Actions */
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.action-btn {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-text);
-    transition: var(--transition);
-    position: relative;
-}
-
-.action-btn:hover {
-    background: var(--color-bg-soft);
-    color: var(--color-red);
-}
-
-.cart-btn .cart-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--color-red);
-    color: var(--color-white);
-    font-size: 10px;
-    font-weight: 700;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-[dir="rtl"] .cart-btn .cart-count {
-    right: auto;
-    left: 0;
-}
-
-/* Language Switcher */
-.lang-switcher {
-    position: relative;
-}
-
-.lang-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    font-size: 13px;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.lang-btn:hover {
-    border-color: var(--color-gold);
-    color: var(--color-gold-dark);
-}
-
-.lang-dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    background: var(--color-white);
-    box-shadow: var(--shadow-lg);
-    border-radius: var(--radius-md);
-    padding: 8px;
-    min-width: 140px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: var(--transition);
-    z-index: 10;
-}
-
-[dir="rtl"] .lang-dropdown {
-    right: auto;
-    left: 0;
-}
-
-.lang-switcher.active .lang-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.lang-dropdown li {
-    padding: 10px 14px;
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.lang-dropdown li:hover {
-    background: var(--color-bg-soft);
-    color: var(--color-red);
-}
-
-.mobile-menu-btn {
-    display: none;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--color-bg-soft);
-    color: var(--color-text);
-    font-size: 18px;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ============= Hero Section ============= */
-.hero {
-    position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    background: var(--color-bg-dark);
-}
-
-.hero-video-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.hero-video-wrap iframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw; /* 16:9 ratio */
-    min-height: 100vh;
-    min-width: 177.77vh; /* 16:9 ratio */
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(26, 26, 26, 0.75) 0%, 
-        rgba(154, 12, 36, 0.45) 50%, 
-        rgba(26, 26, 26, 0.7) 100%);
-    z-index: 2;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 3;
-    width: 100%;
-    color: var(--color-white);
-    padding: 100px 0;
-}
-
-.hero-badge {
-    display: inline-block;
-    padding: 8px 20px;
-    background: rgba(201, 169, 97, 0.15);
-    border: 1px solid var(--color-gold);
-    color: var(--color-gold-light);
-    border-radius: var(--radius-full);
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    backdrop-filter: blur(10px);
-    animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-.hero-title {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.hero-title-sub {
-    font-size: 0.4em;
-    color: var(--color-gold);
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    animation: fadeInUp 0.8s ease 0.3s both;
-}
-
-.hero-title-main {
-    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gold-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: fadeInUp 0.8s ease 0.4s both;
-}
-
-.hero-desc {
-    max-width: 600px;
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 40px;
-    line-height: 1.8;
-    animation: fadeInUp 0.8s ease 0.5s both;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease 0.6s both;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 16px 32px;
-    border-radius: var(--radius-full);
-    font-size: 15px;
-    font-weight: 700;
-    transition: var(--transition);
-    cursor: pointer;
-    text-align: center;
-    line-height: 1;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%);
-    color: var(--color-white);
-    box-shadow: var(--shadow-red);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(200, 16, 46, 0.4);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--color-white);
-    border: 2px solid var(--color-gold);
-}
-
-.btn-outline:hover {
-    background: var(--color-gold);
-    color: var(--color-bg-dark);
-    transform: translateY(-2px);
-}
-
-.hero-scroll {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    color: var(--color-white);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    opacity: 0.8;
-    animation: fadeInUp 0.8s ease 0.8s both;
-}
-
-.scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--color-gold), transparent);
-    animation: scrollDown 2s ease infinite;
-}
-
-@keyframes scrollDown {
-    0%, 100% { transform: scaleY(1); }
-    50% { transform: scaleY(0.4); transform-origin: top; }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============= Features Strip ============= */
-.features-strip {
-    background: var(--color-bg-soft);
-    padding: 50px 0;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.feature-item i {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
-    color: var(--color-white);
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: var(--shadow-gold);
-}
-
-.feature-item h4 {
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--color-text);
-    margin-bottom: 4px;
-}
-
-.feature-item p {
-    font-size: 13px;
-    color: var(--color-text-soft);
-    margin: 0;
-}
-
-/* ============= Section Header ============= */
-.section-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-header.text-center {
-    text-align: center;
-}
-
-.section-eyebrow {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--color-gold-dark);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    position: relative;
-    padding: 0 30px;
-}
-
-.section-eyebrow::before,
-.section-eyebrow::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 20px;
-    height: 1px;
-    background: var(--color-gold);
-}
-
-.section-eyebrow::before { right: 0; }
-.section-eyebrow::after { left: 0; }
-
-.section-title {
-    font-family: var(--font-arabic);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
-    color: var(--color-text);
-    margin-bottom: 16px;
-    line-height: 1.2;
-}
-
-.section-desc {
-    color: var(--color-text-soft);
-    font-size: 16px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* ============= Video Showcase ============= */
-.video-showcase {
-    padding: var(--section-py) 0;
-    background: var(--color-bg);
-    position: relative;
-    overflow: hidden;
-}
-
-.video-showcase::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(74, 124, 46, 0.06), transparent 70%);
-    pointer-events: none;
-}
-
-.video-showcase::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(201, 169, 97, 0.08), transparent 70%);
-    pointer-events: none;
-}
-
-.video-wrapper {
-    max-width: 960px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.video-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(201, 169, 97, 0.2);
-    background: var(--color-bg-dark);
-    z-index: 2;
-    transition: var(--transition);
-}
-
-.video-frame:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 32px 70px rgba(200, 16, 46, 0.18), 0 0 0 2px var(--color-gold);
-}
-
-.video-frame iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.video-decoration {
-    position: absolute;
-    border-radius: 50%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.video-deco-1 {
-    width: 120px;
-    height: 120px;
-    border: 3px dashed var(--color-gold);
-    opacity: 0.4;
-    top: -40px;
-    left: -40px;
-    animation: rotate 40s linear infinite;
-}
-
-.video-deco-2 {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
-    opacity: 0.15;
-    bottom: -30px;
-    right: -30px;
-}
-
-@media (max-width: 768px) {
-    .video-deco-1 {
-        width: 70px;
-        height: 70px;
-        top: -20px;
-        left: -20px;
-    }
-    
-    .video-deco-2 {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-/* ============= Categories Section ============= */
-.categories {
-    padding: var(--section-py) 0;
-    background: var(--color-bg);
-    position: relative;
-}
-
-.categories::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-}
-
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 280px);
-    gap: 24px;
-}
-
-.category-card {
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: var(--transition);
-    cursor: pointer;
-    background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-}
-
-.category-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.category-card.category-large {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-
-.category-card.category-wide {
-    grid-column: span 2;
-}
-
-.category-image {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--color-green-light), var(--color-green));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.category-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.15) 0%, transparent 40%),
-        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.2) 0%, transparent 40%);
-}
-
-.category-image.cream-bg {
-    background: linear-gradient(135deg, #E5C982, var(--color-gold));
-}
-
-.category-image.ointment-bg {
-    background: linear-gradient(135deg, #E63946, var(--color-red));
-}
-
-.category-image.butter-bg {
-    background: linear-gradient(135deg, #F4D77B, #C9A961);
-}
-
-.category-icon {
-    font-size: 80px;
-    color: rgba(255, 255, 255, 0.25);
-    transition: var(--transition);
-    z-index: 1;
-}
-
-.category-card:hover .category-icon {
-    transform: scale(1.1) rotate(-5deg);
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.category-card.category-large .category-icon {
-    font-size: 140px;
-}
-
-.category-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 24px;
-    color: var(--color-white);
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-    z-index: 2;
-}
-
-.category-count {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-    font-size: 11px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.category-content h3 {
-    font-size: 24px;
-    font-weight: 900;
-    margin-bottom: 8px;
-}
-
-.category-card.category-large .category-content h3 {
-    font-size: 36px;
-}
-
-.category-content p {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-bottom: 12px;
-}
-
-.category-link {
-    color: var(--color-gold-light);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 1px;
-}
-
-/* ============= Products Section ============= */
-.products-section {
-    padding: var(--section-py) 0;
-    background: var(--color-bg-soft);
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
-
-.product-card {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
-    position: relative;
-}
-
-.product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.product-image {
-    position: relative;
-    aspect-ratio: 1;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--color-bg-soft), #F0E8D8);
-}
-
-.product-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 90px;
-    color: rgba(255,255,255,0.7);
-    transition: var(--transition);
-}
-
-.product-placeholder.oil-1 { background: linear-gradient(135deg, #4A7C2E, #355A1F); }
-.product-placeholder.oil-2 { background: linear-gradient(135deg, #6FA84A, #4A7C2E); }
-.product-placeholder.oil-3 { background: linear-gradient(135deg, #C9A961, #A88B47); }
-.product-placeholder.cream-1 { background: linear-gradient(135deg, #F4E5C2, #E5C982); }
-.product-placeholder.butter-1 { background: linear-gradient(135deg, #F0D580, #D4A943); }
-.product-placeholder.ointment-1 { background: linear-gradient(135deg, #E63946, #9A0C24); }
-
-.product-card:hover .product-placeholder {
-    transform: scale(1.08);
-}
-
-.product-badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: var(--color-red);
-    color: var(--color-white);
-    padding: 6px 12px;
-    border-radius: var(--radius-full);
-    font-size: 11px;
-    font-weight: 800;
-    z-index: 2;
-    box-shadow: var(--shadow-red);
-}
-
-[dir="rtl"] .product-badge {
-    right: auto;
-    left: 16px;
-}
-
-.product-badge.new {
-    background: var(--color-green);
-}
-
-.product-actions {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    gap: 8px;
-    opacity: 0;
-    transition: var(--transition);
-    z-index: 2;
-}
-
-.product-card:hover .product-actions {
-    opacity: 1;
-}
-
-.product-actions button {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--color-white);
-    color: var(--color-text);
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-}
-
-.product-actions button:hover {
-    background: var(--color-red);
-    color: var(--color-white);
-    transform: scale(1.1);
-}
-
-.product-info {
-    padding: 20px 24px 24px;
-}
-
-.product-cat {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--color-gold-dark);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.product-info h3 {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--color-text);
-    margin: 6px 0 10px;
-}
-
-.product-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.stars {
-    color: var(--color-gold);
-    font-size: 13px;
-}
-
-.product-rating span {
-    font-size: 12px;
-    color: var(--color-text-light);
-}
-
-.product-price {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
-
-.price-old {
-    font-size: 14px;
-    color: var(--color-text-light);
-    text-decoration: line-through;
-}
-
-.price-new {
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--color-red);
-}
-
-/* ============= About Section ============= */
-.about {
-    padding: var(--section-py) 0;
-    background: var(--color-bg);
-    position: relative;
-    overflow: hidden;
-}
-
-.about::before {
-    content: '';
-    position: absolute;
-    top: -100px;
-    right: -100px;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201, 169, 97, 0.08), transparent 70%);
-    pointer-events: none;
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.about-content .section-eyebrow {
-    padding: 0;
-}
-
-.about-content .section-eyebrow::before,
-.about-content .section-eyebrow::after {
-    display: none;
-}
-
-.about-content .section-title {
-    text-align: right;
-}
-
-[dir="ltr"] .about-content .section-title {
-    text-align: left;
-}
-
-.about-content > p {
-    font-size: 16px;
-    color: var(--color-text-soft);
-    margin: 24px 0 32px;
-    line-height: 1.9;
-}
-
-.about-features {
-    margin-bottom: 32px;
-}
-
-.about-features li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    font-size: 15px;
-    color: var(--color-text);
-    font-weight: 500;
-}
-
-.about-features i {
-    color: var(--color-green);
-    font-size: 20px;
-}
-
-.about-quote {
-    padding: 24px 32px;
-    background: linear-gradient(135deg, rgba(200, 16, 46, 0.04), rgba(201, 169, 97, 0.08));
-    border-right: 4px solid var(--color-red);
-    border-radius: var(--radius-md);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--color-red);
-    font-style: italic;
-}
-
-[dir="ltr"] .about-quote {
-    border-right: none;
-    border-left: 4px solid var(--color-red);
-}
-
-.about-visual {
-    position: relative;
-}
-
-.about-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    position: relative;
-    z-index: 2;
-}
-
-.stat-card {
-    background: var(--color-white);
-    padding: 32px 24px;
-    border-radius: var(--radius-lg);
-    text-align: center;
-    box-shadow: var(--shadow-md);
-    border-top: 4px solid var(--color-gold);
-    transition: var(--transition);
-}
-
-.stat-card:nth-child(1) { border-color: var(--color-red); transform: translateY(-20px); }
-.stat-card:nth-child(2) { border-color: var(--color-gold); }
-.stat-card:nth-child(3) { border-color: var(--color-green); }
-.stat-card:nth-child(4) { border-color: var(--color-red); transform: translateY(-20px); }
-
-.stat-card:hover {
-    transform: translateY(-30px);
-    box-shadow: var(--shadow-lg);
-}
-
-.stat-card:nth-child(2):hover,
-.stat-card:nth-child(3):hover {
-    transform: translateY(-10px);
-}
-
-.stat-number {
-    font-size: 42px;
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--color-red), var(--color-gold-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-    margin-bottom: 8px;
-}
-
-.stat-label {
-    font-size: 14px;
-    color: var(--color-text-soft);
-    font-weight: 600;
-}
-
-.about-decoration {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.decoration-circle {
-    width: 320px;
-    height: 320px;
-    border: 2px dashed var(--color-gold);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: rotate 60s linear infinite;
-}
-
-.decoration-leaf {
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    color: var(--color-green);
-    font-size: 60px;
-    opacity: 0.2;
-    animation: floatLeaf 4s ease-in-out infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes floatLeaf {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(10deg); }
-}
-
-/* ============= CTA Banner ============= */
-.cta-banner {
-    background: linear-gradient(135deg, var(--color-red-dark) 0%, var(--color-red) 50%, var(--color-red-dark) 100%);
-    color: var(--color-white);
-    padding: 70px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-banner::before,
-.cta-banner::after {
-    content: '';
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: rgba(201, 169, 97, 0.15);
-    pointer-events: none;
-}
-
-.cta-banner::before {
-    top: -100px;
-    left: -50px;
-}
-
-.cta-banner::after {
-    bottom: -100px;
-    right: -50px;
-}
-
-.cta-content {
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.cta-content h2 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 900;
-    margin-bottom: 12px;
-}
-
-.cta-content p {
-    font-size: 18px;
-    opacity: 0.95;
-    margin-bottom: 30px;
-}
-
-.cta-banner .btn-primary {
-    background: var(--color-white);
-    color: var(--color-red);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-}
-
-.cta-banner .btn-primary:hover {
-    background: var(--color-gold);
-    color: var(--color-white);
-}
-
-/* ============= Contact Section ============= */
-.contact {
-    padding: var(--section-py) 0;
-    background: var(--color-bg-soft);
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.contact-card {
-    background: var(--color-white);
-    padding: 48px 32px;
-    border-radius: var(--radius-lg);
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-red), var(--color-gold), var(--color-green));
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.4s ease;
-}
-
-.contact-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.contact-card:hover::before {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.contact-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: var(--color-white);
-    transition: var(--transition);
-}
-
-.contact-icon.whatsapp {
-    background: linear-gradient(135deg, #25D366, #128C7E);
-}
-
-.contact-icon.phone {
-    background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
-}
-
-.contact-icon.email {
-    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
-}
-
-.contact-card:hover .contact-icon {
-    transform: scale(1.1) rotate(-5deg);
-}
-
-.contact-card h3 {
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 8px;
-}
-
-.contact-card p {
-    color: var(--color-text-soft);
-    font-size: 15px;
-    direction: ltr;
-}
-
-/* ============= Footer ============= */
-.main-footer {
-    background: var(--color-bg-dark);
-    color: rgba(255, 255, 255, 0.8);
-    padding: 80px 0 30px;
-    position: relative;
-}
-
-.main-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-red), var(--color-gold), var(--color-green), var(--color-gold), var(--color-red));
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
-    gap: 48px;
-    margin-bottom: 50px;
-}
-
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.footer-logo img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: var(--color-bg-dark);
-    padding: 4px;
-    border: 2px solid var(--color-gold);
-}
-
-.footer-logo h3 {
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--color-white);
-}
-
-.footer-col p {
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 24px;
-    opacity: 0.7;
-}
-
-.footer-col h4 {
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--color-white);
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 12px;
-}
-
-.footer-col h4::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 40px;
-    height: 2px;
-    background: var(--color-gold);
-}
-
-[dir="ltr"] .footer-col h4::after {
-    right: auto;
-    left: 0;
-}
-
-.footer-col ul li {
-    margin-bottom: 10px;
-}
-
-.footer-col ul a {
-    font-size: 14px;
-    opacity: 0.8;
-    transition: var(--transition);
-    display: inline-block;
-}
-
-.footer-col ul a:hover {
-    color: var(--color-gold);
-    opacity: 1;
-    transform: translateX(-4px);
-}
-
-[dir="ltr"] .footer-col ul a:hover {
-    transform: translateX(4px);
-}
-
-.social-links {
-    display: flex;
-    gap: 12px;
-}
-
-.social-links a {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-    font-size: 16px;
-}
-
-.social-links a:hover {
-    background: var(--color-gold);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-gold);
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-}
-
-.newsletter-form input {
-    flex: 1;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-full);
-    color: var(--color-white);
-    font-size: 14px;
-    font-family: inherit;
-    transition: var(--transition);
-}
-
-.newsletter-form input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-.newsletter-form input:focus {
-    outline: none;
-    border-color: var(--color-gold);
-    background: rgba(255, 255, 255, 0.12);
-}
-
-.newsletter-form button {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--color-gold);
-    color: var(--color-bg-dark);
-    transition: var(--transition);
-    flex-shrink: 0;
-}
-
-.newsletter-form button:hover {
-    background: var(--color-gold-light);
-    transform: scale(1.05);
-}
-
-.footer-bottom {
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    text-align: center;
-    font-size: 14px;
-    opacity: 0.6;
-}
-
-/* ============= Floating WhatsApp Button ============= */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
-    z-index: 999;
-    transition: var(--transition);
-    animation: pulse 2s ease infinite;
-}
-
-[dir="rtl"] .whatsapp-float {
-    left: auto;
-    right: 30px;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6);
-}
-
-.whatsapp-float::before {
-    content: '';
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    background: rgba(37, 211, 102, 0.4);
-    z-index: -1;
-    animation: pulseRing 2s ease infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-@keyframes pulseRing {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(1.4); opacity: 0; }
-}
-
-.whatsapp-tooltip {
-    position: absolute;
-    bottom: 50%;
-    transform: translateY(50%);
-    background: var(--color-bg-dark);
-    color: var(--color-white);
-    padding: 8px 14px;
-    border-radius: var(--radius-md);
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition);
-}
-
-[dir="rtl"] .whatsapp-tooltip {
-    left: calc(100% + 12px);
-}
-
-[dir="ltr"] .whatsapp-tooltip {
-    right: calc(100% + 12px);
-}
-
-.whatsapp-float:hover .whatsapp-tooltip {
-    opacity: 1;
-}
-
-/* ============= Scroll to Top ============= */
-.scroll-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--color-red);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    box-shadow: var(--shadow-red);
-    z-index: 998;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition);
-}
-
-[dir="rtl"] .scroll-top {
-    right: auto;
-    left: 30px;
-}
-
-.scroll-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.scroll-top:hover {
-    background: var(--color-red-dark);
-    transform: translateY(-4px);
-}
-
-/* ============= Responsive ============= */
-@media (max-width: 1100px) {
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-    }
-    
-    .category-card.category-large,
-    .category-card.category-wide {
-        grid-column: span 2;
-    }
-    
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .about-grid {
-        gap: 48px;
-    }
-}
-
-@media (max-width: 768px) {
     :root {
-        --section-py: 60px;
+        --color-red: #C8102E; --color-red-dark: #9A0C24; --color-red-light: #E63946;
+        --color-gold: #C9A961; --color-gold-dark: #A88B47; --color-gold-light: #E5C982;
+        --color-green: #4A7C2E; --color-green-dark: #355A1F; --color-green-light: #6FA84A;
+        --color-bg: #FFFEF9; --color-bg-soft: #F8F4EB; --color-bg-dark: #1a1a1a;
+        --color-text: #2C2825; --color-text-soft: #5C5550; --color-text-light: #8A827C;
+        --color-border: #E8E0D0; --color-white: #FFFFFF;
+        --font-arabic: 'Cairo', sans-serif; --font-display: 'Playfair Display', serif; --font-body: 'Inter', sans-serif;
+        --container-max: 1400px; --section-py: 100px;
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.06); --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+        --shadow-lg: 0 16px 48px rgba(0,0,0,0.12); --shadow-gold: 0 8px 24px rgba(201, 169, 97, 0.25);
+        --shadow-red: 0 8px 24px rgba(200, 16, 46, 0.2);
+        --radius-sm: 6px; --radius-md: 12px; --radius-lg: 24px; --radius-full: 999px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
-    .main-nav,
-    .lang-switcher {
-        display: none;
-    }
-    
-    .mobile-menu-btn {
-        display: flex;
-    }
-    
-    .header-actions {
-        gap: 4px;
-    }
-    
-    .action-btn {
-        width: 38px;
-        height: 38px;
-    }
-    
-    .logo img {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .logo-name {
-        font-size: 18px;
-    }
-    
-    .logo-tagline {
-        display: none;
-    }
-    
-    .hero {
-        min-height: 80vh;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .categories-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .category-card,
-    .category-card.category-large,
-    .category-card.category-wide {
-        grid-column: span 1;
-        height: 240px;
-    }
-    
-    .products-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    
-    .whatsapp-float {
-        width: 54px;
-        height: 54px;
-        font-size: 26px;
-        bottom: 20px;
-    }
-    
-    [dir="rtl"] .whatsapp-float {
-        right: 20px;
-    }
-    
-    .scroll-top {
-        bottom: 90px;
-    }
-    
-    [dir="rtl"] .scroll-top {
-        left: 20px;
-    }
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-arabic); color: var(--color-text); background: var(--color-bg); line-height: 1.7; overflow-x: hidden; }
+    [dir="ltr"] body { font-family: var(--font-body); }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
 
-/* Mobile menu open state */
-.mobile-menu-open .main-nav {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 280px;
-    height: 100vh;
-    background: var(--color-white);
-    z-index: 1100;
-    padding: 80px 24px 24px;
-    box-shadow: var(--shadow-lg);
-    overflow-y: auto;
-}
+    .announcement-bar { background: linear-gradient(90deg, var(--color-red-dark), var(--color-red), var(--color-red-dark)); color: var(--color-white); text-align: center; padding: 10px 0; font-size: 13px; font-weight: 500; position: relative; overflow: hidden; }
+    .announcement-bar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%); animation: shimmer 3s infinite; }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-.mobile-menu-open .main-nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-}
+    .main-header { background: var(--color-white); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+    .main-header.scrolled { box-shadow: var(--shadow-md); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 32px; }
 
-.mobile-menu-open .main-nav a {
-    width: 100%;
-    padding: 14px 18px;
-    justify-content: space-between;
-}
+    /* LOGO FIX - No black circle */
+    .logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo img { width: 64px; height: 64px; object-fit: contain; background: transparent; padding: 0; border-radius: 0; transition: var(--transition); mix-blend-mode: normal; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.1)); }
+    .logo:hover img { transform: rotate(-5deg) scale(1.05); }
+    .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .logo-name { font-size: 22px; font-weight: 900; color: var(--color-red); letter-spacing: -0.5px; }
+    .logo-tagline { font-size: 11px; color: var(--color-gold-dark); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
-.mobile-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1050;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
+    .main-nav ul { display: flex; gap: 8px; align-items: center; }
+    .main-nav a { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; font-weight: 600; font-size: 15px; color: var(--color-text); border-radius: var(--radius-full); transition: var(--transition); position: relative; }
+    .main-nav a:hover { color: var(--color-red); background: rgba(200, 16, 46, 0.06); }
+    .main-nav .has-dropdown { position: relative; }
+    .main-nav .dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: var(--color-white); box-shadow: var(--shadow-lg); border-radius: var(--radius-md); padding: 12px; min-width: 200px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: var(--transition); border-top: 3px solid var(--color-gold); }
+    [dir="ltr"] .main-nav .dropdown { right: auto; left: 0; }
+    .main-nav .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .main-nav .dropdown li { display: block; }
+    .main-nav .dropdown a { display: block; padding: 10px 16px; border-radius: var(--radius-sm); }
 
-.mobile-menu-open .mobile-overlay {
-    display: block;
-    opacity: 1;
-}
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .action-btn { width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: var(--color-text); transition: var(--transition); position: relative; }
+    .action-btn:hover { background: var(--color-bg-soft); color: var(--color-red); }
+    .cart-btn .cart-count { position: absolute; top: 0; right: 0; background: var(--color-red); color: var(--color-white); font-size: 10px; font-weight: 700; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    [dir="rtl"] .cart-btn .cart-count { right: auto; left: 0; }
 
+    .search-overlay { position: fixed; inset: 0; background: rgba(26, 26, 26, 0.85); backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: flex-start; justify-content: center; padding: 100px 24px; }
+    .search-overlay.active { display: flex; }
+    .search-overlay-inner { width: 100%; max-width: 700px; animation: slideDown 0.4s ease; position: relative; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    .search-close { position: absolute; top: -70px; right: 0; width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.1); color: var(--color-white); font-size: 22px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    [dir="rtl"] .search-close { right: auto; left: 0; }
+    .search-close:hover { background: var(--color-red); transform: rotate(90deg); }
+    .search-form { position: relative; }
+    .search-form input { width: 100%; padding: 22px 60px 22px 28px; font-size: 18px; font-family: inherit; background: var(--color-white); border: none; border-radius: var(--radius-full); box-shadow: var(--shadow-lg); outline: none; }
+    [dir="ltr"] .search-form input { padding: 22px 28px 22px 60px; }
+    .search-form > button { position: absolute; top: 50%; transform: translateY(-50%); left: 16px; width: 46px; height: 46px; border-radius: 50%; background: var(--color-red); color: var(--color-white); font-size: 18px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    [dir="ltr"] .search-form > button { left: auto; right: 16px; }
+    .search-form > button:hover { background: var(--color-red-dark); }
+    .search-results { margin-top: 20px; background: var(--color-white); border-radius: var(--radius-md); max-height: 400px; overflow-y: auto; }
+    .search-results:empty { display: none; }
+    .search-result-item { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--color-border); cursor: pointer; transition: var(--transition); }
+    .search-result-item:hover { background: var(--color-bg-soft); }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-icon { width: 50px; height: 50px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold)); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .search-result-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .search-result-info p { font-size: 12px; color: var(--color-text-soft); margin: 0; }
+    .search-no-results { padding: 30px; text-align: center; color: var(--color-text-soft); font-size: 15px; }
+
+    .cart-sidebar { position: fixed; top: 0; right: -420px; width: 400px; max-width: 100vw; height: 100vh; background: var(--color-white); box-shadow: var(--shadow-lg); z-index: 2100; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
+    [dir="ltr"] .cart-sidebar { right: auto; left: -420px; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .cart-sidebar.active { right: 0; }
+    [dir="ltr"] .cart-sidebar.active { left: 0; }
+    .cart-header { padding: 24px; background: linear-gradient(135deg, var(--color-red-dark), var(--color-red)); color: var(--color-white); display: flex; justify-content: space-between; align-items: center; }
+    .cart-header h3 { font-size: 18px; font-weight: 800; }
+    .cart-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); color: var(--color-white); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    .cart-close:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(90deg); }
+    .cart-body { flex: 1; overflow-y: auto; padding: 20px; }
+    .cart-empty { text-align: center; padding: 60px 20px; color: var(--color-text-soft); }
+    .cart-empty i { font-size: 60px; color: var(--color-border); margin-bottom: 20px; }
+    .cart-empty p { font-size: 16px; font-weight: 600; }
+    .cart-item { display: flex; gap: 14px; padding: 14px; background: var(--color-bg-soft); border-radius: var(--radius-md); margin-bottom: 12px; position: relative; }
+    .cart-item-img { width: 70px; height: 70px; border-radius: var(--radius-sm); background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold)); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+    .cart-item-price { color: var(--color-red); font-weight: 800; font-size: 14px; margin-bottom: 8px; }
+    .cart-qty { display: inline-flex; align-items: center; gap: 8px; background: var(--color-white); border-radius: var(--radius-full); padding: 4px; }
+    .cart-qty button { width: 24px; height: 24px; border-radius: 50%; background: var(--color-bg-soft); color: var(--color-text); font-size: 12px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    .cart-qty button:hover { background: var(--color-red); color: var(--color-white); }
+    .cart-qty span { font-weight: 700; font-size: 13px; min-width: 20px; text-align: center; }
+    .cart-item-remove { position: absolute; top: 8px; left: 8px; width: 26px; height: 26px; border-radius: 50%; background: rgba(200, 16, 46, 0.1); color: var(--color-red); font-size: 11px; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    [dir="rtl"] .cart-item-remove { left: auto; right: 8px; }
+    .cart-item-remove:hover { background: var(--color-red); color: var(--color-white); }
+    .cart-footer { padding: 20px; border-top: 1px solid var(--color-border); background: var(--color-bg-soft); }
+    .cart-total { display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 18px; font-weight: 800; }
+    .cart-total-amount { color: var(--color-red); }
+    .cart-checkout { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--color-red), var(--color-red-dark)); color: var(--color-white); border-radius: var(--radius-full); font-size: 15px; font-weight: 700; transition: var(--transition); }
+    .cart-checkout:hover { transform: translateY(-2px); box-shadow: var(--shadow-red); }
+
+    .lang-switcher { position: relative; }
+    .lang-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-full); font-size: 13px; font-weight: 600; transition: var(--transition); }
+    .lang-btn:hover { border-color: var(--color-gold); color: var(--color-gold-dark); }
+    .lang-dropdown { position: absolute; top: calc(100% + 8px); right: 0; background: var(--color-white); box-shadow: var(--shadow-lg); border-radius: var(--radius-md); padding: 8px; min-width: 140px; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: var(--transition); z-index: 10; }
+    [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+    .lang-switcher.active .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-dropdown li { padding: 10px 14px; cursor: pointer; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; transition: var(--transition); }
+    .lang-dropdown li:hover { background: var(--color-bg-soft); color: var(--color-red); }
+
+    .mobile-menu-btn { display: none; width: 42px; height: 42px; border-radius: 50%; background: var(--color-bg-soft); color: var(--color-text); font-size: 18px; align-items: center; justify-content: center; }
+
+    .hero { position: relative; min-height: 90vh; display: flex; align-items: center; overflow: hidden; background: var(--color-bg-dark); }
+    .hero-video-wrap { position: absolute; inset: 0; overflow: hidden; z-index: 1; }
+    .hero-video-wrap iframe { position: absolute; top: 50%; left: 50%; width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; transform: translate(-50%, -50%); pointer-events: none; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26, 26, 26, 0.75) 0%, rgba(154, 12, 36, 0.45) 50%, rgba(26, 26, 26, 0.7) 100%); z-index: 2; }
+    .hero-content { position: relative; z-index: 3; width: 100%; color: var(--color-white); padding: 100px 0; }
+    .hero-badge { display: inline-block; padding: 8px 20px; background: rgba(201, 169, 97, 0.15); border: 1px solid var(--color-gold); color: var(--color-gold-light); border-radius: var(--radius-full); font-size: 13px; font-weight: 600; margin-bottom: 24px; backdrop-filter: blur(10px); animation: fadeInUp 0.8s ease 0.2s both; }
+    .hero-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .hero-title-sub { font-size: 0.4em; color: var(--color-gold); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; animation: fadeInUp 0.8s ease 0.3s both; }
+    .hero-title-main { background: linear-gradient(135deg, var(--color-white) 0%, var(--color-gold-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 0.8s ease 0.4s both; }
+    .hero-desc { max-width: 600px; font-size: clamp(1rem, 1.4vw, 1.15rem); color: rgba(255, 255, 255, 0.9); margin-bottom: 40px; line-height: 1.8; animation: fadeInUp 0.8s ease 0.5s both; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.6s both; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: var(--radius-full); font-size: 15px; font-weight: 700; transition: var(--transition); cursor: pointer; line-height: 1; position: relative; overflow: hidden; }
+    .btn-primary { background: linear-gradient(135deg, var(--color-red) 0%, var(--color-red-dark) 100%); color: var(--color-white); box-shadow: var(--shadow-red); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200, 16, 46, 0.4); }
+    .btn-outline { background: transparent; color: var(--color-white); border: 2px solid var(--color-gold); }
+    .btn-outline:hover { background: var(--color-gold); color: var(--color-bg-dark); transform: translateY(-2px); }
+    .hero-scroll { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 3; color: var(--color-white); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: 0.8; animation: fadeInUp 0.8s ease 0.8s both; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--color-gold), transparent); animation: scrollDown 2s ease infinite; }
+    @keyframes scrollDown { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.4); transform-origin: top; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .features-strip { background: var(--color-bg-soft); padding: 50px 0; border-bottom: 1px solid var(--color-border); }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .feature-item { display: flex; align-items: center; gap: 16px; }
+    .feature-item i { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold)); color: var(--color-white); font-size: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--shadow-gold); }
+    .feature-item h4 { font-size: 16px; font-weight: 800; color: var(--color-text); margin-bottom: 4px; }
+    .feature-item p { font-size: 13px; color: var(--color-text-soft); margin: 0; }
+
+    .video-showcase { padding: var(--section-py) 0; background: var(--color-bg); position: relative; overflow: hidden; }
+    .video-showcase::before { content: ''; position: absolute; top: 0; left: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(74, 124, 46, 0.06), transparent 70%); pointer-events: none; }
+    .video-showcase::after { content: ''; position: absolute; bottom: 0; right: 0; width: 250px; height: 250px; background: radial-gradient(circle, rgba(201, 169, 97, 0.08), transparent 70%); pointer-events: none; }
+    .video-wrapper { max-width: 960px; margin: 0 auto; position: relative; }
+    .video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(201, 169, 97, 0.2); background: var(--color-bg-dark); z-index: 2; transition: var(--transition); }
+    .video-frame:hover { transform: translateY(-4px); box-shadow: 0 32px 70px rgba(200, 16, 46, 0.18), 0 0 0 2px var(--color-gold); }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-decoration { position: absolute; border-radius: 50%; z-index: 1; pointer-events: none; }
+    .video-deco-1 { width: 120px; height: 120px; border: 3px dashed var(--color-gold); opacity: 0.4; top: -40px; left: -40px; animation: rotate 40s linear infinite; }
+    .video-deco-2 { width: 80px; height: 80px; background: linear-gradient(135deg, var(--color-red), var(--color-red-dark)); opacity: 0.15; bottom: -30px; right: -30px; }
+
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-eyebrow { display: inline-block; font-size: 13px; font-weight: 700; color: var(--color-gold-dark); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; position: relative; padding: 0 30px; }
+    .section-eyebrow::before, .section-eyebrow::after { content: ''; position: absolute; top: 50%; width: 20px; height: 1px; background: var(--color-gold); }
+    .section-eyebrow::before { right: 0; }
+    .section-eyebrow::after { left: 0; }
+    .section-title { font-family: var(--font-arabic); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: var(--color-text); margin-bottom: 16px; line-height: 1.2; }
+    .section-desc { color: var(--color-text-soft); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+    .categories { padding: var(--section-py) 0; background: var(--color-bg); position: relative; }
+    .categories::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold), transparent); }
+    .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 280px); gap: 24px; }
+    .category-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); cursor: pointer; background: var(--color-white); box-shadow: var(--shadow-sm); }
+    .category-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .category-card.category-large { grid-column: span 2; grid-row: span 2; }
+    .category-card.category-wide { grid-column: span 2; }
+    .category-image { position: absolute; inset: 0; background: linear-gradient(135deg, var(--color-green-light), var(--color-green)); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+    .category-image::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.15) 0%, transparent 40%), radial-gradient(circle at 70% 80%, rgba(0,0,0,0.2) 0%, transparent 40%); }
+    .category-image.cream-bg { background: linear-gradient(135deg, #E5C982, var(--color-gold)); }
+    .category-image.ointment-bg { background: linear-gradient(135deg, #E63946, var(--color-red)); }
+    .category-image.butter-bg { background: linear-gradient(135deg, #F4D77B, #C9A961); }
+    .category-icon { font-size: 80px; color: rgba(255, 255, 255, 0.25); transition: var(--transition); z-index: 1; }
+    .category-card:hover .category-icon { transform: scale(1.1) rotate(-5deg); color: rgba(255, 255, 255, 0.4); }
+    .category-card.category-large .category-icon { font-size: 140px; }
+    .category-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; color: var(--color-white); background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); z-index: 2; }
+    .category-count { display: inline-block; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 4px 12px; border-radius: var(--radius-full); font-size: 11px; font-weight: 700; margin-bottom: 12px; }
+    .category-content h3 { font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+    .category-card.category-large .category-content h3 { font-size: 36px; }
+    .category-content p { font-size: 14px; opacity: 0.85; margin-bottom: 12px; }
+    .category-link { color: var(--color-gold-light); font-weight: 700; font-size: 13px; letter-spacing: 1px; }
+
+    .products-section { padding: var(--section-py) 0; background: var(--color-bg-soft); }
+    .products-filter { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+    .filter-btn { padding: 10px 20px; border-radius: var(--radius-full); background: var(--color-white); color: var(--color-text); font-size: 14px; font-weight: 600; transition: var(--transition); border: 1px solid var(--color-border); }
+    .filter-btn:hover, .filter-btn.active { background: var(--color-red); color: var(--color-white); border-color: var(--color-red); }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .product-card { background: var(--color-white); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); box-shadow: var(--shadow-sm); position: relative; }
+    .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .product-image { position: relative; aspect-ratio: 1; overflow: hidden; background: linear-gradient(135deg, var(--color-bg-soft), #F0E8D8); }
+    .product-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 90px; color: rgba(255,255,255,0.7); transition: var(--transition); }
+    .product-placeholder.oil-1 { background: linear-gradient(135deg, #4A7C2E, #355A1F); }
+    .product-placeholder.oil-2 { background: linear-gradient(135deg, #6FA84A, #4A7C2E); }
+    .product-placeholder.oil-3 { background: linear-gradient(135deg, #C9A961, #A88B47); }
+    .product-placeholder.cream-1 { background: linear-gradient(135deg, #F4E5C2, #E5C982); }
+    .product-placeholder.butter-1 { background: linear-gradient(135deg, #F0D580, #D4A943); }
+    .product-placeholder.ointment-1 { background: linear-gradient(135deg, #E63946, #9A0C24); }
+    .product-card:hover .product-placeholder { transform: scale(1.08); }
+    .product-badge { position: absolute; top: 16px; right: 16px; background: var(--color-red); color: var(--color-white); padding: 6px 12px; border-radius: var(--radius-full); font-size: 11px; font-weight: 800; z-index: 2; box-shadow: var(--shadow-red); }
+    [dir="rtl"] .product-badge { right: auto; left: 16px; }
+    .product-badge.new { background: var(--color-green); }
+    .product-actions { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; gap: 8px; opacity: 0; transition: var(--transition); z-index: 2; }
+    .product-card:hover .product-actions { opacity: 1; }
+    .product-actions button { width: 42px; height: 42px; border-radius: 50%; background: var(--color-white); color: var(--color-text); font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: var(--transition); }
+    .product-actions button:hover { background: var(--color-red); color: var(--color-white); transform: scale(1.1); }
+    .product-actions button.active { background: var(--color-red); color: var(--color-white); }
+    .product-info { padding: 20px 24px 24px; }
+    .product-cat { font-size: 11px; font-weight: 700; color: var(--color-gold-dark); letter-spacing: 1px; text-transform: uppercase; }
+    .product-info h3 { font-size: 18px; font-weight: 800; color: var(--color-text); margin: 6px 0 10px; }
+    .product-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .stars { color: var(--color-gold); font-size: 13px; }
+    .product-rating span { font-size: 12px; color: var(--color-text-light); }
+    .product-price { display: flex; align-items: baseline; gap: 8px; }
+    .price-old { font-size: 14px; color: var(--color-text-light); text-decoration: line-through; }
+    .price-new { font-size: 20px; font-weight: 900; color: var(--color-red); }
+    .add-to-cart-full { width: 100%; margin-top: 16px; padding: 12px 20px; background: linear-gradient(135deg, var(--color-red), var(--color-red-dark)); color: var(--color-white); border-radius: var(--radius-full); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; transition: var(--transition); font-family: inherit; }
+    .add-to-cart-full:hover { transform: translateY(-2px); box-shadow: var(--shadow-red); }
+    .add-to-cart-full.added { background: linear-gradient(135deg, var(--color-green), var(--color-green-dark)); }
+
+    .quick-view-modal { position: fixed; inset: 0; background: rgba(26, 26, 26, 0.85); backdrop-filter: blur(8px); z-index: 2200; display: none; align-items: center; justify-content: center; padding: 24px; }
+    .quick-view-modal.active { display: flex; }
+    .quick-view-content { background: var(--color-white); border-radius: var(--radius-lg); max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; animation: slideUp 0.4s ease; display: grid; grid-template-columns: 1fr 1fr; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .quick-view-close { position: absolute; top: 16px; left: 16px; width: 38px; height: 38px; border-radius: 50%; background: rgba(0, 0, 0, 0.1); color: var(--color-text); font-size: 16px; display: flex; align-items: center; justify-content: center; transition: var(--transition); z-index: 2; }
+    [dir="rtl"] .quick-view-close { left: auto; right: 16px; }
+    .quick-view-close:hover { background: var(--color-red); color: var(--color-white); transform: rotate(90deg); }
+    .quick-view-image { background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold)); display: flex; align-items: center; justify-content: center; font-size: 120px; color: rgba(255,255,255,0.7); min-height: 400px; }
+    .quick-view-info { padding: 30px; }
+    .quick-view-info .product-cat { margin-bottom: 8px; display: block; }
+    .quick-view-info h2 { font-size: 26px; font-weight: 900; margin-bottom: 12px; }
+    .quick-view-info .product-rating { margin-bottom: 16px; }
+    .quick-view-info .product-price { margin-bottom: 20px; }
+    .quick-view-info p.qv-desc { color: var(--color-text-soft); margin-bottom: 24px; font-size: 14px; line-height: 1.7; }
+    .quick-view-actions { display: flex; gap: 12px; align-items: center; }
+
+    .about { padding: var(--section-py) 0; background: var(--color-bg); position: relative; overflow: hidden; }
+    .about::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(201, 169, 97, 0.08), transparent 70%); pointer-events: none; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-content .section-eyebrow { padding: 0; }
+    .about-content .section-eyebrow::before, .about-content .section-eyebrow::after { display: none; }
+    .about-content .section-title { text-align: right; }
+    [dir="ltr"] .about-content .section-title { text-align: left; }
+    .about-content > p { font-size: 16px; color: var(--color-text-soft); margin: 24px 0 32px; line-height: 1.9; }
+    .about-features { margin-bottom: 32px; }
+    .about-features li { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-size: 15px; color: var(--color-text); font-weight: 500; }
+    .about-features i { color: var(--color-green); font-size: 20px; }
+    .about-quote { padding: 24px 32px; background: linear-gradient(135deg, rgba(200, 16, 46, 0.04), rgba(201, 169, 97, 0.08)); border-right: 4px solid var(--color-red); border-radius: var(--radius-md); font-size: 18px; font-weight: 700; color: var(--color-red); font-style: italic; }
+    [dir="ltr"] .about-quote { border-right: none; border-left: 4px solid var(--color-red); }
+    .about-visual { position: relative; }
+    .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; position: relative; z-index: 2; }
+    .stat-card { background: var(--color-white); padding: 32px 24px; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-md); border-top: 4px solid var(--color-gold); transition: var(--transition); }
+    .stat-card:nth-child(1) { border-color: var(--color-red); transform: translateY(-20px); }
+    .stat-card:nth-child(2) { border-color: var(--color-gold); }
+    .stat-card:nth-child(3) { border-color: var(--color-green); }
+    .stat-card:nth-child(4) { border-color: var(--color-red); transform: translateY(-20px); }
+    .stat-card:hover { transform: translateY(-30px); box-shadow: var(--shadow-lg); }
+    .stat-card:nth-child(2):hover, .stat-card:nth-child(3):hover { transform: translateY(-10px); }
+    .stat-number { font-size: 42px; font-weight: 900; background: linear-gradient(135deg, var(--color-red), var(--color-gold-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 14px; color: var(--color-text-soft); font-weight: 600; }
+    .about-decoration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; }
+    .decoration-circle { width: 320px; height: 320px; border: 2px dashed var(--color-gold); border-radius: 50%; opacity: 0.3; animation: rotate 60s linear infinite; }
+    .decoration-leaf { position: absolute; top: -30px; right: -30px; color: var(--color-green); font-size: 60px; opacity: 0.2; animation: floatLeaf 4s ease-in-out infinite; }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes floatLeaf { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(10deg); } }
+
+    .cta-banner { background: linear-gradient(135deg, var(--color-red-dark) 0%, var(--color-red) 50%, var(--color-red-dark) 100%); color: var(--color-white); padding: 70px 0; position: relative; overflow: hidden; }
+    .cta-banner::before, .cta-banner::after { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(201, 169, 97, 0.15); pointer-events: none; }
+    .cta-banner::before { top: -100px; left: -50px; }
+    .cta-banner::after { bottom: -100px; right: -50px; }
+    .cta-content { text-align: center; position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+    .cta-content h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; margin-bottom: 12px; }
+    .cta-content p { font-size: 18px; opacity: 0.95; margin-bottom: 30px; }
+    .cta-banner .btn-primary { background: var(--color-white); color: var(--color-red); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .cta-banner .btn-primary:hover { background: var(--color-gold); color: var(--color-white); }
+
+    .contact { padding: var(--section-py) 0; background: var(--color-bg-soft); }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1000px; margin: 0 auto; }
+    .contact-card { background: var(--color-white); padding: 48px 32px; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-sm); transition: var(--transition); position: relative; overflow: hidden; }
+    .contact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-red), var(--color-gold), var(--color-green)); transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; }
+    .contact-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .contact-card:hover::before { transform: scaleX(1); transform-origin: left; }
+    .contact-icon { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--color-white); transition: var(--transition); }
+    .contact-icon.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+    .contact-icon.phone { background: linear-gradient(135deg, var(--color-red), var(--color-red-dark)); }
+    .contact-icon.email { background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark)); }
+    .contact-card:hover .contact-icon { transform: scale(1.1) rotate(-5deg); }
+    .contact-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .contact-card p { color: var(--color-text-soft); font-size: 15px; direction: ltr; }
+
+    .main-footer { background: var(--color-bg-dark); color: rgba(255, 255, 255, 0.8); padding: 80px 0 30px; position: relative; }
+    .main-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-red), var(--color-gold), var(--color-green), var(--color-gold), var(--color-red)); }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 48px; margin-bottom: 50px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .footer-logo img { width: 60px; height: 60px; object-fit: contain; background: var(--color-white); padding: 4px; border-radius: 50%; }
+    .footer-logo h3 { font-size: 22px; font-weight: 900; color: var(--color-white); }
+    .footer-col p { font-size: 14px; line-height: 1.8; margin-bottom: 24px; opacity: 0.7; }
+    .footer-col h4 { font-size: 16px; font-weight: 800; color: var(--color-white); margin-bottom: 20px; position: relative; padding-bottom: 12px; }
+    .footer-col h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 2px; background: var(--color-gold); }
+    [dir="ltr"] .footer-col h4::after { right: auto; left: 0; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a { font-size: 14px; opacity: 0.8; transition: var(--transition); display: inline-block; }
+    .footer-col ul a:hover { color: var(--color-gold); opacity: 1; transform: translateX(-4px); }
+    [dir="ltr"] .footer-col ul a:hover { transform: translateX(4px); }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a { width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); color: var(--color-white); display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 16px; }
+    .social-links a:hover { background: var(--color-gold); transform: translateY(-4px); box-shadow: var(--shadow-gold); }
+    .newsletter-form { display: flex; gap: 8px; margin-top: 16px; }
+    .newsletter-form input { flex: 1; padding: 12px 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-full); color: var(--color-white); font-size: 14px; font-family: inherit; transition: var(--transition); }
+    .newsletter-form input::placeholder { color: rgba(255, 255, 255, 0.4); }
+    .newsletter-form input:focus { outline: none; border-color: var(--color-gold); background: rgba(255, 255, 255, 0.12); }
+    .newsletter-form button { width: 46px; height: 46px; border-radius: 50%; background: var(--color-gold); color: var(--color-bg-dark); transition: var(--transition); flex-shrink: 0; }
+    .newsletter-form button:hover { background: var(--color-gold-light); transform: scale(1.05); }
+    .footer-bottom { padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; font-size: 14px; opacity: 0.6; }
+
+    .whatsapp-float { position: fixed; bottom: 30px; left: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #25D366, #128C7E); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); z-index: 999; transition: var(--transition); animation: pulse 2s ease infinite; }
+    [dir="rtl"] .whatsapp-float { left: auto; right: 30px; }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6); }
+    .whatsapp-float::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; background: rgba(37, 211, 102, 0.4); z-index: -1; animation: pulseRing 2s ease infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.4); opacity: 0; } }
+
+    .scroll-top { position: fixed; bottom: 30px; right: 30px; width: 46px; height: 46px; border-radius: 50%; background: var(--color-red); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: var(--shadow-red); z-index: 998; opacity: 0; visibility: hidden; transition: var(--transition); }
+    [dir="rtl"] .scroll-top { right: auto; left: 30px; }
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+    .scroll-top:hover { background: var(--color-red-dark); transform: translateY(-4px); }
+
+    .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--color-bg-dark); color: var(--color-white); padding: 14px 24px; border-radius: var(--radius-full); font-weight: 600; box-shadow: var(--shadow-lg); z-index: 3000; opacity: 0; transition: all 0.4s ease; display: flex; align-items: center; gap: 10px; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast i { color: var(--color-green-light); }
+
+    .modal-overlay-bg { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 2050; display: none; }
+    .modal-overlay-bg.active { display: block; }
+
+    @media (max-width: 1100px) {
+        .features-grid { grid-template-columns: repeat(2, 1fr); }
+        .categories-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+        .category-card.category-large, .category-card.category-wide { grid-column: span 2; }
+        .products-grid { grid-template-columns: repeat(2, 1fr); }
+        .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        .about-grid { gap: 48px; }
+        .quick-view-content { grid-template-columns: 1fr; }
+        .quick-view-image { min-height: 250px; }
+    }
+    @media (max-width: 768px) {
+        :root { --section-py: 60px; }
+        .main-nav, .lang-switcher { display: none; }
+        .mobile-menu-btn { display: flex; }
+        .header-actions { gap: 4px; }
+        .action-btn { width: 38px; height: 38px; }
+        .logo img { width: 52px; height: 52px; }
+        .logo-name { font-size: 18px; }
+        .logo-tagline { display: none; }
+        .hero { min-height: 80vh; }
+        .features-grid { grid-template-columns: 1fr; gap: 20px; }
+        .categories-grid { grid-template-columns: 1fr; }
+        .category-card, .category-card.category-large, .category-card.category-wide { grid-column: span 1; height: 240px; }
+        .products-grid { grid-template-columns: 1fr; }
+        .about-grid { grid-template-columns: 1fr; gap: 40px; }
+        .contact-grid { grid-template-columns: 1fr; }
+        .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        .whatsapp-float { width: 54px; height: 54px; font-size: 26px; bottom: 20px; }
+        [dir="rtl"] .whatsapp-float { right: 20px; }
+        .scroll-top { bottom: 90px; }
+        [dir="rtl"] .scroll-top { left: 20px; }
+        .video-deco-1 { width: 70px; height: 70px; top: -20px; left: -20px; }
+        .video-deco-2 { width: 50px; height: 50px; }
+        .cart-sidebar { width: 100vw; right: -100vw; }
+        [dir="ltr"] .cart-sidebar { left: -100vw; }
+    }
+
+    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--color-white); z-index: 1100; padding: 80px 24px 24px; box-shadow: var(--shadow-lg); overflow-y: auto; }
+    [dir="ltr"] .mobile-menu-open .main-nav { right: auto; left: 0; }
+    .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; }
+    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
+    .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
     </style>
 </head>
 <body>
 
-    <!-- Top Announcement Bar -->
     <div class="announcement-bar">
         <div class="container">
-            <span data-ar="🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%" 
-                  data-en="🌿 Free shipping on orders over 1000 EGP - 100% Natural Products"
-                  data-ru="🌿 Бесплатная доставка для заказов более 1000 EGP - 100% натуральные продукты">
-                🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%
-            </span>
+            <span data-ar="🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%" data-en="🌿 Free shipping on orders over 1000 EGP - 100% Natural Products">🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%</span>
         </div>
     </div>
 
-    <!-- Header -->
     <header class="main-header">
         <div class="container">
             <div class="header-inner">
-                <!-- Logo -->
                 <a href="#" class="logo">
-                    <img src="images/logo.jpeg" alt="Al Shorouq Organic">
+                    <img src="images/logo.jpeg" alt="Al Shorouq Organic" id="siteLogo">
                     <div class="logo-text">
-                        <span class="logo-name">الشروق</span>
-                        <span class="logo-tagline" data-ar="أورجانيك للزيوت الطبيعية" data-en="Organic Natural Oils" data-ru="Натуральные масла">أورجانيك للزيوت الطبيعية</span>
+                        <span class="logo-name" id="siteName" data-ar="الشروق" data-en="Al Shorouq">الشروق</span>
+                        <span class="logo-tagline" data-ar="أورجانيك للزيوت الطبيعية" data-en="Organic Natural Oils">أورجانيك للزيوت الطبيعية</span>
                     </div>
                 </a>
 
-                <!-- Main Nav -->
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="#home" data-ar="الرئيسية" data-en="Home" data-ru="Главная">الرئيسية</a></li>
+                        <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
                         <li class="has-dropdown">
-                            <a href="#shop" data-ar="المتجر" data-en="Shop" data-ru="Магазин">المتجر <i class="fas fa-chevron-down"></i></a>
+                            <a href="#shop" data-ar="المتجر" data-en="Shop">المتجر <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown">
-                                <li><a href="#oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла">الزيوت</a></li>
-                                <li><a href="#creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</a></li>
-                                <li><a href="#ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</a></li>
-                                <li><a href="#butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло">الزبدة</a></li>
+                                <li><a href="#products" data-cat-filter="oils" class="category-link-filter" data-ar="الزيوت" data-en="Oils">الزيوت</a></li>
+                                <li><a href="#products" data-cat-filter="creams" class="category-link-filter" data-ar="الكريمات" data-en="Creams">الكريمات</a></li>
+                                <li><a href="#products" data-cat-filter="ointments" class="category-link-filter" data-ar="الدهانات" data-en="Ointments">الدهانات</a></li>
+                                <li><a href="#products" data-cat-filter="butter" class="category-link-filter" data-ar="الزبدة" data-en="Butter">الزبدة</a></li>
                             </ul>
                         </li>
-                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас">من نحن</a></li>
-                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты">تواصل معنا</a></li>
+                        <li><a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
                     </ul>
                 </nav>
 
-                <!-- Header Actions -->
                 <div class="header-actions">
-                    <!-- Language Switcher -->
                     <div class="lang-switcher">
                         <button class="lang-btn" id="langBtn">
                             <i class="fas fa-globe"></i>
@@ -1931,122 +445,65 @@ button {
                         <ul class="lang-dropdown" id="langDropdown">
                             <li data-lang="ar">العربية</li>
                             <li data-lang="en">English</li>
-                            <li data-lang="ru">Русский</li>
                         </ul>
                     </div>
-                    <button class="action-btn" aria-label="Search"><i class="fas fa-search"></i></button>
-                    <button class="action-btn" aria-label="Account"><i class="fas fa-user"></i></button>
-                    <button class="action-btn cart-btn" aria-label="Cart">
+                    <button class="action-btn" id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+                    <button class="action-btn cart-btn" id="cartBtn" aria-label="Cart">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count">0</span>
+                        <span class="cart-count" id="cartCount">0</span>
                     </button>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section with Video Background -->
     <section class="hero" id="home">
         <div class="hero-video-wrap">
-            <iframe 
-                id="heroVideo"
-                src="https://www.youtube.com/embed/AEyHBmvgHfs?autoplay=1&mute=1&loop=1&playlist=AEyHBmvgHfs&controls=0&showinfo=0&rel=0&modestbranding=1&start=143&iv_load_policy=3&playsinline=1"
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen>
-            </iframe>
+            <iframe id="heroVideo" src="https://www.youtube.com/embed/AEyHBmvgHfs?autoplay=1&mute=1&loop=1&playlist=AEyHBmvgHfs&controls=0&showinfo=0&rel=0&modestbranding=1&start=143&iv_load_policy=3&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             <div class="hero-overlay"></div>
         </div>
-        
         <div class="hero-content">
             <div class="container">
-                <div class="hero-badge" data-ar="✨ منتجات طبيعية 100%" data-en="✨ 100% Natural Products" data-ru="✨ 100% Натуральные продукты">
-                    ✨ منتجات طبيعية 100%
-                </div>
+                <div class="hero-badge" data-ar="✨ منتجات طبيعية 100%" data-en="✨ 100% Natural Products">✨ منتجات طبيعية 100%</div>
                 <h1 class="hero-title">
-                    <span class="hero-title-sub" data-ar="الشروق أورجانيك" data-en="Al Shorouq Organic" data-ru="Аль Шорук Органик">الشروق أورجانيك</span>
-                    <span class="hero-title-main" data-ar="نقاء الطبيعة في كل قطرة" data-en="Pure Nature in Every Drop" data-ru="Чистая природа в каждой капле">نقاء الطبيعة في كل قطرة</span>
+                    <span class="hero-title-sub" id="heroSiteName" data-ar="الشروق أورجانيك" data-en="Al Shorouq Organic">الشروق أورجانيك</span>
+                    <span class="hero-title-main" data-ar="نقاء الطبيعة في كل قطرة" data-en="Pure Nature in Every Drop">نقاء الطبيعة في كل قطرة</span>
                 </h1>
-                <p class="hero-desc" data-ar="منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم"
-                   data-en="Products worth trying.. Premium natural oils extracted from carefully selected seeds and herbs from around the world"
-                   data-ru="Продукты, достойные внимания.. Лучшие натуральные масла из тщательно отобранных семян и трав со всего мира">
-                    منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم
-                </p>
+                <p class="hero-desc" data-ar="منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم" data-en="Products worth trying.. Premium natural oils extracted from carefully selected seeds and herbs from around the world">منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم</p>
                 <div class="hero-actions">
-                    <a href="#shop" class="btn btn-primary" data-ar="تسوق الآن" data-en="Shop Now" data-ru="Купить сейчас">
-                        <span>تسوق الآن</span>
-                        <i class="fas fa-arrow-left"></i>
-                    </a>
-                    <a href="#about" class="btn btn-outline" data-ar="من نحن" data-en="About Us" data-ru="О нас">
-                        من نحن
-                    </a>
+                    <a href="#shop" class="btn btn-primary" data-ar="تسوق الآن" data-en="Shop Now">تسوق الآن</a>
+                    <a href="#about" class="btn btn-outline" data-ar="من نحن" data-en="About Us">من نحن</a>
                 </div>
             </div>
         </div>
-        
         <div class="hero-scroll">
-            <span data-ar="اكتشف المزيد" data-en="Discover More" data-ru="Узнать больше">اكتشف المزيد</span>
+            <span data-ar="اكتشف المزيد" data-en="Discover More">اكتشف المزيد</span>
             <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- Features Strip -->
     <section class="features-strip">
         <div class="container">
             <div class="features-grid">
-                <div class="feature-item">
-                    <i class="fas fa-leaf"></i>
-                    <div>
-                        <h4 data-ar="طبيعي 100%" data-en="100% Natural" data-ru="100% Натуральный">طبيعي 100%</h4>
-                        <p data-ar="بدون مواد حافظة" data-en="No preservatives" data-ru="Без консервантов">بدون مواد حافظة</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-truck"></i>
-                    <div>
-                        <h4 data-ar="شحن سريع" data-en="Fast Shipping" data-ru="Быстрая доставка">شحن سريع</h4>
-                        <p data-ar="لكل المحافظات" data-en="All governorates" data-ru="Все провинции">لكل المحافظات</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <div>
-                        <h4 data-ar="جودة مضمونة" data-en="Quality Assured" data-ru="Гарантия качества">جودة مضمونة</h4>
-                        <p data-ar="منتجات معتمدة" data-en="Certified products" data-ru="Сертифицированная продукция">منتجات معتمدة</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-headset"></i>
-                    <div>
-                        <h4 data-ar="دعم 24/7" data-en="24/7 Support" data-ru="Поддержка 24/7">دعم 24/7</h4>
-                        <p data-ar="خدمة عملاء متميزة" data-en="Premium support" data-ru="Премиум поддержка">خدمة عملاء متميزة</p>
-                    </div>
-                </div>
+                <div class="feature-item"><i class="fas fa-leaf"></i><div><h4 data-ar="طبيعي 100%" data-en="100% Natural">طبيعي 100%</h4><p data-ar="بدون مواد حافظة" data-en="No preservatives">بدون مواد حافظة</p></div></div>
+                <div class="feature-item"><i class="fas fa-truck"></i><div><h4 data-ar="شحن سريع" data-en="Fast Shipping">شحن سريع</h4><p data-ar="لكل المحافظات" data-en="All governorates">لكل المحافظات</p></div></div>
+                <div class="feature-item"><i class="fas fa-shield-alt"></i><div><h4 data-ar="جودة مضمونة" data-en="Quality Assured">جودة مضمونة</h4><p data-ar="منتجات معتمدة" data-en="Certified products">منتجات معتمدة</p></div></div>
+                <div class="feature-item"><i class="fas fa-headset"></i><div><h4 data-ar="دعم 24/7" data-en="24/7 Support">دعم 24/7</h4><p data-ar="خدمة عملاء متميزة" data-en="Premium support">خدمة عملاء متميزة</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- Video Showcase Section -->
     <section class="video-showcase">
         <div class="container">
             <div class="section-header">
-                <span class="section-eyebrow" data-ar="تعرف علينا أكثر" data-en="Know Us More" data-ru="Узнайте больше о нас">تعرف علينا أكثر</span>
-                <h2 class="section-title" data-ar="شاهد قصتنا" data-en="Watch Our Story" data-ru="Смотрите нашу историю">شاهد قصتنا</h2>
-                <p class="section-desc" data-ar="تعرف على رحلتنا في تقديم أفضل المنتجات الطبيعية" data-en="Learn about our journey in delivering the finest natural products" data-ru="Узнайте о нашем пути к лучшим натуральным продуктам">تعرف على رحلتنا في تقديم أفضل المنتجات الطبيعية</p>
+                <span class="section-eyebrow" data-ar="تعرف علينا أكثر" data-en="Know Us More">تعرف علينا أكثر</span>
+                <h2 class="section-title" data-ar="شاهد قصتنا" data-en="Watch Our Story">شاهد قصتنا</h2>
+                <p class="section-desc" data-ar="تعرف على رحلتنا في تقديم أفضل المنتجات الطبيعية" data-en="Learn about our journey in delivering the finest natural products">تعرف على رحلتنا في تقديم أفضل المنتجات الطبيعية</p>
             </div>
-
             <div class="video-wrapper">
                 <div class="video-frame">
-                    <iframe 
-                        src="https://www.youtube.com/embed/MIXS8hn9w7Y?rel=0&modestbranding=1"
-                        title="Al Shorouq Organic"
-                        frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                    <iframe src="https://www.youtube.com/embed/MIXS8hn9w7Y?rel=0&modestbranding=1" title="Al Shorouq Organic" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="video-decoration video-deco-1"></div>
                 <div class="video-decoration video-deco-2"></div>
@@ -2054,340 +511,145 @@ button {
         </div>
     </section>
 
-    <!-- Categories Section -->
     <section class="categories" id="shop">
         <div class="container">
             <div class="section-header">
-                <span class="section-eyebrow" data-ar="تسوق حسب الفئة" data-en="Shop by Category" data-ru="Покупки по категориям">تسوق حسب الفئة</span>
-                <h2 class="section-title" data-ar="فئات منتجاتنا" data-en="Our Product Categories" data-ru="Наши категории">فئات منتجاتنا</h2>
-                <p class="section-desc" data-ar="اكتشف مجموعتنا الكاملة من المنتجات الطبيعية" data-en="Discover our full range of natural products" data-ru="Откройте для себя весь ассортимент">اكتشف مجموعتنا الكاملة من المنتجات الطبيعية</p>
+                <span class="section-eyebrow" data-ar="تسوق حسب الفئة" data-en="Shop by Category">تسوق حسب الفئة</span>
+                <h2 class="section-title" data-ar="فئات منتجاتنا" data-en="Our Product Categories">فئات منتجاتنا</h2>
+                <p class="section-desc" data-ar="اكتشف مجموعتنا الكاملة من المنتجات الطبيعية" data-en="Discover our full range of natural products">اكتشف مجموعتنا الكاملة من المنتجات الطبيعية</p>
             </div>
-
             <div class="categories-grid">
-                <a href="#oils" class="category-card category-large">
-                    <div class="category-image">
-                        <div class="category-icon"><i class="fas fa-tint"></i></div>
-                    </div>
+                <a href="#products" data-cat-filter="oils" class="category-card category-large category-link-filter">
+                    <div class="category-image"><div class="category-icon"><i class="fas fa-tint"></i></div></div>
                     <div class="category-content">
-                        <span class="category-count" data-ar="+25 منتج" data-en="+25 products" data-ru="+25 товаров">+25 منتج</span>
-                        <h3 data-ar="الزيوت الطبيعية" data-en="Natural Oils" data-ru="Натуральные масла">الزيوت الطبيعية</h3>
-                        <p data-ar="زيوت معصورة على البارد للصحة والجمال" data-en="Cold-pressed oils for health and beauty" data-ru="Масла холодного отжима">زيوت معصورة على البارد للصحة والجمال</p>
-                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                        <span class="category-count" id="catCountOils" data-ar="0 منتج" data-en="0 products">0 منتج</span>
+                        <h3 data-ar="الزيوت الطبيعية" data-en="Natural Oils">الزيوت الطبيعية</h3>
+                        <p data-ar="زيوت معصورة على البارد للصحة والجمال" data-en="Cold-pressed oils for health and beauty">زيوت معصورة على البارد للصحة والجمال</p>
+                        <span class="category-link" data-ar="تسوق ←" data-en="Shop →">تسوق ←</span>
                     </div>
                 </a>
-
-                <a href="#creams" class="category-card">
-                    <div class="category-image cream-bg">
-                        <div class="category-icon"><i class="fas fa-pump-medical"></i></div>
-                    </div>
+                <a href="#products" data-cat-filter="creams" class="category-card category-link-filter">
+                    <div class="category-image cream-bg"><div class="category-icon"><i class="fas fa-pump-medical"></i></div></div>
                     <div class="category-content">
-                        <span class="category-count" data-ar="+15 منتج" data-en="+15 products" data-ru="+15 товаров">+15 منتج</span>
-                        <h3 data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</h3>
-                        <p data-ar="كريمات للعناية بالبشرة" data-en="Skincare creams" data-ru="Кремы для ухода">كريمات للعناية بالبشرة</p>
-                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                        <span class="category-count" id="catCountCreams" data-ar="0 منتج" data-en="0 products">0 منتج</span>
+                        <h3 data-ar="الكريمات" data-en="Creams">الكريمات</h3>
+                        <p data-ar="كريمات للعناية بالبشرة" data-en="Skincare creams">كريمات للعناية بالبشرة</p>
+                        <span class="category-link" data-ar="تسوق ←" data-en="Shop →">تسوق ←</span>
                     </div>
                 </a>
-
-                <a href="#ointments" class="category-card">
-                    <div class="category-image ointment-bg">
-                        <div class="category-icon"><i class="fas fa-prescription-bottle"></i></div>
-                    </div>
+                <a href="#products" data-cat-filter="ointments" class="category-card category-link-filter">
+                    <div class="category-image ointment-bg"><div class="category-icon"><i class="fas fa-prescription-bottle"></i></div></div>
                     <div class="category-content">
-                        <span class="category-count" data-ar="+10 منتج" data-en="+10 products" data-ru="+10 товаров">+10 منتج</span>
-                        <h3 data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</h3>
-                        <p data-ar="دهانات علاجية طبيعية" data-en="Natural therapeutic ointments" data-ru="Натуральные мази">دهانات علاجية طبيعية</p>
-                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                        <span class="category-count" id="catCountOintments" data-ar="0 منتج" data-en="0 products">0 منتج</span>
+                        <h3 data-ar="الدهانات" data-en="Ointments">الدهانات</h3>
+                        <p data-ar="دهانات علاجية طبيعية" data-en="Natural therapeutic ointments">دهانات علاجية طبيعية</p>
+                        <span class="category-link" data-ar="تسوق ←" data-en="Shop →">تسوق ←</span>
                     </div>
                 </a>
-
-                <a href="#butter" class="category-card category-wide">
-                    <div class="category-image butter-bg">
-                        <div class="category-icon"><i class="fas fa-cookie-bite"></i></div>
-                    </div>
+                <a href="#products" data-cat-filter="butter" class="category-card category-wide category-link-filter">
+                    <div class="category-image butter-bg"><div class="category-icon"><i class="fas fa-cookie-bite"></i></div></div>
                     <div class="category-content">
-                        <span class="category-count" data-ar="+8 منتج" data-en="+8 products" data-ru="+8 товаров">+8 منتج</span>
-                        <h3 data-ar="الزبدة الطبيعية" data-en="Natural Butter" data-ru="Натуральное масло">الزبدة الطبيعية</h3>
-                        <p data-ar="زبدة طبيعية للترطيب العميق" data-en="Natural butter for deep moisturizing" data-ru="Глубокое увлажнение">زبدة طبيعية للترطيب العميق والعناية</p>
-                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                        <span class="category-count" id="catCountButter" data-ar="0 منتج" data-en="0 products">0 منتج</span>
+                        <h3 data-ar="الزبدة الطبيعية" data-en="Natural Butter">الزبدة الطبيعية</h3>
+                        <p data-ar="زبدة طبيعية للترطيب العميق" data-en="Natural butter for deep moisturizing">زبدة طبيعية للترطيب العميق والعناية</p>
+                        <span class="category-link" data-ar="تسوق ←" data-en="Shop →">تسوق ←</span>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Featured Products -->
-    <section class="products-section">
+    <section class="products-section" id="products">
         <div class="container">
             <div class="section-header">
-                <span class="section-eyebrow" data-ar="الأكثر مبيعاً" data-en="Best Sellers" data-ru="Хиты продаж">الأكثر مبيعاً</span>
-                <h2 class="section-title" data-ar="منتجاتنا المميزة" data-en="Featured Products" data-ru="Рекомендуемые товары">منتجاتنا المميزة</h2>
+                <span class="section-eyebrow" data-ar="الأكثر مبيعاً" data-en="Best Sellers">الأكثر مبيعاً</span>
+                <h2 class="section-title" data-ar="منتجاتنا المميزة" data-en="Featured Products">منتجاتنا المميزة</h2>
             </div>
-
-            <div class="products-grid">
-                <!-- Product 1 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <div class="product-badge">-20%</div>
-                        <div class="product-placeholder oil-1">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="product-actions">
-                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
-                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
-                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat" data-ar="زيوت" data-en="Oils" data-ru="Масла">زيوت</span>
-                        <h3 data-ar="زيت حبة البركة" data-en="Black Seed Oil" data-ru="Масло черного тмина">زيت حبة البركة</h3>
-                        <div class="product-rating">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <span>(24)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price-old">350 ج.م</span>
-                            <span class="price-new">280 ج.م</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Product 2 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <div class="product-placeholder oil-2">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="product-actions">
-                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
-                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
-                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat" data-ar="زيوت" data-en="Oils" data-ru="Масла">زيوت</span>
-                        <h3 data-ar="زيت الجرجير" data-en="Arugula Oil" data-ru="Масло рукколы">زيت الجرجير</h3>
-                        <div class="product-rating">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <span>(18)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price-new">220 ج.م</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Product 3 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <div class="product-badge new">جديد</div>
-                        <div class="product-placeholder cream-1">
-                            <i class="fas fa-pump-medical"></i>
-                        </div>
-                        <div class="product-actions">
-                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
-                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
-                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat" data-ar="كريمات" data-en="Creams" data-ru="Кремы">كريمات</span>
-                        <h3 data-ar="كريم الكولاجين" data-en="Collagen Cream" data-ru="Крем с коллагеном">كريم الكولاجين</h3>
-                        <div class="product-rating">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                            <span>(12)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price-new">180 ج.م</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Product 4 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <div class="product-badge">-15%</div>
-                        <div class="product-placeholder butter-1">
-                            <i class="fas fa-cookie-bite"></i>
-                        </div>
-                        <div class="product-actions">
-                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
-                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
-                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat" data-ar="زبدة" data-en="Butter" data-ru="Масло">زبدة</span>
-                        <h3 data-ar="زبدة الشيا" data-en="Shea Butter" data-ru="Масло Ши">زبدة الشيا</h3>
-                        <div class="product-rating">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <span>(31)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price-old">200 ج.م</span>
-                            <span class="price-new">170 ج.م</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Product 5 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <div class="product-placeholder ointment-1">
-                            <i class="fas fa-prescription-bottle"></i>
-                        </div>
-                        <div class="product-actions">
-                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
-                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
-                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat" data-ar="دهانات" data-en="Ointments" data-ru="Мази">دهانات</span>
-                        <h3 data-ar="دهان مسكن للآلام" data-en="Pain Relief Ointment" data-ru="Обезболивающая мазь">دهان مسكن للآلام</h3>
-                        <div class="product-rating">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <span>(45)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price-new">250 ج.م</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Product 6 -->
-                <article class="product-card">
-                    <div class="product-image">
-                        <div class="product-badge new">جديد</div>
-                        <div class="product-placeholder oil-3">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="product-actions">
-                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
-                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
-                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-cat" data-ar="زيوت" data-en="Oils" data-ru="Масла">زيوت</span>
-                        <h3 data-ar="زيت الأرغان" data-en="Argan Oil" data-ru="Аргановое масло">زيت الأرغان</h3>
-                        <div class="product-rating">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                            <span>(22)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="price-new">320 ج.م</span>
-                        </div>
-                    </div>
-                </article>
+            <div class="products-filter" id="productsFilter">
+                <button class="filter-btn active" data-filter="all" data-ar="الكل" data-en="All">الكل</button>
+                <button class="filter-btn" data-filter="oils" data-ar="الزيوت" data-en="Oils">الزيوت</button>
+                <button class="filter-btn" data-filter="creams" data-ar="الكريمات" data-en="Creams">الكريمات</button>
+                <button class="filter-btn" data-filter="ointments" data-ar="الدهانات" data-en="Ointments">الدهانات</button>
+                <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter">الزبدة</button>
             </div>
+            <div class="products-grid" id="productsGrid"></div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
                 <div class="about-content">
-                    <span class="section-eyebrow" data-ar="من نحن" data-en="About Us" data-ru="О нас">من نحن</span>
-                    <h2 class="section-title" data-ar="شركة الشروق أورجانيك" data-en="Al Shorouq Organic" data-ru="Компания Аль Шорук">شركة الشروق أورجانيك</h2>
-                    <p data-ar="من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية."
-                       data-en="One of the leading companies in extracting and packaging natural oils, where we select the best types of seeds and herbs from different countries around the world to provide the best types of natural oils."
-                       data-ru="Одна из ведущих компаний в области извлечения и упаковки натуральных масел. Мы выбираем лучшие виды семян и трав со всего мира.">
-                       من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية.
-                    </p>
-                    
+                    <span class="section-eyebrow" data-ar="من نحن" data-en="About Us">من نحن</span>
+                    <h2 class="section-title" id="aboutTitle" data-ar="شركة الشروق أورجانيك" data-en="Al Shorouq Organic Company">شركة الشروق أورجانيك</h2>
+                    <p data-ar="من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية." data-en="One of the leading companies in extracting and packaging natural oils, where we select the best types of seeds and herbs from different countries around the world to provide the best types of natural oils.">من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية.</p>
                     <ul class="about-features">
-                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت الصحة الجنسية" data-en="Sexual Health Oils" data-ru="Масла для здоровья">زيوت الصحة الجنسية</span></li>
-                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت تقوية جهاز المناعة" data-en="Immunity Boosting Oils" data-ru="Иммуностимулирующие масла">زيوت تقوية جهاز المناعة</span></li>
-                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت العناية بالبشرة والشعر" data-en="Skin & Hair Care Oils" data-ru="Уход за кожей и волосами">زيوت العناية بالبشرة والشعر</span></li>
-                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت المساج والتدليك" data-en="Massage Oils" data-ru="Массажные масла">زيوت المساج والتدليك</span></li>
-                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت علاج الأمراض الجلدية" data-en="Skin Treatment Oils" data-ru="Лечебные масла">زيوت علاج الأمراض الجلدية</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت الصحة الجنسية" data-en="Sexual Health Oils">زيوت الصحة الجنسية</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت تقوية جهاز المناعة" data-en="Immunity Boosting Oils">زيوت تقوية جهاز المناعة</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت العناية بالبشرة والشعر" data-en="Skin & Hair Care Oils">زيوت العناية بالبشرة والشعر</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت المساج والتدليك" data-en="Massage Oils">زيوت المساج والتدليك</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت علاج الأمراض الجلدية" data-en="Skin Treatment Oils">زيوت علاج الأمراض الجلدية</span></li>
                     </ul>
-                    
-                    <div class="about-quote" data-ar="منتجات الشروق أورجانيك ... منتجات تستحق التجربة"
-                         data-en="Al Shorouq Organic products... worth trying"
-                         data-ru="Продукты Аль Шорук Органик... достойны внимания">
-                        " منتجات الشروق أورجانيك ... منتجات تستحق التجربة "
-                    </div>
+                    <div class="about-quote" data-ar="منتجات الشروق أورجانيك ... منتجات تستحق التجربة" data-en="Al Shorouq Organic products... worth trying">" منتجات الشروق أورجانيك ... منتجات تستحق التجربة "</div>
                 </div>
-                
                 <div class="about-visual">
                     <div class="about-stats">
-                        <div class="stat-card">
-                            <div class="stat-number">+50</div>
-                            <div class="stat-label" data-ar="منتج طبيعي" data-en="Natural Products" data-ru="Натуральных продуктов">منتج طبيعي</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">+10K</div>
-                            <div class="stat-label" data-ar="عميل سعيد" data-en="Happy Customers" data-ru="Довольных клиентов">عميل سعيد</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label" data-ar="جودة طبيعية" data-en="Natural Quality" data-ru="Натуральное качество">جودة طبيعية</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label" data-ar="دعم العملاء" data-en="Customer Support" data-ru="Поддержка">دعم العملاء</div>
-                        </div>
+                        <div class="stat-card"><div class="stat-number">+50</div><div class="stat-label" data-ar="منتج طبيعي" data-en="Natural Products">منتج طبيعي</div></div>
+                        <div class="stat-card"><div class="stat-number">+10K</div><div class="stat-label" data-ar="عميل سعيد" data-en="Happy Customers">عميل سعيد</div></div>
+                        <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label" data-ar="جودة طبيعية" data-en="Natural Quality">جودة طبيعية</div></div>
+                        <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label" data-ar="دعم العملاء" data-en="Customer Support">دعم العملاء</div></div>
                     </div>
-                    <div class="about-decoration">
-                        <div class="decoration-circle"></div>
-                        <div class="decoration-leaf"><i class="fas fa-leaf"></i></div>
-                    </div>
+                    <div class="about-decoration"><div class="decoration-circle"></div><div class="decoration-leaf"><i class="fas fa-leaf"></i></div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Banner -->
     <section class="cta-banner">
         <div class="container">
             <div class="cta-content">
-                <h2 data-ar="جرب منتجاتنا الطبيعية اليوم" data-en="Try Our Natural Products Today" data-ru="Попробуйте наши натуральные продукты сегодня">جرب منتجاتنا الطبيعية اليوم</h2>
-                <p data-ar="احصل على خصم 15% على طلبك الأول" data-en="Get 15% off your first order" data-ru="Получите скидку 15% на первый заказ">احصل على خصم 15% على طلبك الأول</p>
-                <a href="#shop" class="btn btn-primary" data-ar="ابدأ التسوق" data-en="Start Shopping" data-ru="Начать покупки">ابدأ التسوق</a>
+                <h2 data-ar="جرب منتجاتنا الطبيعية اليوم" data-en="Try Our Natural Products Today">جرب منتجاتنا الطبيعية اليوم</h2>
+                <p data-ar="احصل على خصم 15% على طلبك الأول" data-en="Get 15% off your first order">احصل على خصم 15% على طلبك الأول</p>
+                <a href="#shop" class="btn btn-primary" data-ar="ابدأ التسوق" data-en="Start Shopping">ابدأ التسوق</a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="section-eyebrow" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты">تواصل معنا</span>
-                <h2 class="section-title" data-ar="نحن هنا لخدمتك" data-en="We're Here to Serve You" data-ru="Мы здесь, чтобы служить вам">نحن هنا لخدمتك</h2>
+            <div class="section-header">
+                <span class="section-eyebrow" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</span>
+                <h2 class="section-title" data-ar="نحن هنا لخدمتك" data-en="We're Here to Serve You">نحن هنا لخدمتك</h2>
             </div>
-            
             <div class="contact-grid">
                 <a href="https://wa.me/201064540290" target="_blank" class="contact-card">
                     <div class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
-                    <h3 data-ar="واتساب" data-en="WhatsApp" data-ru="WhatsApp">واتساب</h3>
+                    <h3 data-ar="واتساب" data-en="WhatsApp">واتساب</h3>
                     <p>01064540290</p>
                 </a>
                 <a href="tel:01064540290" class="contact-card">
                     <div class="contact-icon phone"><i class="fas fa-phone"></i></div>
-                    <h3 data-ar="اتصل بنا" data-en="Call Us" data-ru="Позвоните нам">اتصل بنا</h3>
+                    <h3 data-ar="اتصل بنا" data-en="Call Us">اتصل بنا</h3>
                     <p>01064540290</p>
                 </a>
                 <a href="mailto:niposoft@gmail.com" class="contact-card">
                     <div class="contact-icon email"><i class="fas fa-envelope"></i></div>
-                    <h3 data-ar="البريد الإلكتروني" data-en="Email" data-ru="Эл. почта">البريد الإلكتروني</h3>
+                    <h3 data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</h3>
                     <p>niposoft@gmail.com</p>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
                         <img src="images/logo.jpeg" alt="Al Shorouq Organic">
-                        <h3>الشروق أورجانيك</h3>
+                        <h3 id="footerSiteName" data-ar="الشروق أورجانيك" data-en="Al Shorouq Organic">الشروق أورجانيك</h3>
                     </div>
-                    <p data-ar="من الشركات الرائدة في مجال الزيوت الطبيعية والمنتجات العضوية" data-en="Leading company in natural oils and organic products" data-ru="Ведущая компания в области натуральных масел">من الشركات الرائدة في مجال الزيوت الطبيعية والمنتجات العضوية</p>
+                    <p data-ar="من الشركات الرائدة في مجال الزيوت الطبيعية والمنتجات العضوية" data-en="Leading company in natural oils and organic products">من الشركات الرائدة في مجال الزيوت الطبيعية والمنتجات العضوية</p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -2395,293 +657,706 @@ button {
                         <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                
                 <div class="footer-col">
-                    <h4 data-ar="الفئات" data-en="Categories" data-ru="Категории">الفئات</h4>
+                    <h4 data-ar="الفئات" data-en="Categories">الفئات</h4>
                     <ul>
-                        <li><a href="#oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла">الزيوت</a></li>
-                        <li><a href="#creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</a></li>
-                        <li><a href="#ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</a></li>
-                        <li><a href="#butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло">الزبدة</a></li>
+                        <li><a href="#products" data-cat-filter="oils" class="category-link-filter" data-ar="الزيوت" data-en="Oils">الزيوت</a></li>
+                        <li><a href="#products" data-cat-filter="creams" class="category-link-filter" data-ar="الكريمات" data-en="Creams">الكريمات</a></li>
+                        <li><a href="#products" data-cat-filter="ointments" class="category-link-filter" data-ar="الدهانات" data-en="Ointments">الدهانات</a></li>
+                        <li><a href="#products" data-cat-filter="butter" class="category-link-filter" data-ar="الزبدة" data-en="Butter">الزبدة</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-col">
-                    <h4 data-ar="روابط مفيدة" data-en="Useful Links" data-ru="Полезные ссылки">روابط مفيدة</h4>
+                    <h4 data-ar="روابط مفيدة" data-en="Useful Links">روابط مفيدة</h4>
                     <ul>
-                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас">من نحن</a></li>
-                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты">تواصل معنا</a></li>
-                        <li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy" data-ru="Политика">سياسة الخصوصية</a></li>
-                        <li><a href="#" data-ar="الشروط والأحكام" data-en="Terms" data-ru="Условия">الشروط والأحكام</a></li>
+                        <li><a href="#about" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+                        <li><a href="admin.html" data-ar="لوحة التحكم" data-en="Admin Panel">لوحة التحكم</a></li>
+                        <li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy">سياسة الخصوصية</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-col">
-                    <h4 data-ar="النشرة البريدية" data-en="Newsletter" data-ru="Рассылка">النشرة البريدية</h4>
-                    <p data-ar="اشترك ليصلك كل جديد وعروضنا المميزة" data-en="Subscribe for updates and exclusive offers" data-ru="Подпишитесь на новости">اشترك ليصلك كل جديد وعروضنا المميزة</p>
-                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('شكراً لاشتراكك!');">
-                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                    <h4 data-ar="النشرة البريدية" data-en="Newsletter">النشرة البريدية</h4>
+                    <p data-ar="اشترك ليصلك كل جديد وعروضنا المميزة" data-en="Subscribe for updates and exclusive offers">اشترك ليصلك كل جديد وعروضنا المميزة</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); showToast(currentLanguage === 'ar' ? 'شكراً لاشتراكك!' : 'Thank you for subscribing!');">
+                        <input type="email" placeholder="بريدك الإلكتروني" data-placeholder-ar="بريدك الإلكتروني" data-placeholder-en="Your email" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>&copy; 2026 Al Shorouq Organic. <span data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved" data-ru="Все права защищены">جميع الحقوق محفوظة</span></p>
+                <p>&copy; 2026 <span id="footerCopyName" data-ar="الشروق أورجانيك" data-en="Al Shorouq Organic">الشروق أورجانيك</span>. <span data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved">جميع الحقوق محفوظة</span></p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/201064540290?text=مرحبا، أريد الاستفسار عن منتجاتكم" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-        <span class="whatsapp-tooltip" data-ar="تواصل معنا" data-en="Contact us" data-ru="Связаться">تواصل معنا</span>
-    </a>
+    <a href="https://wa.me/201064540290?text=مرحبا، أريد الاستفسار عن منتجاتكم" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- Scroll to top -->
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-overlay-inner">
+            <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+            <form class="search-form" onsubmit="event.preventDefault();">
+                <input type="text" id="searchInput" placeholder="ابحث عن منتج..." data-placeholder-ar="ابحث عن منتج..." data-placeholder-en="Search products...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay-bg" id="modalBg"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 data-ar="🛒 سلة التسوق" data-en="🛒 Shopping Cart">🛒 سلة التسوق</h3>
+            <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-bag"></i>
+                <p data-ar="السلة فارغة" data-en="Cart is empty">السلة فارغة</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span data-ar="الإجمالي:" data-en="Total:">الإجمالي:</span>
+                <span class="cart-total-amount" id="cartTotal">0 ج.م</span>
+            </div>
+            <button class="cart-checkout" id="checkoutBtn" data-ar="إتمام الطلب عبر واتساب" data-en="Checkout via WhatsApp">إتمام الطلب عبر واتساب</button>
+        </div>
+    </aside>
+
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="quick-view-content" id="quickViewContent"></div>
+    </div>
+
+    <div class="toast" id="toast"></div>
 
     <script>
-// ============= Al Shorouq Organic - Main Script =============
+    // ===== Default Data =====
+    const defaultProducts = [
+        { id: 1, nameAr: 'زيت حبة البركة', nameEn: 'Black Seed Oil', cat: 'oils', price: 280, oldPrice: 350, rating: 5, reviews: 24, badge: '-20%', icon: 'fa-tint', placeholder: 'oil-1', descAr: 'زيت حبة البركة الطبيعي المعصور على البارد، يعزز المناعة ويغذي البشرة.', descEn: 'Natural cold-pressed black seed oil, boosts immunity and nourishes skin.' },
+        { id: 2, nameAr: 'زيت الجرجير', nameEn: 'Arugula Oil', cat: 'oils', price: 220, oldPrice: null, rating: 5, reviews: 18, badge: null, icon: 'fa-tint', placeholder: 'oil-2', descAr: 'زيت الجرجير الطبيعي يقوي بصيلات الشعر ويمنع التساقط.', descEn: 'Natural arugula oil strengthens hair follicles and prevents hair loss.' },
+        { id: 3, nameAr: 'كريم الكولاجين', nameEn: 'Collagen Cream', cat: 'creams', price: 180, oldPrice: null, rating: 4.5, reviews: 12, badge: 'new', icon: 'fa-pump-medical', placeholder: 'cream-1', descAr: 'كريم الكولاجين لبشرة شابة ومشدودة وخالية من التجاعيد.', descEn: 'Collagen cream for youthful, firm and wrinkle-free skin.' },
+        { id: 4, nameAr: 'زبدة الشيا', nameEn: 'Shea Butter', cat: 'butter', price: 170, oldPrice: 200, rating: 5, reviews: 31, badge: '-15%', icon: 'fa-cookie-bite', placeholder: 'butter-1', descAr: 'زبدة الشيا الخام لترطيب عميق للبشرة والشعر.', descEn: 'Raw shea butter for deep moisturizing of skin and hair.' },
+        { id: 5, nameAr: 'دهان مسكن للآلام', nameEn: 'Pain Relief Ointment', cat: 'ointments', price: 250, oldPrice: null, rating: 5, reviews: 45, badge: null, icon: 'fa-prescription-bottle', placeholder: 'ointment-1', descAr: 'دهان طبيعي مسكن لآلام المفاصل والعضلات.', descEn: 'Natural ointment for joint and muscle pain relief.' },
+        { id: 6, nameAr: 'زيت الأرغان', nameEn: 'Argan Oil', cat: 'oils', price: 320, oldPrice: null, rating: 4.5, reviews: 22, badge: 'new', icon: 'fa-tint', placeholder: 'oil-3', descAr: 'زيت الأرغان المغربي الأصلي للبشرة والشعر.', descEn: 'Original Moroccan argan oil for skin and hair.' }
+    ];
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // ========== Language Switcher ==========
-    const langBtn = document.getElementById('langBtn');
-    const langDropdown = document.getElementById('langDropdown');
-    const langSwitcher = document.querySelector('.lang-switcher');
-    const currentLangEl = document.getElementById('currentLang');
-    
-    const langConfig = {
-        ar: { dir: 'rtl', code: 'AR', name: 'العربية' },
-        en: { dir: 'ltr', code: 'EN', name: 'English' },
-        ru: { dir: 'ltr', code: 'RU', name: 'Русский' }
+    const defaultSettings = {
+        nameAr: 'الشروق', nameEn: 'Al Shorouq',
+        fullNameAr: 'الشروق أورجانيك', fullNameEn: 'Al Shorouq Organic',
+        taglineAr: 'أورجانيك للزيوت الطبيعية', taglineEn: 'Organic Natural Oils',
+        whatsapp: '201064540290', phone: '01064540290', email: 'niposoft@gmail.com',
+        announceAr: '🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%',
+        announceEn: '🌿 Free shipping on orders over 1000 EGP - 100% Natural Products',
+        heroVideoId: 'AEyHBmvgHfs', showcaseVideoId: 'MIXS8hn9w7Y'
     };
-    
-    // Toggle dropdown
-    if (langBtn) {
-        langBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            langSwitcher.classList.toggle('active');
-        });
-        
-        document.addEventListener('click', function() {
-            langSwitcher.classList.remove('active');
-        });
-    }
-    
-    // Switch language
-    document.querySelectorAll('.lang-dropdown li').forEach(item => {
-        item.addEventListener('click', function() {
-            const lang = this.dataset.lang;
-            switchLanguage(lang);
-            langSwitcher.classList.remove('active');
-        });
-    });
-    
-    function switchLanguage(lang) {
+
+    // ===== State =====
+    let currentLanguage = localStorage.getItem('preferred-language') || 'ar';
+    let products = JSON.parse(localStorage.getItem('shorouq-products') || 'null') || defaultProducts;
+    let cart = JSON.parse(localStorage.getItem('shorouq-cart') || '[]');
+    let wishlist = JSON.parse(localStorage.getItem('shorouq-wishlist') || '[]');
+    let siteSettings = Object.assign({}, defaultSettings, JSON.parse(localStorage.getItem('shorouq-settings') || '{}'));
+    let currentFilter = 'all';
+
+    const langConfig = { ar: { dir: 'rtl', code: 'AR' }, en: { dir: 'ltr', code: 'EN' } };
+
+    // ===== Language System =====
+    function applyLanguage(lang) {
         const config = langConfig[lang];
         if (!config) return;
-        
-        // Set HTML attributes
+        currentLanguage = lang;
         document.documentElement.lang = lang;
         document.documentElement.dir = config.dir;
         document.documentElement.dataset.lang = lang;
-        
-        // Update current language display
+
+        const currentLangEl = document.getElementById('currentLang');
         if (currentLangEl) currentLangEl.textContent = config.code;
-        
-        // Update all translatable elements
-        document.querySelectorAll('[data-ar], [data-en], [data-ru]').forEach(el => {
+
+        document.title = lang === 'ar' 
+            ? siteSettings.fullNameAr
+            : siteSettings.fullNameEn;
+
+        document.querySelectorAll('[data-ar], [data-en]').forEach(el => {
             const text = el.dataset[lang];
             if (text) {
-                // Preserve icons inside element
                 const icons = el.querySelectorAll('i');
                 el.textContent = text;
                 icons.forEach(icon => el.appendChild(icon.cloneNode(true)));
             }
         });
-        
-        // Update placeholders
-        document.querySelectorAll('input[placeholder]').forEach(input => {
-            if (input.dataset[`placeholder${lang.charAt(0).toUpperCase()}${lang.slice(1)}`]) {
-                input.placeholder = input.dataset[`placeholder${lang.charAt(0).toUpperCase()}${lang.slice(1)}`];
-            }
+
+        document.querySelectorAll('input[data-placeholder-ar], input[data-placeholder-en]').forEach(input => {
+            const ph = input.dataset[`placeholder${lang.charAt(0).toUpperCase()}${lang.slice(1)}`];
+            if (ph) input.placeholder = ph;
         });
-        
-        // Save preference
+
         localStorage.setItem('preferred-language', lang);
     }
-    
-    // Load saved language
-    const savedLang = localStorage.getItem('preferred-language') || 'ar';
-    if (savedLang !== 'ar') {
-        switchLanguage(savedLang);
-    }
-    
-    // ========== Header Scroll Effect ==========
-    const header = document.querySelector('.main-header');
-    const scrollTopBtn = document.getElementById('scrollTop');
-    
-    window.addEventListener('scroll', function() {
-        // Header shadow
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Scroll to top button
-        if (window.scrollY > 500) {
-            scrollTopBtn.classList.add('visible');
-        } else {
-            scrollTopBtn.classList.remove('visible');
-        }
-    });
-    
-    // Scroll to top
-    if (scrollTopBtn) {
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-    
-    // ========== Mobile Menu ==========
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const body = document.body;
-    
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'mobile-overlay';
-    body.appendChild(overlay);
-    
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            body.classList.toggle('mobile-menu-open');
-            const icon = this.querySelector('i');
-            if (body.classList.contains('mobile-menu-open')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    }
-    
-    overlay.addEventListener('click', function() {
-        body.classList.remove('mobile-menu-open');
-        const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    });
-    
-    // Close menu on link click
-    document.querySelectorAll('.main-nav a').forEach(link => {
-        link.addEventListener('click', function() {
-            if (body.classList.contains('mobile-menu-open')) {
-                body.classList.remove('mobile-menu-open');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    });
-    
-    // ========== Smooth Scroll for Anchor Links ==========
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const target = this.getAttribute('href');
-            if (target === '#' || target.length <= 1) return;
-            
-            const targetEl = document.querySelector(target);
-            if (targetEl) {
-                e.preventDefault();
-                const offset = 100;
-                const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - offset;
-                window.scrollTo({ top: targetPos, behavior: 'smooth' });
-            }
-        });
-    });
-    
-    // ========== Add to Cart Animation ==========
-    const cartBtn = document.querySelector('.cart-btn');
-    const cartCount = document.querySelector('.cart-count');
-    let cartItems = parseInt(localStorage.getItem('cart-count') || '0');
-    
-    if (cartCount) cartCount.textContent = cartItems;
-    
-    document.querySelectorAll('.product-actions button[aria-label="Add to Cart"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            cartItems++;
-            if (cartCount) {
-                cartCount.textContent = cartItems;
-                cartCount.style.transform = 'scale(1.4)';
-                setTimeout(() => cartCount.style.transform = 'scale(1)', 200);
-            }
-            localStorage.setItem('cart-count', cartItems);
-            
-            // Brief feedback
-            const original = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-check"></i>';
-            this.style.background = '#4A7C2E';
-            this.style.color = '#fff';
-            setTimeout(() => {
-                this.innerHTML = original;
-                this.style.background = '';
-                this.style.color = '';
-            }, 1500);
-        });
-    });
-    
-    // ========== Wishlist Animation ==========
-    document.querySelectorAll('.product-actions button[aria-label="Wishlist"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-                this.style.color = '#C8102E';
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-                this.style.color = '';
-            }
-        });
-    });
-    
-    // ========== Intersection Observer for Animations ==========
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe sections for fade-in
-    document.querySelectorAll('.product-card, .category-card, .stat-card, .contact-card, .feature-item').forEach((el, i) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${i * 0.05}s, transform 0.6s ease ${i * 0.05}s`;
-        observer.observe(el);
-    });
-    
-    // ========== Console Welcome ==========
-    console.log('%c🌿 Al Shorouq Organic 🌿', 'color: #C8102E; font-size: 24px; font-weight: bold; padding: 10px;');
-    console.log('%cWelcome to our natural products store!', 'color: #C9A961; font-size: 14px;');
-});
 
+    function applySiteSettings() {
+        // Update data-attributes from settings
+        const setAttrs = (id, ar, en) => {
+            const el = document.getElementById(id);
+            if (el) { el.dataset.ar = ar; el.dataset.en = en; }
+        };
+        setAttrs('siteName', siteSettings.nameAr, siteSettings.nameEn);
+        setAttrs('heroSiteName', siteSettings.fullNameAr, siteSettings.fullNameEn);
+        setAttrs('footerSiteName', siteSettings.fullNameAr, siteSettings.fullNameEn);
+        setAttrs('footerCopyName', siteSettings.fullNameAr, siteSettings.fullNameEn);
+
+        const tag = document.querySelector('.logo-tagline');
+        if (tag) { tag.dataset.ar = siteSettings.taglineAr; tag.dataset.en = siteSettings.taglineEn; }
+
+        const announce = document.querySelector('.announcement-bar span');
+        if (announce) { announce.dataset.ar = siteSettings.announceAr; announce.dataset.en = siteSettings.announceEn; }
+
+        // WhatsApp links
+        document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+            const text = a.href.includes('?text=') ? a.href.split('?text=')[1] : '';
+            a.href = `https://wa.me/${siteSettings.whatsapp}${text ? '?text=' + text : ''}`;
+        });
+        // Phone
+        document.querySelectorAll('a[href^="tel:"]').forEach(a => a.href = `tel:${siteSettings.phone}`);
+        document.querySelectorAll('.contact-card[href^="tel:"] p').forEach(p => p.textContent = siteSettings.phone);
+        // Email
+        document.querySelectorAll('a[href^="mailto:"]').forEach(a => a.href = `mailto:${siteSettings.email}`);
+        document.querySelectorAll('.contact-card[href^="mailto:"] p').forEach(p => p.textContent = siteSettings.email);
+        // WA contact card text
+        document.querySelectorAll('.contact-card .contact-icon.whatsapp').forEach(icon => {
+            const p = icon.parentElement.querySelector('p');
+            if (p) p.textContent = siteSettings.phone;
+        });
+
+        // Videos
+        const heroV = document.getElementById('heroVideo');
+        if (heroV) {
+            heroV.src = `https://www.youtube.com/embed/${siteSettings.heroVideoId}?autoplay=1&mute=1&loop=1&playlist=${siteSettings.heroVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`;
+        }
+        const showV = document.querySelector('.video-frame iframe');
+        if (showV) {
+            showV.src = `https://www.youtube.com/embed/${siteSettings.showcaseVideoId}?rel=0&modestbranding=1`;
+        }
+    }
+
+    // ===== Render Products =====
+    function renderProducts() {
+        const grid = document.getElementById('productsGrid');
+        if (!grid) return;
+        const lang = currentLanguage;
+        const filtered = currentFilter === 'all' ? products : products.filter(p => p.cat === currentFilter);
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--color-text-light);">
+                <i class="fas fa-box-open" style="font-size: 60px; margin-bottom: 16px; display: block;"></i>
+                <p>${lang === 'ar' ? 'لا توجد منتجات في هذه الفئة' : 'No products in this category'}</p>
+            </div>`;
+            return;
+        }
+
+        const currency = lang === 'ar' ? 'ج.م' : 'EGP';
+        const catNames = {
+            oils: { ar: 'زيوت', en: 'Oils' },
+            creams: { ar: 'كريمات', en: 'Creams' },
+            ointments: { ar: 'دهانات', en: 'Ointments' },
+            butter: { ar: 'زبدة', en: 'Butter' }
+        };
+
+        grid.innerHTML = filtered.map(p => {
+            const name = lang === 'ar' ? p.nameAr : p.nameEn;
+            const cat = catNames[p.cat] ? catNames[p.cat][lang] : p.cat;
+            const isInWishlist = wishlist.includes(p.id);
+            const badgeText = p.badge === 'new' ? (lang === 'ar' ? 'جديد' : 'NEW') : p.badge;
+            const badgeClass = p.badge === 'new' ? 'product-badge new' : 'product-badge';
+
+            return `
+                <article class="product-card" data-product-id="${p.id}">
+                    <div class="product-image">
+                        ${p.badge ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
+                        <div class="product-placeholder ${p.placeholder}"><i class="fas ${p.icon}"></i></div>
+                        <div class="product-actions">
+                            <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" data-product-id="${p.id}" aria-label="Wishlist">
+                                <i class="${isInWishlist ? 'fas' : 'far'} fa-heart"></i>
+                            </button>
+                            <button class="quickview-btn" data-product-id="${p.id}" aria-label="Quick View">
+                                <i class="far fa-eye"></i>
+                            </button>
+                            <button class="add-cart-btn" data-product-id="${p.id}" aria-label="Add to Cart">
+                                <i class="fas fa-shopping-bag"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat">${cat}</span>
+                        <h3>${name}</h3>
+                        <div class="product-rating">
+                            <div class="stars">${renderStars(p.rating)}</div>
+                            <span>(${p.reviews})</span>
+                        </div>
+                        <div class="product-price">
+                            ${p.oldPrice ? `<span class="price-old">${p.oldPrice} ${currency}</span>` : ''}
+                            <span class="price-new">${p.price} ${currency}</span>
+                        </div>
+                        <button class="add-to-cart-full" data-product-id="${p.id}">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>${lang === 'ar' ? 'أضف إلى السلة' : 'Add to Cart'}</span>
+                        </button>
+                    </div>
+                </article>`;
+        }).join('');
+
+        attachProductListeners();
+    }
+
+    function renderStars(rating) {
+        let html = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < Math.floor(rating)) html += '<i class="fas fa-star"></i>';
+            else if (i < rating) html += '<i class="fas fa-star-half-alt"></i>';
+            else html += '<i class="far fa-star"></i>';
+        }
+        return html;
+    }
+
+    function updateCategoryCounts() {
+        const counts = { oils: 0, creams: 0, ointments: 0, butter: 0 };
+        products.forEach(p => { if (counts.hasOwnProperty(p.cat)) counts[p.cat]++; });
+        const lang = currentLanguage;
+        const setCount = (id, n) => {
+            const el = document.getElementById(id);
+            if (el) {
+                const ar = `${n} منتج${n > 10 ? '' : (n >= 3 && n <= 10 ? 'ات' : '')}`;
+                const en = `${n} product${n !== 1 ? 's' : ''}`;
+                el.dataset.ar = ar;
+                el.dataset.en = en;
+                el.textContent = lang === 'ar' ? ar : en;
+            }
+        };
+        setCount('catCountOils', counts.oils);
+        setCount('catCountCreams', counts.creams);
+        setCount('catCountOintments', counts.ointments);
+        setCount('catCountButter', counts.butter);
+    }
+
+    function attachProductListeners() {
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault(); e.stopPropagation();
+                toggleWishlist(parseInt(this.dataset.productId), this);
+            };
+        });
+        document.querySelectorAll('.quickview-btn').forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault(); e.stopPropagation();
+                openQuickView(parseInt(this.dataset.productId));
+            };
+        });
+        document.querySelectorAll('.add-cart-btn').forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault(); e.stopPropagation();
+                addToCart(parseInt(this.dataset.productId));
+                const original = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                this.style.background = 'var(--color-green)';
+                this.style.color = '#fff';
+                setTimeout(() => {
+                    this.innerHTML = original;
+                    this.style.background = '';
+                    this.style.color = '';
+                }, 1200);
+            };
+        });
+        document.querySelectorAll('.add-to-cart-full').forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault(); e.stopPropagation();
+                addToCart(parseInt(this.dataset.productId));
+                const lang = currentLanguage;
+                const origHTML = this.innerHTML;
+                this.innerHTML = `<i class="fas fa-check"></i><span>${lang === 'ar' ? 'تمت الإضافة!' : 'Added!'}</span>`;
+                this.classList.add('added');
+                setTimeout(() => {
+                    this.innerHTML = origHTML;
+                    this.classList.remove('added');
+                }, 1500);
+            };
+        });
+    }
+
+    // ===== Wishlist =====
+    function toggleWishlist(productId, btn) {
+        const idx = wishlist.indexOf(productId);
+        const icon = btn.querySelector('i');
+        if (idx === -1) {
+            wishlist.push(productId);
+            btn.classList.add('active');
+            icon.classList.replace('far', 'fas');
+            showToast(currentLanguage === 'ar' ? '❤️ تمت الإضافة إلى المفضلة' : '❤️ Added to wishlist');
+        } else {
+            wishlist.splice(idx, 1);
+            btn.classList.remove('active');
+            icon.classList.replace('fas', 'far');
+            showToast(currentLanguage === 'ar' ? 'تم الحذف من المفضلة' : 'Removed from wishlist');
+        }
+        localStorage.setItem('shorouq-wishlist', JSON.stringify(wishlist));
+    }
+
+    // ===== Cart =====
+    function addToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        const existing = cart.find(item => item.id === productId);
+        if (existing) existing.qty++;
+        else cart.push({ id: productId, qty: 1 });
+        saveCart(); renderCart(); updateCartCount();
+        showToast(currentLanguage === 'ar' ? '🛒 تمت الإضافة إلى السلة' : '🛒 Added to cart');
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        saveCart(); renderCart(); updateCartCount();
+    }
+
+    function updateQty(productId, delta) {
+        const item = cart.find(i => i.id === productId);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) removeFromCart(productId);
+        else { saveCart(); renderCart(); updateCartCount(); }
+    }
+
+    function saveCart() { localStorage.setItem('shorouq-cart', JSON.stringify(cart)); }
+
+    function updateCartCount() {
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        const el = document.getElementById('cartCount');
+        if (el) {
+            el.textContent = count;
+            el.style.transform = 'scale(1.4)';
+            setTimeout(() => el.style.transform = 'scale(1)', 200);
+        }
+    }
+
+    function renderCart() {
+        const body = document.getElementById('cartBody');
+        const footer = document.getElementById('cartFooter');
+        const totalEl = document.getElementById('cartTotal');
+        const lang = currentLanguage;
+
+        if (cart.length === 0) {
+            body.innerHTML = `<div class="cart-empty">
+                <i class="fas fa-shopping-bag"></i>
+                <p>${lang === 'ar' ? 'السلة فارغة' : 'Cart is empty'}</p>
+            </div>`;
+            footer.style.display = 'none';
+            return;
+        }
+
+        const currency = lang === 'ar' ? 'ج.م' : 'EGP';
+        let total = 0;
+
+        body.innerHTML = cart.map(item => {
+            const p = products.find(pr => pr.id === item.id);
+            if (!p) return '';
+            const name = lang === 'ar' ? p.nameAr : p.nameEn;
+            total += p.price * item.qty;
+            return `
+                <div class="cart-item">
+                    <div class="cart-item-img"><i class="fas ${p.icon}"></i></div>
+                    <div class="cart-item-info">
+                        <h4>${name}</h4>
+                        <div class="cart-item-price">${p.price} ${currency}</div>
+                        <div class="cart-qty">
+                            <button onclick="updateQty(${p.id}, -1)">−</button>
+                            <span>${item.qty}</span>
+                            <button onclick="updateQty(${p.id}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${p.id})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>`;
+        }).join('');
+
+        totalEl.textContent = `${total} ${currency}`;
+        footer.style.display = 'block';
+    }
+
+    // ===== Quick View =====
+    function openQuickView(productId) {
+        const p = products.find(pr => pr.id === productId);
+        if (!p) return;
+        const lang = currentLanguage;
+        const currency = lang === 'ar' ? 'ج.م' : 'EGP';
+        const name = lang === 'ar' ? p.nameAr : p.nameEn;
+        const desc = lang === 'ar' ? p.descAr : p.descEn;
+        const catNames = { oils: { ar: 'زيوت', en: 'Oils' }, creams: { ar: 'كريمات', en: 'Creams' }, ointments: { ar: 'دهانات', en: 'Ointments' }, butter: { ar: 'زبدة', en: 'Butter' } };
+        const cat = catNames[p.cat] ? catNames[p.cat][lang] : p.cat;
+        const addText = lang === 'ar' ? 'أضف إلى السلة' : 'Add to Cart';
+
+        document.getElementById('quickViewContent').innerHTML = `
+            <button class="quick-view-close" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
+            <div class="quick-view-image"><i class="fas ${p.icon}"></i></div>
+            <div class="quick-view-info">
+                <span class="product-cat">${cat}</span>
+                <h2>${name}</h2>
+                <div class="product-rating">
+                    <div class="stars">${renderStars(p.rating)}</div>
+                    <span>(${p.reviews})</span>
+                </div>
+                <div class="product-price">
+                    ${p.oldPrice ? `<span class="price-old">${p.oldPrice} ${currency}</span>` : ''}
+                    <span class="price-new">${p.price} ${currency}</span>
+                </div>
+                <p class="qv-desc">${desc}</p>
+                <div class="quick-view-actions">
+                    <button class="btn btn-primary" onclick="addToCart(${p.id}); closeQuickView();">
+                        <i class="fas fa-shopping-bag"></i><span>${addText}</span>
+                    </button>
+                </div>
+            </div>`;
+        document.getElementById('quickViewModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeQuickView() {
+        document.getElementById('quickViewModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // ===== Toast =====
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        toast.classList.add('show');
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ===== Search =====
+    function performSearch(query) {
+        const resultsEl = document.getElementById('searchResults');
+        if (!query.trim()) { resultsEl.innerHTML = ''; return; }
+        const q = query.toLowerCase();
+        const results = products.filter(p =>
+            p.nameAr.toLowerCase().includes(q) || p.nameEn.toLowerCase().includes(q)
+        );
+        const lang = currentLanguage;
+        if (results.length === 0) {
+            resultsEl.innerHTML = `<div class="search-no-results">${lang === 'ar' ? 'لا توجد نتائج' : 'No results found'}</div>`;
+            return;
+        }
+        const currency = lang === 'ar' ? 'ج.م' : 'EGP';
+        const catNames = { oils: { ar: 'زيوت', en: 'Oils' }, creams: { ar: 'كريمات', en: 'Creams' }, ointments: { ar: 'دهانات', en: 'Ointments' }, butter: { ar: 'زبدة', en: 'Butter' } };
+        resultsEl.innerHTML = results.map(p => {
+            const name = lang === 'ar' ? p.nameAr : p.nameEn;
+            const cat = catNames[p.cat] ? catNames[p.cat][lang] : p.cat;
+            return `
+                <div class="search-result-item" onclick="closeSearchAndOpen(${p.id})">
+                    <div class="search-result-icon"><i class="fas ${p.icon}"></i></div>
+                    <div class="search-result-info">
+                        <h4>${name}</h4>
+                        <p>${cat} • ${p.price} ${currency}</p>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+
+    function closeSearchAndOpen(productId) {
+        document.getElementById('searchOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => openQuickView(productId), 300);
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', function() {
+        applySiteSettings();
+        applyLanguage(currentLanguage);
+        updateCategoryCounts();
+        renderProducts();
+        renderCart();
+        updateCartCount();
+
+        // Language switcher
+        const langBtn = document.getElementById('langBtn');
+        const langSwitcher = document.querySelector('.lang-switcher');
+        langBtn?.addEventListener('click', e => { e.stopPropagation(); langSwitcher.classList.toggle('active'); });
+        document.addEventListener('click', () => langSwitcher?.classList.remove('active'));
+        document.querySelectorAll('.lang-dropdown li').forEach(item => {
+            item.onclick = function() {
+                applyLanguage(this.dataset.lang);
+                updateCategoryCounts();
+                renderProducts();
+                renderCart();
+                langSwitcher.classList.remove('active');
+            };
+        });
+
+        // Header scroll
+        const header = document.querySelector('.main-header');
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+        });
+        scrollTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const overlay = document.createElement('div');
+        overlay.className = 'mobile-overlay';
+        document.body.appendChild(overlay);
+        mobileMenuBtn?.addEventListener('click', function() {
+            document.body.classList.toggle('mobile-menu-open');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        overlay.addEventListener('click', () => {
+            document.body.classList.remove('mobile-menu-open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = this.getAttribute('href');
+                if (target === '#' || target.length <= 1) return;
+                const targetEl = document.querySelector(target);
+                if (targetEl) {
+                    e.preventDefault();
+                    const offset = 100;
+                    const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: targetPos, behavior: 'smooth' });
+                    if (document.body.classList.contains('mobile-menu-open')) {
+                        document.body.classList.remove('mobile-menu-open');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.replace('fa-times', 'fa-bars');
+                    }
+                }
+            });
+        });
+
+        // Category filter (from cards/menu)
+        document.querySelectorAll('.category-link-filter').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const cat = this.dataset.catFilter;
+                currentFilter = cat;
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
+                renderProducts();
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.onclick = function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderProducts();
+            };
+        });
+
+        // Search
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        const searchInput = document.getElementById('searchInput');
+        searchBtn?.addEventListener('click', () => {
+            searchOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => searchInput.focus(), 100);
+        });
+        searchClose?.addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            searchInput.value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        });
+        searchInput?.addEventListener('input', e => performSearch(e.target.value));
+        searchOverlay?.addEventListener('click', e => { if (e.target === searchOverlay) searchClose.click(); });
+
+        // Cart sidebar
+        const cartBtn = document.getElementById('cartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartClose = document.getElementById('cartClose');
+        const modalBg = document.getElementById('modalBg');
+        cartBtn?.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            modalBg.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        const closeCart = () => {
+            cartSidebar.classList.remove('active');
+            modalBg.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        cartClose?.addEventListener('click', closeCart);
+        modalBg?.addEventListener('click', closeCart);
+
+        // Checkout via WhatsApp
+        document.getElementById('checkoutBtn')?.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            const lang = currentLanguage;
+            let msg = lang === 'ar' ? 'مرحبا، أريد طلب المنتجات التالية:%0A%0A' : 'Hello, I would like to order:%0A%0A';
+            let total = 0;
+            cart.forEach(item => {
+                const p = products.find(pr => pr.id === item.id);
+                if (p) {
+                    const name = lang === 'ar' ? p.nameAr : p.nameEn;
+                    msg += `• ${name} x${item.qty} = ${p.price * item.qty} ${lang === 'ar' ? 'ج.م' : 'EGP'}%0A`;
+                    total += p.price * item.qty;
+                }
+            });
+            msg += `%0A${lang === 'ar' ? 'الإجمالي' : 'Total'}: ${total} ${lang === 'ar' ? 'ج.م' : 'EGP'}`;
+            window.open(`https://wa.me/${siteSettings.whatsapp}?text=${msg}`, '_blank');
+        });
+
+        // Quick view bg close
+        document.getElementById('quickViewModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeQuickView();
+        });
+
+        // ESC key
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                searchOverlay.classList.remove('active');
+                cartSidebar.classList.remove('active');
+                modalBg.classList.remove('active');
+                document.getElementById('quickViewModal').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.category-card, .stat-card, .contact-card, .feature-item').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${i * 0.05}s, transform 0.6s ease ${i * 0.05}s`;
+            observer.observe(el);
+        });
+
+        console.log('%c🌿 Al Shorouq Organic 🌿', 'color: #C8102E; font-size: 24px; font-weight: bold; padding: 10px;');
+    });
+
+    window.removeFromCart = removeFromCart;
+    window.updateQty = updateQty;
+    window.addToCart = addToCart;
+    window.openQuickView = openQuickView;
+    window.closeQuickView = closeQuickView;
+    window.closeSearchAndOpen = closeSearchAndOpen;
+    window.showToast = showToast;
     </script>
 </body>
 </html>
