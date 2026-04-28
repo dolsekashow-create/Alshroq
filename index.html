@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الشروق أورجانيك | Al Shorouq Organic - زيوت طبيعية ومنتجات عضوية</title>
+    <meta name="description" content="الشروق أورجانيك - من الشركات الرائدة في مجال استخلاص وتعبئة الزيوت الطبيعية والكريمات والدهانات والزبدة">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="container">
+            <span data-ar="🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%" 
+                  data-en="🌿 Free shipping on orders over 1000 EGP - 100% Natural Products"
+                  data-ru="🌿 Бесплатная доставка для заказов более 1000 EGP - 100% натуральные продукты">
+                🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%
+            </span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-inner">
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <img src="images/logo.jpeg" alt="Al Shorouq Organic">
+                    <div class="logo-text">
+                        <span class="logo-name">الشروق</span>
+                        <span class="logo-tagline" data-ar="أورجانيك للزيوت الطبيعية" data-en="Organic Natural Oils" data-ru="Натуральные масла">أورجانيك للزيوت الطبيعية</span>
+                    </div>
+                </a>
+
+                <!-- Main Nav -->
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#home" data-ar="الرئيسية" data-en="Home" data-ru="Главная">الرئيسية</a></li>
+                        <li class="has-dropdown">
+                            <a href="#shop" data-ar="المتجر" data-en="Shop" data-ru="Магазин">المتجر <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown">
+                                <li><a href="#oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла">الزيوت</a></li>
+                                <li><a href="#creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</a></li>
+                                <li><a href="#ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</a></li>
+                                <li><a href="#butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло">الزبدة</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас">من نحن</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты">تواصل معنا</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Language Switcher -->
+                    <div class="lang-switcher">
+                        <button class="lang-btn" id="langBtn">
+                            <i class="fas fa-globe"></i>
+                            <span id="currentLang">AR</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <ul class="lang-dropdown" id="langDropdown">
+                            <li data-lang="ar">العربية</li>
+                            <li data-lang="en">English</li>
+                            <li data-lang="ru">Русский</li>
+                        </ul>
+                    </div>
+                    <button class="action-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+                    <button class="action-btn" aria-label="Account"><i class="fas fa-user"></i></button>
+                    <button class="action-btn cart-btn" aria-label="Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero" id="home">
+        <div class="hero-video-wrap">
+            <iframe 
+                id="heroVideo"
+                src="https://www.youtube.com/embed/AEyHBmvgHfs?autoplay=1&mute=1&loop=1&playlist=AEyHBmvgHfs&controls=0&showinfo=0&rel=0&modestbranding=1&start=143&iv_load_policy=3&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-badge" data-ar="✨ منتجات طبيعية 100%" data-en="✨ 100% Natural Products" data-ru="✨ 100% Натуральные продукты">
+                    ✨ منتجات طبيعية 100%
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-title-sub" data-ar="الشروق أورجانيك" data-en="Al Shorouq Organic" data-ru="Аль Шорук Органик">الشروق أورجانيك</span>
+                    <span class="hero-title-main" data-ar="نقاء الطبيعة في كل قطرة" data-en="Pure Nature in Every Drop" data-ru="Чистая природа в каждой капле">نقاء الطبيعة في كل قطرة</span>
+                </h1>
+                <p class="hero-desc" data-ar="منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم"
+                   data-en="Products worth trying.. Premium natural oils extracted from carefully selected seeds and herbs from around the world"
+                   data-ru="Продукты, достойные внимания.. Лучшие натуральные масла из тщательно отобранных семян и трав со всего мира">
+                    منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم
+                </p>
+                <div class="hero-actions">
+                    <a href="#shop" class="btn btn-primary" data-ar="تسوق الآن" data-en="Shop Now" data-ru="Купить сейчас">
+                        <span>تسوق الآن</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <a href="#about" class="btn btn-outline" data-ar="من نحن" data-en="About Us" data-ru="О нас">
+                        من نحن
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
+            <span data-ar="اكتشف المزيد" data-en="Discover More" data-ru="Узнать больше">اكتشف المزيد</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Features Strip -->
+    <section class="features-strip">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-leaf"></i>
+                    <div>
+                        <h4 data-ar="طبيعي 100%" data-en="100% Natural" data-ru="100% Натуральный">طبيعي 100%</h4>
+                        <p data-ar="بدون مواد حافظة" data-en="No preservatives" data-ru="Без консервантов">بدون مواد حافظة</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-truck"></i>
+                    <div>
+                        <h4 data-ar="شحن سريع" data-en="Fast Shipping" data-ru="Быстрая доставка">شحن سريع</h4>
+                        <p data-ar="لكل المحافظات" data-en="All governorates" data-ru="Все провинции">لكل المحافظات</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h4 data-ar="جودة مضمونة" data-en="Quality Assured" data-ru="Гарантия качества">جودة مضمونة</h4>
+                        <p data-ar="منتجات معتمدة" data-en="Certified products" data-ru="Сертифицированная продукция">منتجات معتمدة</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <div>
+                        <h4 data-ar="دعم 24/7" data-en="24/7 Support" data-ru="Поддержка 24/7">دعم 24/7</h4>
+                        <p data-ar="خدمة عملاء متميزة" data-en="Premium support" data-ru="Премиум поддержка">خدمة عملاء متميزة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow" data-ar="تسوق حسب الفئة" data-en="Shop by Category" data-ru="Покупки по категориям">تسوق حسب الفئة</span>
+                <h2 class="section-title" data-ar="فئات منتجاتنا" data-en="Our Product Categories" data-ru="Наши категории">فئات منتجاتنا</h2>
+                <p class="section-desc" data-ar="اكتشف مجموعتنا الكاملة من المنتجات الطبيعية" data-en="Discover our full range of natural products" data-ru="Откройте для себя весь ассортимент">اكتشف مجموعتنا الكاملة من المنتجات الطبيعية</p>
+            </div>
+
+            <div class="categories-grid">
+                <a href="#oils" class="category-card category-large">
+                    <div class="category-image">
+                        <div class="category-icon"><i class="fas fa-tint"></i></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-count" data-ar="+25 منتج" data-en="+25 products" data-ru="+25 товаров">+25 منتج</span>
+                        <h3 data-ar="الزيوت الطبيعية" data-en="Natural Oils" data-ru="Натуральные масла">الزيوت الطبيعية</h3>
+                        <p data-ar="زيوت معصورة على البارد للصحة والجمال" data-en="Cold-pressed oils for health and beauty" data-ru="Масла холодного отжима">زيوت معصورة على البارد للصحة والجمال</p>
+                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                    </div>
+                </a>
+
+                <a href="#creams" class="category-card">
+                    <div class="category-image cream-bg">
+                        <div class="category-icon"><i class="fas fa-pump-medical"></i></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-count" data-ar="+15 منتج" data-en="+15 products" data-ru="+15 товаров">+15 منتج</span>
+                        <h3 data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</h3>
+                        <p data-ar="كريمات للعناية بالبشرة" data-en="Skincare creams" data-ru="Кремы для ухода">كريمات للعناية بالبشرة</p>
+                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                    </div>
+                </a>
+
+                <a href="#ointments" class="category-card">
+                    <div class="category-image ointment-bg">
+                        <div class="category-icon"><i class="fas fa-prescription-bottle"></i></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-count" data-ar="+10 منتج" data-en="+10 products" data-ru="+10 товаров">+10 منتج</span>
+                        <h3 data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</h3>
+                        <p data-ar="دهانات علاجية طبيعية" data-en="Natural therapeutic ointments" data-ru="Натуральные мази">دهانات علاجية طبيعية</p>
+                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                    </div>
+                </a>
+
+                <a href="#butter" class="category-card category-wide">
+                    <div class="category-image butter-bg">
+                        <div class="category-icon"><i class="fas fa-cookie-bite"></i></div>
+                    </div>
+                    <div class="category-content">
+                        <span class="category-count" data-ar="+8 منتج" data-en="+8 products" data-ru="+8 товаров">+8 منتج</span>
+                        <h3 data-ar="الزبدة الطبيعية" data-en="Natural Butter" data-ru="Натуральное масло">الزبدة الطبيعية</h3>
+                        <p data-ar="زبدة طبيعية للترطيب العميق" data-en="Natural butter for deep moisturizing" data-ru="Глубокое увлажнение">زبدة طبيعية للترطيب العميق والعناية</p>
+                        <span class="category-link" data-ar="تسوق →" data-en="Shop →" data-ru="Купить →">تسوق →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-eyebrow" data-ar="الأكثر مبيعاً" data-en="Best Sellers" data-ru="Хиты продаж">الأكثر مبيعاً</span>
+                <h2 class="section-title" data-ar="منتجاتنا المميزة" data-en="Featured Products" data-ru="Рекомендуемые товары">منتجاتنا المميزة</h2>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <div class="product-badge">-20%</div>
+                        <div class="product-placeholder oil-1">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="product-actions">
+                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
+                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
+                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat" data-ar="زيوت" data-en="Oils" data-ru="Масла">زيوت</span>
+                        <h3 data-ar="زيت حبة البركة" data-en="Black Seed Oil" data-ru="Масло черного тмина">زيت حبة البركة</h3>
+                        <div class="product-rating">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <span>(24)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-old">350 ج.م</span>
+                            <span class="price-new">280 ج.م</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <div class="product-placeholder oil-2">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="product-actions">
+                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
+                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
+                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat" data-ar="زيوت" data-en="Oils" data-ru="Масла">زيوت</span>
+                        <h3 data-ar="زيت الجرجير" data-en="Arugula Oil" data-ru="Масло рукколы">زيت الجرجير</h3>
+                        <div class="product-rating">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <span>(18)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-new">220 ج.م</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <div class="product-badge new">جديد</div>
+                        <div class="product-placeholder cream-1">
+                            <i class="fas fa-pump-medical"></i>
+                        </div>
+                        <div class="product-actions">
+                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
+                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
+                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat" data-ar="كريمات" data-en="Creams" data-ru="Кремы">كريمات</span>
+                        <h3 data-ar="كريم الكولاجين" data-en="Collagen Cream" data-ru="Крем с коллагеном">كريم الكولاجين</h3>
+                        <div class="product-rating">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span>(12)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-new">180 ج.م</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <div class="product-badge">-15%</div>
+                        <div class="product-placeholder butter-1">
+                            <i class="fas fa-cookie-bite"></i>
+                        </div>
+                        <div class="product-actions">
+                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
+                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
+                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat" data-ar="زبدة" data-en="Butter" data-ru="Масло">زبدة</span>
+                        <h3 data-ar="زبدة الشيا" data-en="Shea Butter" data-ru="Масло Ши">زبدة الشيا</h3>
+                        <div class="product-rating">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <span>(31)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-old">200 ج.م</span>
+                            <span class="price-new">170 ج.م</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 5 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <div class="product-placeholder ointment-1">
+                            <i class="fas fa-prescription-bottle"></i>
+                        </div>
+                        <div class="product-actions">
+                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
+                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
+                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat" data-ar="دهانات" data-en="Ointments" data-ru="Мази">دهانات</span>
+                        <h3 data-ar="دهان مسكن للآلام" data-en="Pain Relief Ointment" data-ru="Обезболивающая мазь">دهان مسكن للآلام</h3>
+                        <div class="product-rating">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <span>(45)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-new">250 ج.م</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Product 6 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <div class="product-badge new">جديد</div>
+                        <div class="product-placeholder oil-3">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="product-actions">
+                            <button aria-label="Wishlist"><i class="far fa-heart"></i></button>
+                            <button aria-label="Quick View"><i class="far fa-eye"></i></button>
+                            <button aria-label="Add to Cart"><i class="fas fa-shopping-bag"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-cat" data-ar="زيوت" data-en="Oils" data-ru="Масла">زيوت</span>
+                        <h3 data-ar="زيت الأرغان" data-en="Argan Oil" data-ru="Аргановое масло">زيت الأرغان</h3>
+                        <div class="product-rating">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span>(22)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-new">320 ج.م</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="section-eyebrow" data-ar="من نحن" data-en="About Us" data-ru="О нас">من نحن</span>
+                    <h2 class="section-title" data-ar="شركة الشروق أورجانيك" data-en="Al Shorouq Organic" data-ru="Компания Аль Шорук">شركة الشروق أورجانيك</h2>
+                    <p data-ar="من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية."
+                       data-en="One of the leading companies in extracting and packaging natural oils, where we select the best types of seeds and herbs from different countries around the world to provide the best types of natural oils."
+                       data-ru="Одна из ведущих компаний в области извлечения и упаковки натуральных масел. Мы выбираем лучшие виды семян и трав со всего мира.">
+                       من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية.
+                    </p>
+                    
+                    <ul class="about-features">
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت الصحة الجنسية" data-en="Sexual Health Oils" data-ru="Масла для здоровья">زيوت الصحة الجنسية</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت تقوية جهاز المناعة" data-en="Immunity Boosting Oils" data-ru="Иммуностимулирующие масла">زيوت تقوية جهاز المناعة</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت العناية بالبشرة والشعر" data-en="Skin & Hair Care Oils" data-ru="Уход за кожей и волосами">زيوت العناية بالبشرة والشعر</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت المساج والتدليك" data-en="Massage Oils" data-ru="Массажные масла">زيوت المساج والتدليك</span></li>
+                        <li><i class="fas fa-check-circle"></i><span data-ar="زيوت علاج الأمراض الجلدية" data-en="Skin Treatment Oils" data-ru="Лечебные масла">زيوت علاج الأمراض الجلدية</span></li>
+                    </ul>
+                    
+                    <div class="about-quote" data-ar="منتجات الشروق أورجانيك ... منتجات تستحق التجربة"
+                         data-en="Al Shorouq Organic products... worth trying"
+                         data-ru="Продукты Аль Шорук Органик... достойны внимания">
+                        " منتجات الشروق أورجانيك ... منتجات تستحق التجربة "
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">+50</div>
+                            <div class="stat-label" data-ar="منتج طبيعي" data-en="Natural Products" data-ru="Натуральных продуктов">منتج طبيعي</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">+10K</div>
+                            <div class="stat-label" data-ar="عميل سعيد" data-en="Happy Customers" data-ru="Довольных клиентов">عميل سعيد</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label" data-ar="جودة طبيعية" data-en="Natural Quality" data-ru="Натуральное качество">جودة طبيعية</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label" data-ar="دعم العملاء" data-en="Customer Support" data-ru="Поддержка">دعم العملاء</div>
+                        </div>
+                    </div>
+                    <div class="about-decoration">
+                        <div class="decoration-circle"></div>
+                        <div class="decoration-leaf"><i class="fas fa-leaf"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="cta-banner">
+        <div class="container">
+            <div class="cta-content">
+                <h2 data-ar="جرب منتجاتنا الطبيعية اليوم" data-en="Try Our Natural Products Today" data-ru="Попробуйте наши натуральные продукты сегодня">جرب منتجاتنا الطبيعية اليوم</h2>
+                <p data-ar="احصل على خصم 15% على طلبك الأول" data-en="Get 15% off your first order" data-ru="Получите скидку 15% на первый заказ">احصل على خصم 15% على طلبك الأول</p>
+                <a href="#shop" class="btn btn-primary" data-ar="ابدأ التسوق" data-en="Start Shopping" data-ru="Начать покупки">ابدأ التسوق</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-eyebrow" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты">تواصل معنا</span>
+                <h2 class="section-title" data-ar="نحن هنا لخدمتك" data-en="We're Here to Serve You" data-ru="Мы здесь, чтобы служить вам">نحن هنا لخدمتك</h2>
+            </div>
+            
+            <div class="contact-grid">
+                <a href="https://wa.me/201064540290" target="_blank" class="contact-card">
+                    <div class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                    <h3 data-ar="واتساب" data-en="WhatsApp" data-ru="WhatsApp">واتساب</h3>
+                    <p>01064540290</p>
+                </a>
+                <a href="tel:01064540290" class="contact-card">
+                    <div class="contact-icon phone"><i class="fas fa-phone"></i></div>
+                    <h3 data-ar="اتصل بنا" data-en="Call Us" data-ru="Позвоните нам">اتصل بنا</h3>
+                    <p>01064540290</p>
+                </a>
+                <a href="mailto:niposoft@gmail.com" class="contact-card">
+                    <div class="contact-icon email"><i class="fas fa-envelope"></i></div>
+                    <h3 data-ar="البريد الإلكتروني" data-en="Email" data-ru="Эл. почта">البريد الإلكتروني</h3>
+                    <p>niposoft@gmail.com</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo.jpeg" alt="Al Shorouq Organic">
+                        <h3>الشروق أورجانيك</h3>
+                    </div>
+                    <p data-ar="من الشركات الرائدة في مجال الزيوت الطبيعية والمنتجات العضوية" data-en="Leading company in natural oils and organic products" data-ru="Ведущая компания в области натуральных масел">من الشركات الرائدة في مجال الزيوت الطبيعية والمنتجات العضوية</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/201064540290" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 data-ar="الفئات" data-en="Categories" data-ru="Категории">الفئات</h4>
+                    <ul>
+                        <li><a href="#oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла">الزيوت</a></li>
+                        <li><a href="#creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</a></li>
+                        <li><a href="#ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</a></li>
+                        <li><a href="#butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло">الزبدة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 data-ar="روابط مفيدة" data-en="Useful Links" data-ru="Полезные ссылки">روابط مفيدة</h4>
+                    <ul>
+                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас">من نحن</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты">تواصل معنا</a></li>
+                        <li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy" data-ru="Политика">سياسة الخصوصية</a></li>
+                        <li><a href="#" data-ar="الشروط والأحكام" data-en="Terms" data-ru="Условия">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 data-ar="النشرة البريدية" data-en="Newsletter" data-ru="Рассылка">النشرة البريدية</h4>
+                    <p data-ar="اشترك ليصلك كل جديد وعروضنا المميزة" data-en="Subscribe for updates and exclusive offers" data-ru="Подпишитесь на новости">اشترك ليصلك كل جديد وعروضنا المميزة</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('شكراً لاشتراكك!');">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Al Shorouq Organic. <span data-ar="جميع الحقوق محفوظة" data-en="All Rights Reserved" data-ru="Все права защищены">جميع الحقوق محفوظة</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201064540290?text=مرحبا، أريد الاستفسار عن منتجاتكم" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip" data-ar="تواصل معنا" data-en="Contact us" data-ru="Связаться">تواصل معنا</span>
+    </a>
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
