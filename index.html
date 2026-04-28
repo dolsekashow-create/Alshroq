@@ -775,7 +775,7 @@
 
     // ===== SUPABASE CONFIG =====
     const SUPABASE_URL = 'https://dibvmjxwjrnebmcslzwm.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_B5LS9b1C55lX-yN2YLEw_Q_TpgH9Bgp';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpYnZtanh3anJuZWJtY3NsendtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNTM3NDgsImV4cCI6MjA5MjkyOTc0OH0.cSpSoIbMPU5zYMCR9hZN5ShNU7u1bKAK8Aw0Ts24yS4';
     const _supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
     async function loadFromSupabase() {
@@ -793,6 +793,7 @@
                     cat: p.cat, price: p.price, oldPrice: p.old_price,
                     rating: p.rating, reviews: p.reviews, badge: p.badge,
                     icon: p.icon, placeholder: p.placeholder,
+                    imageUrl: p.image_url || null,
                     descAr: p.desc_ar, descEn: p.desc_en, descRu: p.desc_ru || p.desc_en
                 }));
                 localStorage.setItem('shorouq-products', JSON.stringify(products));
