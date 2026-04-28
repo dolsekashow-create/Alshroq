@@ -610,32 +610,18 @@
                 </div>
             </div>
 
-            <!-- TRANSLATION -->
+            <!-- TRANSLATION - UPDATED: Uses MyMemory API (free, no key needed) -->
             <div class="settings-pane card" id="pane-translate">
                 <div class="card-header"><h2 data-ar="إعدادات الترجمة التلقائية" data-en="Auto-Translation Settings">إعدادات الترجمة التلقائية</h2></div>
                 <div class="card-body">
-                    <div style="background:linear-gradient(135deg,#e8f0fe,#f3e8ff);border:1.5px solid #c5d4f8;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
-                        <p style="font-size:13px;font-weight:700;color:#4285f4;margin-bottom:6px;">⚡ كيف تشتغل الترجمة التلقائية؟</p>
-                        <p style="font-size:12px;color:#555;line-height:1.7;">لما تضيف منتج جديد بالعربي — الاسم والوصف بيتترجموا تلقائياً للإنجليزي والروسي عن طريق Claude AI. محتاج تحط API Key من Anthropic عشان الميزة دي تشتغل.</p>
-                        <a href="https://console.anthropic.com/settings/keys" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:#4285f4;font-size:12px;font-weight:700;text-decoration:underline;">🔗 احصل على API Key من Anthropic Console</a>
+                    <div style="background:linear-gradient(135deg,#e6f4e3,#f0fff0);border:1.5px solid #a3d4a0;border-radius:10px;padding:16px 20px;margin-bottom:16px;">
+                        <p style="font-size:14px;font-weight:800;color:#2d6a27;margin-bottom:6px;">✅ الترجمة التلقائية شغالة — مش محتاج API Key</p>
+                        <p style="font-size:13px;color:#555;line-height:1.7;">لما تضيف منتج جديد بالعربي، الاسم والوصف بيتترجموا تلقائياً للإنجليزي والروسي عن طريق <strong>MyMemory Translation API</strong> — مجاناً وبدون أي إعدادات إضافية.</p>
                     </div>
-                    <div class="form-grid">
-                        <div class="form-group full">
-                            <label data-ar="Anthropic API Key" data-en="Anthropic API Key">Anthropic API Key</label>
-                            <input type="password" id="s-anthropicKey" placeholder="sk-ant-api03-..." autocomplete="off">
-                            <small style="color:var(--text-soft);font-size:11px;margin-top:4px;display:block;" data-ar="مش محتاج تحفظ في Supabase — بيتحفظ محلياً في المتصفح فقط" data-en="Not synced to Supabase — stored locally in browser only">مش محتاج تحفظ في Supabase — بيتحفظ محلياً في المتصفح فقط</small>
-                        </div>
-                        <div class="form-group full" id="keyTestResult" style="display:none;"></div>
-                    </div>
-                    <div class="form-actions" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
-                        <button class="btn btn-primary" onclick="saveApiKey()">
-                            <i class="fas fa-save"></i>
-                            <span data-ar="حفظ الـ API Key" data-en="Save API Key">حفظ الـ API Key</span>
-                        </button>
-                        <button class="btn btn-outline" onclick="testApiKey()">
-                            <i class="fas fa-vial"></i>
-                            <span data-ar="اختبار الاتصال" data-en="Test Connection">اختبار الاتصال</span>
-                        </button>
+                    <div style="background:#f9fafb;border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
+                        <p style="font-size:13px;color:var(--text-soft);line-height:1.8;">
+                            <strong>💡 ملاحظة:</strong> الترجمة آلية وتعمل فوراً عند حفظ المنتج. لو عندك منتجات قديمة بدون ترجمة، احذفها وأعد إضافتها عشان تتترجم تلقائياً.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1073,50 +1059,35 @@ async function translateProductArabicToEnAndRu(nameAr, descAr) {
     const statusWrap = document.getElementById('translateStatusWrap');
     if (statusWrap) statusWrap.style.display = '';
 
-    const apiKey = localStorage.getItem('shorouq-anthropic-key') || '';
-    if (!apiKey) {
-        toast('⚠️ مفيش API Key محفوظ — روح الإعدادات > الترجمة وحط الـ Key', 'danger');
-        if (statusWrap) statusWrap.style.display = 'none';
-        return null;
+    // دالة مساعدة لترجمة نص واحد بـ MyMemory API (مجاني - بدون API Key)
+    async function myMemoryTranslate(text, targetLang) {
+        if (!text || !text.trim()) return '';
+        try {
+            const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text.trim())}&langpair=ar|${targetLang}`;
+            const resp = await fetch(url);
+            if (!resp.ok) return text;
+            const data = await resp.json();
+            if (data.responseStatus === 200 && data.responseData && data.responseData.translatedText) {
+                return data.responseData.translatedText;
+            }
+            return text;
+        } catch(e) {
+            console.warn('MyMemory translate error:', e);
+            return text;
+        }
     }
 
     try {
-        const prompt = `You are a professional translator for an Egyptian organic cosmetics/natural products store called "الشروق أورجانيك" (Al Shorouk Organic).
-
-Translate the following Arabic product name and description accurately to both English and Russian.
-The translation must be natural, professional, and suitable for an e-commerce product listing.
-
-Arabic Name: ${nameAr}
-Arabic Description: ${descAr || ''}
-
-Respond ONLY with valid JSON in this exact format (no other text, no markdown):
-{"nameEn":"...","descEn":"...","nameRu":"...","descRu":"..."}`;
-
-        const resp = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-                'anthropic-version': '2023-06-01',
-                'anthropic-dangerous-direct-browser-access': 'true'
-            },
-            body: JSON.stringify({
-                model: 'claude-sonnet-4-20250514',
-                max_tokens: 1000,
-                messages: [{ role: 'user', content: prompt }]
-            })
-        });
-        const data = await resp.json();
-        if (data.error) {
-            console.error('Anthropic API error:', data.error);
-            toast('❌ خطأ في الترجمة: ' + (data.error.message || 'تحقق من الـ API Key'), 'danger');
-            return null;
-        }
-        const text = (data.content || []).map(b => b.text || '').join('').trim();
-        const clean = text.replace(/```json|```/g, '').trim();
-        return JSON.parse(clean);
+        // نترجم الاسم والوصف لإنجليزي وروسي بالتوازي
+        const [nameEn, nameRu, descEn, descRu] = await Promise.all([
+            myMemoryTranslate(nameAr, 'en'),
+            myMemoryTranslate(nameAr, 'ru'),
+            myMemoryTranslate(descAr, 'en'),
+            myMemoryTranslate(descAr, 'ru')
+        ]);
+        return { nameEn, nameRu, descEn, descRu };
     } catch(e) {
-        console.error('Translation error:', e);
+        console.error('Translation failed:', e);
         return null;
     } finally {
         if (statusWrap) statusWrap.style.display = 'none';
@@ -1250,48 +1221,16 @@ function loadSettingsForm() {
     document.getElementById('s-showcaseVideoId').value = s.showcaseVideoId || '';
     document.getElementById('s-announceAr').value = s.announceAr || '';
     document.getElementById('s-announceEn').value = s.announceEn || '';
-    // API Key (stored separately, not in settings object)
-    const storedKey = localStorage.getItem('shorouq-anthropic-key') || '';
-    const keyEl = document.getElementById('s-anthropicKey');
-    if (keyEl) keyEl.value = storedKey;
 }
 
 function saveApiKey() {
-    const keyEl = document.getElementById('s-anthropicKey');
-    const key = keyEl ? keyEl.value.trim() : '';
-    if (!key) { toast('⚠️ ادخل الـ API Key الأول', 'danger'); return; }
-    localStorage.setItem('shorouq-anthropic-key', key);
-    toast('✅ تم حفظ الـ API Key بنجاح', 'success');
+    // No longer needed — translation now uses MyMemory API (free, no key required)
+    toast('✅ الترجمة التلقائية شغالة بدون API Key', 'success');
 }
 
 async function testApiKey() {
-    const keyEl = document.getElementById('s-anthropicKey');
-    const key = keyEl ? keyEl.value.trim() : '';
-    if (!key) { toast('⚠️ ادخل الـ API Key الأول', 'danger'); return; }
-    const resultEl = document.getElementById('keyTestResult');
-    if (resultEl) { resultEl.style.display = ''; resultEl.innerHTML = '<div style="color:#4285f4;font-size:13px;font-weight:600;">⏳ جاري الاختبار...</div>'; }
-    try {
-        const resp = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': key,
-                'anthropic-version': '2023-06-01',
-                'anthropic-dangerous-direct-browser-access': 'true'
-            },
-            body: JSON.stringify({
-                model: 'claude-sonnet-4-20250514',
-                max_tokens: 10,
-                messages: [{ role: 'user', content: 'say ok' }]
-            })
-        });
-        const data = await resp.json();
-        if (data.error) throw new Error(data.error.message);
-        if (resultEl) resultEl.innerHTML = '<div style="background:#e6f4e3;border:1.5px solid #a3d4a0;border-radius:8px;padding:12px 16px;color:#2d6a27;font-size:13px;font-weight:700;">✅ الاتصال ناجح! الترجمة التلقائية هتشتغل تمام</div>';
-        localStorage.setItem('shorouq-anthropic-key', key);
-    } catch(e) {
-        if (resultEl) resultEl.innerHTML = `<div style="background:#fff0f0;border:1.5px solid #ffc5c5;border-radius:8px;padding:12px 16px;color:#9A0C24;font-size:13px;font-weight:700;">❌ خطأ: ${e.message || 'API Key غلط أو انتهت صلاحيته'}</div>`;
-    }
+    // No longer needed — translation now uses MyMemory API (free, no key required)
+    toast('✅ الترجمة التلقائية شغالة بدون API Key', 'success');
 }
 
 function saveSettings() {
