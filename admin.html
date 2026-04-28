@@ -1038,7 +1038,7 @@ function closeProductModal() {
     document.getElementById('productModal').classList.remove('active');
 }
 
-function saveProduct() {
+async function saveProduct() {
     const lang = adminLang;
     const nameAr = document.getElementById('p-nameAr').value.trim();
     const nameEn = document.getElementById('p-nameEn').value.trim();
@@ -1064,19 +1064,45 @@ function saveProduct() {
         icon: document.getElementById('p-icon').value,
         placeholder: document.getElementById('p-placeholder').value
     };
+
+    // عمل id فريد - بناخد الأكبر من اللى موجود محلياً وأيضاً من Supabase
+    let newId;
     if (editId) {
-        const idx = products.findIndex(p => p.id === parseInt(editId));
+        newId = parseInt(editId);
+        const idx = products.findIndex(p => p.id === newId);
         if (idx !== -1) products[idx] = { ...products[idx], ...productData };
     } else {
-        const maxId = products.reduce((m, p) => Math.max(m, p.id), 0);
-        products.push({ id: maxId + 1, ...productData });
+        // نجيب أكبر id من السوبا بيز عشان نضمن مفيش تكرار
+        let maxRemoteId = 0;
+        if (_supabase) {
+            try {
+                const { data: maxRow } = await _supabase
+                    .from('products').select('id').order('id', { ascending: false }).limit(1);
+                if (maxRow && maxRow.length > 0) maxRemoteId = maxRow[0].id;
+            } catch(e) { console.warn('maxId fetch failed', e); }
+        }
+        const maxLocalId = products.reduce((m, p) => Math.max(m, p.id), 0);
+        newId = Math.max(maxLocalId, maxRemoteId) + 1;
+        products.push({ id: newId, ...productData });
     }
+
     localStorage.setItem('shorouq-products', JSON.stringify(products));
-    const savedProd = editId ? products.find(p => p.id === parseInt(editId)) : products[products.length-1];
-    if (savedProd) {
-        saveProductImageForId(savedProd.id);
-        syncProductToSupabase(savedProd);
+
+    // حفظ الصورة فى localStorage الأدمن (نسخة احتياطية)
+    saveProductImageForId(newId);
+
+    // ندمج الصورة مع المنتج عشان تترفع لـ Supabase
+    const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+    const productWithImage = { ...products.find(p => p.id === newId), imageUrl: productImages[newId] || null };
+
+    // ✨ ننتظر السوبا بيز فعلاً
+    const result = await syncProductToSupabase(productWithImage);
+    if (!result.ok) {
+        toast(lang === 'ar' ? ('❌ خطأ Supabase: ' + result.error) : ('❌ Supabase error: ' + result.error), 'danger');
+        console.error('Supabase save error:', result.error);
+        return;
     }
+
     closeProductModal();
     renderAll();
     toast(lang === 'ar' ? '✅ تم حفظ المنتج بنجاح' : '✅ Product saved successfully', 'success');
@@ -1091,15 +1117,19 @@ function closeDeleteModal() {
     deleteTargetId = null;
     document.getElementById('deleteModal').classList.remove('active');
 }
-function confirmDelete() {
+async function confirmDelete() {
     if (!deleteTargetId) return;
-    const delProd = { id: deleteTargetId };
-    syncProductToSupabase(delProd, true);
-    products = products.filter(p => p.id !== deleteTargetId);
+    const targetId = deleteTargetId;
+    const result = await syncProductToSupabase({ id: targetId }, true);
+    if (!result.ok) {
+        toast(adminLang === 'ar' ? ('❌ خطأ Supabase: ' + result.error) : ('❌ Supabase error: ' + result.error), 'danger');
+        return;
+    }
+    products = products.filter(p => p.id !== targetId);
     localStorage.setItem('shorouq-products', JSON.stringify(products));
     // Remove associated image
     const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
-    delete productImages[deleteTargetId];
+    delete productImages[targetId];
     localStorage.setItem('shorouq-product-images', JSON.stringify(productImages));
     closeDeleteModal();
     renderAll();
@@ -1245,28 +1275,55 @@ function doLogin() {
 // ===== IMAGE UPLOAD =====
 let currentEditImgProductId = null;
 
-function handleImageUpload(event) {
+// ضغط الصورة وتصغيرها لتقليل الحجم قبل الرفع لـ Supabase
+function compressImage(file, maxWidth = 1000, quality = 0.82) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                if (w > maxWidth) {
+                    h = Math.round(h * (maxWidth / w));
+                    w = maxWidth;
+                }
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            img.onerror = reject;
+            img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+async function handleImageUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
     if (!file.type.startsWith('image/')) {
         toast(adminLang === 'ar' ? '❌ يرجى اختيار ملف صورة صحيح' : '❌ Please select a valid image file', 'danger');
         return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-        toast(adminLang === 'ar' ? '❌ حجم الصورة يجب أن يكون أقل من 5MB' : '❌ Image must be less than 5MB', 'danger');
+    if (file.size > 10 * 1024 * 1024) {
+        toast(adminLang === 'ar' ? '❌ حجم الصورة يجب أن يكون أقل من 10MB' : '❌ Image must be less than 10MB', 'danger');
         return;
     }
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const base64 = e.target.result;
+    try {
+        const base64 = await compressImage(file, 1000, 0.82);
         document.getElementById('imgPreview').src = base64;
         document.getElementById('imgPreview').classList.add('visible');
         document.getElementById('imgDropZone').style.display = 'none';
         document.getElementById('removeImgBtn').style.display = '';
-        // Store temporarily until product is saved
         window._pendingProductImage = base64;
-    };
-    reader.readAsDataURL(file);
+    } catch(e) {
+        console.error('Image compression failed:', e);
+        toast(adminLang === 'ar' ? '❌ فشل معالجة الصورة' : '❌ Image processing failed', 'danger');
+    }
     event.target.value = '';
 }
 
@@ -1313,14 +1370,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== SUPABASE SYNC =====
 const SUPABASE_URL = 'https://dibvmjxwjrnebmcslzwm.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_B5LS9b1C55lX-yN2YLEw_Q_TpgH9Bgp';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpYnZtanh3anJuZWJtY3NsendtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzczNTM3NDgsImV4cCI6MjA5MjkyOTc0OH0.cSpSoIbMPU5zYMCR9hZN5ShNU7u1bKAK8Aw0Ts24yS4';
 const _supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 async function syncProductToSupabase(product, isDelete = false) {
-    if (!_supabase) return;
+    if (!_supabase) return { ok: false, error: 'Supabase client not initialized' };
     try {
         if (isDelete) {
-            await _supabase.from('products').delete().eq('id', product.id);
+            const { error } = await _supabase.from('products').delete().eq('id', product.id);
+            if (error) return { ok: false, error: error.message };
+            return { ok: true };
         } else {
             const row = {
                 id: product.id,
@@ -1328,11 +1387,17 @@ async function syncProductToSupabase(product, isDelete = false) {
                 cat: product.cat, price: product.price, old_price: product.oldPrice || null,
                 rating: product.rating, reviews: product.reviews, badge: product.badge || null,
                 icon: product.icon, placeholder: product.placeholder,
-                desc_ar: product.descAr || '', desc_en: product.descEn || '', desc_ru: product.descRu || ''
+                desc_ar: product.descAr || '', desc_en: product.descEn || '', desc_ru: product.descRu || '',
+                image_url: product.imageUrl || null
             };
-            await _supabase.from('products').upsert(row, { onConflict: 'id' });
+            const { error } = await _supabase.from('products').upsert(row, { onConflict: 'id' });
+            if (error) return { ok: false, error: error.message };
+            return { ok: true };
         }
-    } catch(e) { console.warn('Supabase sync error:', e); }
+    } catch(e) {
+        console.error('Supabase sync exception:', e);
+        return { ok: false, error: e.message || String(e) };
+    }
 }
 
 async function syncSettingsToSupabase(s) {
@@ -1352,9 +1417,16 @@ async function loadFromSupabase() {
                 cat: p.cat, price: p.price, oldPrice: p.old_price,
                 rating: p.rating, reviews: p.reviews, badge: p.badge,
                 icon: p.icon, placeholder: p.placeholder,
+                imageUrl: p.image_url || null,
                 descAr: p.desc_ar, descEn: p.desc_en, descRu: p.desc_ru || p.desc_en
             }));
             localStorage.setItem('shorouq-products', JSON.stringify(products));
+
+            // نزامن الصور من السوبا بيز للـ localStorage عشان الـ admin يعرضها
+            const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+            prods.forEach(p => { if (p.image_url) productImages[p.id] = p.image_url; });
+            localStorage.setItem('shorouq-product-images', JSON.stringify(productImages));
+
             renderAll();
         }
         const { data: sd, error: se } = await _supabase.from('site_settings').select('*').eq('id', 1).single();
@@ -1374,25 +1446,27 @@ function triggerCatUpload(slug) {
     document.getElementById('catFileInput').click();
 }
 
-function handleCatImageUpload(event) {
+async function handleCatImageUpload(event) {
     const file = event.target.files[0];
     if (!file || !_currentCatSlug) return;
     if (!file.type.startsWith('image/')) {
         toast(adminLang === 'ar' ? '❌ يرجى اختيار ملف صورة' : '❌ Please select an image file', 'danger');
         return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-        toast(adminLang === 'ar' ? '❌ الصورة أكبر من 5MB' : '❌ Image must be < 5MB', 'danger');
+    if (file.size > 10 * 1024 * 1024) {
+        toast(adminLang === 'ar' ? '❌ الصورة أكبر من 10MB' : '❌ Image must be < 10MB', 'danger');
         return;
     }
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        saveCatImage(_currentCatSlug, e.target.result);
-    };
-    reader.readAsDataURL(file);
+    try {
+        const base64 = await compressImage(file, 1200, 0.85);
+        await saveCatImage(_currentCatSlug, base64);
+    } catch(e) {
+        console.error('Cat image error:', e);
+        toast(adminLang === 'ar' ? '❌ فشل معالجة الصورة' : '❌ Image processing failed', 'danger');
+    }
 }
 
-function saveCatImage(slug, base64) {
+async function saveCatImage(slug, base64) {
     const preview = document.getElementById('cat-preview-' + slug);
     if (preview) {
         const existing = preview.querySelector('img');
@@ -1403,11 +1477,15 @@ function saveCatImage(slug, base64) {
     }
     const status = document.getElementById('cat-status-' + slug);
     if (status) status.classList.add('visible');
-    syncCategoryToSupabase(slug, base64);
+    const result = await syncCategoryToSupabase(slug, base64);
+    if (result && !result.ok) {
+        toast(adminLang === 'ar' ? ('❌ خطأ Supabase: ' + result.error) : ('❌ Supabase error: ' + result.error), 'danger');
+        return;
+    }
     toast(adminLang === 'ar' ? '✅ تم رفع صورة الفئة' : '✅ Category image saved', 'success');
 }
 
-function removeCatImage(slug) {
+async function removeCatImage(slug) {
     const preview = document.getElementById('cat-preview-' + slug);
     if (preview) {
         const existing = preview.querySelector('img');
@@ -1415,12 +1493,12 @@ function removeCatImage(slug) {
     }
     const status = document.getElementById('cat-status-' + slug);
     if (status) status.classList.remove('visible');
-    syncCategoryToSupabase(slug, null);
+    await syncCategoryToSupabase(slug, null);
     toast(adminLang === 'ar' ? '🗑️ تم حذف صورة الفئة' : '🗑️ Category image removed', 'danger');
 }
 
 async function syncCategoryToSupabase(slug, imageUrl) {
-    if (!_supabase) return;
+    if (!_supabase) return { ok: false, error: 'No Supabase client' };
     try {
         const catNames = {
             oils:      { ar: 'الزيوت الطبيعية', en: 'Natural Oils' },
@@ -1429,13 +1507,18 @@ async function syncCategoryToSupabase(slug, imageUrl) {
             butter:    { ar: 'الزبدة الطبيعية',  en: 'Natural Butter'}
         };
         const names = catNames[slug] || { ar: slug, en: slug };
-        await _supabase.from('categories').upsert({
+        const { error } = await _supabase.from('categories').upsert({
             slug: slug,
             name_ar: names.ar,
             name_en: names.en,
             image_url: imageUrl
         }, { onConflict: 'slug' });
-    } catch(e) { console.warn('Category sync error:', e); }
+        if (error) return { ok: false, error: error.message };
+        return { ok: true };
+    } catch(e) {
+        console.error('Category sync exception:', e);
+        return { ok: false, error: e.message || String(e) };
+    }
 }
 
 async function loadCategoriesPage() {
