@@ -752,7 +752,16 @@
     };
 
     // ===== State =====
-    let currentLanguage = localStorage.getItem('preferred-language') || 'ar';
+    // Auto-detect browser language if no preference saved
+    function detectLanguage() {
+        const saved = localStorage.getItem('preferred-language');
+        if (saved) return saved;
+        const browserLang = (navigator.language || navigator.userLanguage || 'ar').toLowerCase();
+        if (browserLang.startsWith('ar')) return 'ar';
+        if (browserLang.startsWith('ru')) return 'ru';
+        return 'en';
+    }
+    let currentLanguage = detectLanguage();
     let products = JSON.parse(localStorage.getItem('shorouq-products') || 'null') || defaultProducts;
     let cart = JSON.parse(localStorage.getItem('shorouq-cart') || '[]');
     let wishlist = JSON.parse(localStorage.getItem('shorouq-wishlist') || '[]');
