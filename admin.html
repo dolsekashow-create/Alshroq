@@ -6,6 +6,7 @@
     <title>لوحة التحكم - الشروق أورجانيك</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <style>
     :root {
         --red: #C8102E; --red-dark: #9A0C24; --red-light: #fdecea;
@@ -815,6 +816,7 @@ function openProductModal(id = null) {
             document.getElementById('p-badge').value = p.badge || '';
             document.getElementById('p-icon').value = p.icon;
             document.getElementById('p-placeholder').value = p.placeholder;
+            if (document.getElementById('p-nameRu')) document.getElementById('p-nameRu').value = p.nameRu || '';
         }
     } else {
         title.textContent = lang === 'ar' ? 'إضافة منتج جديد' : 'Add New Product';
@@ -830,6 +832,7 @@ function openProductModal(id = null) {
         document.getElementById('p-badge').value = '';
         document.getElementById('p-icon').value = 'fa-tint';
         document.getElementById('p-placeholder').value = 'oil-1';
+        if (document.getElementById('p-nameRu')) document.getElementById('p-nameRu').value = '';
     }
     document.getElementById('productModal').classList.add('active');
 }
@@ -850,8 +853,9 @@ function saveProduct() {
     const editId = document.getElementById('editProductId').value;
     const oldPrice = parseFloat(document.getElementById('p-oldPrice').value) || null;
     const badge = document.getElementById('p-badge').value || null;
+    const nameRu = document.getElementById('p-nameRu') ? document.getElementById('p-nameRu').value.trim() : '';
     const productData = {
-        nameAr, nameEn,
+        nameAr, nameEn, nameRu,
         descAr: document.getElementById('p-descAr').value.trim(),
         descEn: document.getElementById('p-descEn').value.trim(),
         cat: document.getElementById('p-cat').value,
@@ -871,6 +875,8 @@ function saveProduct() {
         products.push({ id: maxId + 1, ...productData });
     }
     localStorage.setItem('shorouq-products', JSON.stringify(products));
+    const savedProd = editId ? products.find(p => p.id === parseInt(editId)) : products[products.length-1];
+    if (savedProd) syncProductToSupabase(savedProd);
     closeProductModal();
     renderAll();
     toast(lang === 'ar' ? '✅ تم حفظ المنتج بنجاح' : '✅ Product saved successfully', 'success');
@@ -887,6 +893,8 @@ function closeDeleteModal() {
 }
 function confirmDelete() {
     if (!deleteTargetId) return;
+    const delProd = { id: deleteTargetId };
+    syncProductToSupabase(delProd, true);
     products = products.filter(p => p.id !== deleteTargetId);
     localStorage.setItem('shorouq-products', JSON.stringify(products));
     closeDeleteModal();
@@ -927,6 +935,7 @@ function saveSettings() {
     settings.announceAr = document.getElementById('s-announceAr').value.trim() || settings.announceAr;
     settings.announceEn = document.getElementById('s-announceEn').value.trim() || settings.announceEn;
     localStorage.setItem('shorouq-settings', JSON.stringify(settings));
+    syncSettingsToSupabase(settings);
     document.getElementById('adminSiteName').textContent = settings[adminLang === 'ar' ? 'fullNameAr' : 'fullNameEn'];
     toast(adminLang === 'ar' ? '✅ تم حفظ الإعدادات' : '✅ Settings saved', 'success');
 }
@@ -1021,6 +1030,8 @@ document.getElementById('deleteModal').addEventListener('click', function(e) { i
 setAdminLang(adminLang);
 renderAll();
 loadSettingsForm();
+// Load fresh data from Supabase
+loadFromSupabase();
 </script>
 </body>
 </html>
