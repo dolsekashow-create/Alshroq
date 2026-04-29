@@ -514,13 +514,19 @@
         .logo-name { font-size: 16px; }
     }
 
-    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 300px; max-width: 85vw; height: 100vh; background: var(--color-white); z-index: 1100; padding: 80px 24px 24px; box-shadow: var(--shadow-lg); overflow-y: auto; }
+    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 300px; max-width: 85vw; height: 100vh; background: var(--color-white); z-index: 1100; padding: 0; box-shadow: var(--shadow-lg); overflow-y: auto; }
     [dir="ltr"] .mobile-menu-open .main-nav { right: auto; left: 0; }
+    .mobile-nav-header { display: none; }
+    .mobile-menu-open .mobile-nav-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; background: linear-gradient(135deg, var(--color-red-dark), var(--color-red)); color: var(--color-white); border-bottom: 3px solid var(--color-gold); position: sticky; top: 0; z-index: 2; }
+    .mobile-nav-header h3 { font-size: 17px; font-weight: 700; margin: 0; color: var(--color-white); }
+    .mobile-nav-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.18); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-size: 16px; transition: var(--transition); border: none; cursor: pointer; }
+    .mobile-nav-close:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(90deg); }
+    .mobile-menu-open .main-nav > ul { padding: 16px; }
     .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; display: flex; }
     .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
-    .mobile-menu-open .main-nav .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; padding: 4px 0 4px 16px; min-width: auto; border-top: none; border-right: 2px solid var(--color-gold); margin: 4px 8px; background: var(--color-bg-soft); border-radius: var(--radius-sm); }
-    [dir="ltr"] .mobile-menu-open .main-nav .dropdown { border-right: none; border-left: 2px solid var(--color-gold); padding: 4px 16px 4px 0; }
-    .mobile-menu-open .main-nav .dropdown ul { display: flex; flex-direction: column; gap: 0; }
+    .mobile-menu-open .main-nav .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; padding: 4px 0; min-width: auto; border-top: none; border-right: 2px solid var(--color-gold); margin: 4px 8px; background: var(--color-bg-soft); border-radius: var(--radius-sm); }
+    [dir="ltr"] .mobile-menu-open .main-nav .dropdown { border-right: none; border-left: 2px solid var(--color-gold); }
+    .mobile-menu-open .main-nav .dropdown ul { display: flex; flex-direction: column; gap: 0; padding: 0; }
     .mobile-menu-open .main-nav .dropdown a { padding: 10px 14px; font-size: 14px; }
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
     .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
@@ -539,6 +545,10 @@
                 </a>
 
                 <nav class="main-nav">
+                    <div class="mobile-nav-header">
+                        <h3 data-ar="القائمة" data-en="Menu" data-ru="Меню">القائمة</h3>
+                        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+                    </div>
                     <ul>
                         <li><a href="#home" data-ar="الرئيسية" data-en="Home" data-ru="Главная" data-ru="Главная">الرئيسية</a></li>
                         <li class="has-dropdown">
@@ -1506,6 +1516,12 @@
             const icon = this.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
+        });
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        mobileNavClose?.addEventListener('click', () => {
+            document.body.classList.remove('mobile-menu-open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
         });
         overlay.addEventListener('click', () => {
             document.body.classList.remove('mobile-menu-open');
