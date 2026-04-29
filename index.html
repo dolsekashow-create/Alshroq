@@ -474,7 +474,7 @@
     }
     @media (max-width: 768px) {
         :root { --section-py: 60px; }
-        .main-nav { display: none; }
+        .main-nav { display: none; } .lang-btn { padding: 6px 10px; font-size: 12px; } .lang-btn .fa-chevron-down { display: none; }
         .mobile-menu-btn { display: flex; }
         .header-actions { gap: 4px; }
         .action-btn { width: 38px; height: 38px; }
@@ -499,39 +499,62 @@
         [dir="ltr"] .cart-sidebar { left: -100vw; }
     }
 
-    @media (max-width: 768px) {
-        .mobile-menu-open .main-nav { display: block !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100vw !important; height: 100vh !important; background: var(--color-white) !important; z-index: 9100 !important; overflow-y: auto !important; padding: 0 !important; }
-        .mobile-menu-open .main-nav ul { flex-direction: column !important; align-items: stretch !important; gap: 0 !important; padding-top: 64px !important; }
-        .mobile-menu-open .main-nav > ul > li { border-bottom: 1px solid var(--color-border); }
-        .mobile-menu-open .main-nav a { display: flex !important; width: 100% !important; padding: 18px 24px !important; font-size: 17px !important; font-weight: 700 !important; justify-content: space-between !important; border-radius: 0 !important; }
-        .mobile-menu-open .main-nav .dropdown { display: block !important; position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; min-width: unset !important; background: var(--color-bg-soft) !important; border-top: 1px solid var(--color-border); border-right: 4px solid var(--color-gold); }
-        .mobile-menu-open .main-nav .dropdown li { border-bottom: 1px solid var(--color-border); }
-        .mobile-menu-open .main-nav .dropdown a { padding: 14px 36px !important; font-size: 15px !important; color: var(--color-text-soft) !important; }
+    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--color-white); z-index: 1100; padding: 80px 24px 24px; box-shadow: var(--shadow-lg); overflow-y: auto; }
+    [dir="ltr"] .mobile-menu-open .main-nav { right: auto; left: 0; }
+    .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; }
+    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
+    .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
+
+    /* ===== MOBILE DRAWER ===== */
+    #mobDrawer {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100%; height: 100%;
+        background: #fff;
+        z-index: 99999;
+        flex-direction: column;
+        overflow-y: auto;
     }
-
-    /* Mobile menu top bar */
-    .mobile-nav-bar { display: none; position: fixed; top: 0; left: 0; right: 0; height: 64px; background: var(--color-white); border-bottom: 2px solid var(--color-gold); z-index: 9200; align-items: center; justify-content: space-between; padding: 0 20px; }
-    .mobile-menu-open .mobile-nav-bar { display: flex; }
-    .mobile-nav-bar span { font-weight: 900; font-size: 17px; color: var(--color-text); }
-    .mobile-nav-bar button { width: 38px; height: 38px; border-radius: 50%; background: var(--color-bg-soft); border: none; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; color: var(--color-text); transition: var(--transition); }
-    .mobile-nav-bar button:hover { background: var(--color-red); color: white; }
-
-    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9000; }
-    .mobile-menu-open .mobile-overlay { display: block; }
-
-    /* Lang btn compact on mobile */
-    @media (max-width: 768px) {
-        .lang-btn { padding: 6px 10px; font-size: 12px; gap: 4px; }
-        .lang-btn .fa-chevron-down { display: none; }
+    #mobDrawer.open { display: flex; }
+    #mobOverlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.55);
+        z-index: 99998;
     }
+    #mobOverlay.open { display: block; }
     </style>
 </head>
 <body>
-    <!-- Mobile nav bar (shown only when menu open) -->
-    <div class="mobile-nav-bar" id="mobileNavBar">
-        <span id="mobileNavTitle">القائمة</span>
-        <button id="mobileMenuClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    
+    <!-- MOBILE DRAWER -->
+    <div id="mobOverlay"></div>
+    <div id="mobDrawer">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;min-height:60px;background:#fff;border-bottom:3px solid #C9A961;flex-shrink:0;">
+            <span style="font-family:Cairo,sans-serif;font-weight:900;font-size:18px;color:#2C2825;" id="mobTitle" data-ar="القائمة" data-en="Menu" data-ru="Меню">القائمة</span>
+            <button id="mobClose" style="width:40px;height:40px;border-radius:50%;background:#F8F4EB;border:none;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;color:#2C2825;">✕</button>
+        </div>
+        <div style="flex:1;overflow-y:auto;background:#fff;">
+            <a href="#home" class="mob-item" data-ar="الرئيسية" data-en="Home" data-ru="Главная" style="display:flex;align-items:center;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;background:#fff;">الرئيسية</a>
+            <div style="border-bottom:1px solid #E8E0D0;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;background:#fff;">
+                    <span data-ar="المتجر" data-en="Shop" data-ru="Магазин">المتجر</span><span>▾</span>
+                </div>
+                <div style="background:#F8F4EB;border-right:4px solid #C9A961;">
+                    <a href="#products" class="mob-item mob-cat" data-cat-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла" style="display:flex;align-items:center;padding:16px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الزيوت</a>
+                    <a href="#products" class="mob-item mob-cat" data-cat-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" style="display:flex;align-items:center;padding:16px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الكريمات</a>
+                    <a href="#products" class="mob-item mob-cat" data-cat-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" style="display:flex;align-items:center;padding:16px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الدهانات</a>
+                    <a href="#products" class="mob-item mob-cat" data-cat-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" style="display:flex;align-items:center;padding:16px 40px;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الزبدة</a>
+                </div>
+            </div>
+            <a href="#about" class="mob-item" data-ar="من نحن" data-en="About Us" data-ru="О нас" style="display:flex;align-items:center;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;background:#fff;">من نحن</a>
+            <a href="#contact" class="mob-item" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" style="display:flex;align-items:center;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;background:#fff;">تواصل معنا</a>
+        </div>
     </div>
+
     <header class="main-header">
         <div class="container">
             <div class="header-inner">
@@ -1503,23 +1526,20 @@
 
         // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
         const overlay = document.createElement('div');
         overlay.className = 'mobile-overlay';
         document.body.appendChild(overlay);
-
-        function openMenu() {
-            document.body.classList.add('mobile-menu-open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeMenu() {
+        mobileMenuBtn?.addEventListener('click', function() {
+            document.body.classList.toggle('mobile-menu-open');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        overlay.addEventListener('click', () => {
             document.body.classList.remove('mobile-menu-open');
-            document.body.style.overflow = '';
-        }
-
-        mobileMenuBtn?.addEventListener('click', openMenu);
-        mobileMenuClose?.addEventListener('click', closeMenu);
-        overlay.addEventListener('click', closeMenu);
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
+        });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1533,7 +1553,9 @@
                     const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - offset;
                     window.scrollTo({ top: targetPos, behavior: 'smooth' });
                     if (document.body.classList.contains('mobile-menu-open')) {
-                        closeMenu();
+                        document.body.classList.remove('mobile-menu-open');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.replace('fa-times', 'fa-bars');
                     }
                 }
             });
@@ -1770,5 +1792,62 @@
     })();
 
     </script>
+
+    <script>
+    // ===== MOBILE DRAWER JS =====
+    (function() {
+        var menuBtn = document.getElementById('mobileMenuBtn');
+        var drawer  = document.getElementById('mobDrawer');
+        var overlay = document.getElementById('mobOverlay');
+        var closeBtn= document.getElementById('mobClose');
+
+        function openDrawer() {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeDrawer() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (menuBtn)  menuBtn.addEventListener('click', openDrawer);
+        if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+        if (overlay)  overlay.addEventListener('click', closeDrawer);
+
+        // Update lang text inside drawer
+        document.addEventListener('langChanged', function(e) {
+            var lang = e.detail;
+            document.querySelectorAll('#mobDrawer [data-' + lang + ']').forEach(function(el) {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+        });
+
+        // Links click
+        document.querySelectorAll('#mobDrawer .mob-item').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var href = this.getAttribute('href');
+                var cat  = this.dataset.catFilter;
+                closeDrawer();
+                if (href && href.length > 1 && href.startsWith('#')) {
+                    e.preventDefault();
+                    setTimeout(function() {
+                        var el = document.querySelector(href);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                        if (cat) {
+                            window.currentFilter = cat;
+                            document.querySelectorAll('#productsFilter .filter-btn').forEach(function(b) {
+                                b.classList.toggle('active', b.dataset.filter === cat);
+                            });
+                            if (typeof renderProducts === 'function') renderProducts();
+                        }
+                    }, 200);
+                }
+            });
+        });
+    })();
+    </script>
+
 </body>
 </html>
