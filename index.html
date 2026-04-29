@@ -502,11 +502,70 @@
         [dir="ltr"] .cart-sidebar { left: -100vw; }
     }
 
-    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--color-white); z-index: 1100; padding: 80px 24px 24px; box-shadow: var(--shadow-lg); overflow-y: auto; }
-    [dir="ltr"] .mobile-menu-open .main-nav { right: auto; left: 0; }
-    .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; }
-    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
-    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
+    /* ===== MOBILE MENU - Clean Dropdown ===== */
+    .mobile-menu-open .main-nav {
+        display: block;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: var(--color-white);
+        z-index: 1100;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        animation: mobileMenuSlide 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        max-height: 100vh;
+    }
+    @keyframes mobileMenuSlide {
+        from { opacity: 0; transform: translateY(-12px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu-open .main-nav > ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 70px 0 16px;
+    }
+    .mobile-menu-open .main-nav > ul > li { border-bottom: 1px solid var(--color-border); }
+    .mobile-menu-open .main-nav > ul > li:last-child { border-bottom: none; }
+    .mobile-menu-open .main-nav a {
+        width: 100%;
+        padding: 16px 24px;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 0;
+    }
+    .mobile-menu-open .main-nav a:hover { background: var(--color-bg-soft); color: var(--color-red); }
+    .mobile-menu-open .main-nav .dropdown {
+        position: static;
+        opacity: 1; visibility: visible; transform: none;
+        box-shadow: none; border-radius: 0;
+        padding: 0; min-width: unset;
+        background: var(--color-bg-soft);
+        border-top: 1px solid var(--color-border);
+        border-left: 3px solid var(--color-gold);
+    }
+    .mobile-menu-open .main-nav .dropdown a { padding: 12px 32px; font-size: 14px; color: var(--color-text-soft); }
+    /* Fixed close bar at top of mobile menu */
+    .mobile-menu-bar {
+        display: none;
+        align-items: center; justify-content: space-between;
+        padding: 14px 20px;
+        border-bottom: 2px solid var(--color-gold);
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        background: var(--color-white);
+        z-index: 1200;
+    }
+    .mobile-menu-open .mobile-menu-bar { display: flex; }
+    .mobile-menu-bar-title { font-weight: 900; font-size: 15px; color: var(--color-text); }
+    .mobile-menu-bar-close {
+        width: 36px; height: 36px; border-radius: 50%;
+        background: var(--color-bg-soft); color: var(--color-text);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 16px; transition: var(--transition);
+    }
+    .mobile-menu-bar-close:hover { background: var(--color-red); color: white; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
     .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
     </style>
 </head>
@@ -523,6 +582,10 @@
                 </a>
 
                 <nav class="main-nav">
+                    <div class="mobile-menu-bar">
+                        <span class="mobile-menu-bar-title" data-ar="القائمة" data-en="Menu" data-ru="Меню">القائمة</span>
+                        <button class="mobile-menu-bar-close" id="mobileMenuClose"><i class="fas fa-times"></i></button>
+                    </div>
                     <ul>
                         <li><a href="#home" data-ar="الرئيسية" data-en="Home" data-ru="Главная" data-ru="Главная">الرئيسية</a></li>
                         <li class="has-dropdown">
@@ -1482,20 +1545,25 @@
 
         // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
         const overlay = document.createElement('div');
         overlay.className = 'mobile-overlay';
         document.body.appendChild(overlay);
+
+        function closeMobileMenu() {
+            document.body.classList.remove('mobile-menu-open');
+            const icon = mobileMenuBtn?.querySelector('i');
+            if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        }
+
         mobileMenuBtn?.addEventListener('click', function() {
             document.body.classList.toggle('mobile-menu-open');
             const icon = this.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
         });
-        overlay.addEventListener('click', () => {
-            document.body.classList.remove('mobile-menu-open');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.replace('fa-times', 'fa-bars');
-        });
+        mobileMenuClose?.addEventListener('click', closeMobileMenu);
+        overlay.addEventListener('click', closeMobileMenu);
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1509,9 +1577,7 @@
                     const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - offset;
                     window.scrollTo({ top: targetPos, behavior: 'smooth' });
                     if (document.body.classList.contains('mobile-menu-open')) {
-                        document.body.classList.remove('mobile-menu-open');
-                        const icon = mobileMenuBtn.querySelector('i');
-                        icon.classList.replace('fa-times', 'fa-bars');
+                        closeMobileMenu();
                     }
                 }
             });
