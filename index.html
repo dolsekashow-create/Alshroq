@@ -474,7 +474,7 @@
     }
     @media (max-width: 768px) {
         :root { --section-py: 60px; }
-        .main-nav { display: none; } .lang-btn { padding: 6px 10px; font-size: 12px; } .lang-btn .fa-chevron-down { display: none; }
+        .main-nav { display: none; }
         .mobile-menu-btn { display: flex; }
         .header-actions { gap: 4px; }
         .action-btn { width: 38px; height: 38px; }
@@ -505,56 +505,9 @@
     .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
     .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
     .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
-
-    /* ===== MOBILE DRAWER ===== */
-    #mobDrawer {
-        display: none;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        width: 100%; height: 100%;
-        background: #fff;
-        z-index: 99999;
-        flex-direction: column;
-        overflow-y: auto;
-    }
-    #mobDrawer.open { display: flex; }
-    #mobOverlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-        z-index: 99998;
-    }
-    #mobOverlay.open { display: block; }
     </style>
 </head>
 <body>
-    
-    <!-- MOBILE DRAWER -->
-    <div id="mobOverlay"></div>
-    <div id="mobDrawer">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;min-height:60px;background:#fff;border-bottom:3px solid #C9A961;flex-shrink:0;">
-            <span style="font-family:Cairo,sans-serif;font-weight:900;font-size:18px;color:#2C2825;" id="mobTitle" data-ar="القائمة" data-en="Menu" data-ru="Меню">القائمة</span>
-            <button id="mobClose" style="width:40px;height:40px;border-radius:50%;background:#F8F4EB;border:none;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;color:#2C2825;">✕</button>
-        </div>
-        <div style="flex:1;overflow-y:auto;background:#fff;">
-            <a href="#home" class="mob-item" data-ar="الرئيسية" data-en="Home" data-ru="Главная" style="display:flex;align-items:center;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;background:#fff;">الرئيسية</a>
-            <div style="border-bottom:1px solid #E8E0D0;">
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;background:#fff;">
-                    <span data-ar="المتجر" data-en="Shop" data-ru="Магазин">المتجر</span><span>▾</span>
-                </div>
-                <div style="background:#F8F4EB;border-right:4px solid #C9A961;">
-                    <a href="#products" class="mob-item mob-cat" data-cat-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла" style="display:flex;align-items:center;padding:16px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الزيوت</a>
-                    <a href="#products" class="mob-item mob-cat" data-cat-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" style="display:flex;align-items:center;padding:16px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الكريمات</a>
-                    <a href="#products" class="mob-item mob-cat" data-cat-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" style="display:flex;align-items:center;padding:16px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الدهانات</a>
-                    <a href="#products" class="mob-item mob-cat" data-cat-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" style="display:flex;align-items:center;padding:16px 40px;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;">الزبدة</a>
-                </div>
-            </div>
-            <a href="#about" class="mob-item" data-ar="من نحن" data-en="About Us" data-ru="О нас" style="display:flex;align-items:center;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;background:#fff;">من نحن</a>
-            <a href="#contact" class="mob-item" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" style="display:flex;align-items:center;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;background:#fff;">تواصل معنا</a>
-        </div>
-    </div>
-
     <header class="main-header">
         <div class="container">
             <div class="header-inner">
@@ -1793,61 +1746,69 @@
 
     </script>
 
-    <script>
-    // ===== MOBILE DRAWER JS =====
-    (function() {
-        var menuBtn = document.getElementById('mobileMenuBtn');
-        var drawer  = document.getElementById('mobDrawer');
-        var overlay = document.getElementById('mobOverlay');
-        var closeBtn= document.getElementById('mobClose');
+<div id="mDrw" style="display:none;position:fixed;inset:0;z-index:99999;background:#fff;flex-direction:column;overflow-y:auto;"></div>
+<div id="mOvl" style="display:none;position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.5);"></div>
 
-        function openDrawer() {
-            drawer.classList.add('open');
-            overlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeDrawer() {
-            drawer.classList.remove('open');
-            overlay.classList.remove('open');
-            document.body.style.overflow = '';
-        }
+<script>
+(function(){
+  var btn  = document.getElementById('mobileMenuBtn');
+  var drw  = document.getElementById('mDrw');
+  var ovl  = document.getElementById('mOvl');
 
-        if (menuBtn)  menuBtn.addEventListener('click', openDrawer);
-        if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-        if (overlay)  overlay.addEventListener('click', closeDrawer);
+  // بناء محتوى الدراور
+  drw.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;min-height:60px;background:#fff;border-bottom:3px solid #C9A961;position:sticky;top:0;z-index:2;">
+      <span style="font-family:Cairo,sans-serif;font-weight:900;font-size:18px;color:#2C2825;" id="mDrwTitle">القائمة</span>
+      <button id="mDrwClose" style="width:40px;height:40px;border-radius:50%;background:#F8F4EB;border:none;cursor:pointer;font-size:20px;color:#2C2825;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+    <a data-href="#home" class="mdi" style="display:flex;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;" data-ar="الرئيسية" data-en="Home" data-ru="Главная">الرئيسية</a>
+    <div style="border-bottom:1px solid #E8E0D0;">
+      <div style="display:flex;justify-content:space-between;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;">
+        <span data-ar="المتجر" data-en="Shop" data-ru="Магازин">المتجر</span><span>▾</span>
+      </div>
+      <div style="background:#F8F4EB;border-right:4px solid #C9A961;">
+        <a data-href="#products" data-cat="oils"      class="mdi mdc" style="display:flex;padding:15px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;" data-ar="الزيوت"    data-en="Oils"      data-ru="Масла">الزيوت</a>
+        <a data-href="#products" data-cat="creams"    class="mdi mdc" style="display:flex;padding:15px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;" data-ar="الكريمات"  data-en="Creams"    data-ru="Кремы">الكريمات</a>
+        <a data-href="#products" data-cat="ointments" class="mdi mdc" style="display:flex;padding:15px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;" data-ar="الدهانات"  data-en="Ointments" data-ru="Мази">الدهانات</a>
+        <a data-href="#products" data-cat="butter"    class="mdi mdc" style="display:flex;padding:15px 40px;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;"                                  data-ar="الزبدة"    data-en="Butter"    data-ru="Масло ши">الزبدة</a>
+      </div>
+    </div>
+    <a data-href="#about"   class="mdi" style="display:flex;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;" data-ar="من نحن"      data-en="About Us" data-ru="О нас">من نحن</a>
+    <a data-href="#contact" class="mdi" style="display:flex;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;" data-ar="تواصل معنا" data-en="Contact"  data-ru="Контакты">تواصل معنا</a>
+  `;
 
-        // Update lang text inside drawer
-        document.addEventListener('langChanged', function(e) {
-            var lang = e.detail;
-            document.querySelectorAll('#mobDrawer [data-' + lang + ']').forEach(function(el) {
-                el.textContent = el.getAttribute('data-' + lang);
-            });
+  function open()  { drw.style.display='flex'; ovl.style.display='block'; document.body.style.overflow='hidden'; }
+  function close() { drw.style.display='none'; ovl.style.display='none';  document.body.style.overflow=''; }
+
+  if(btn) btn.addEventListener('click', open);
+  ovl.addEventListener('click', close);
+  drw.addEventListener('click', function(e){
+    var el = e.target.closest('.mdi');
+    if(!el) { if(e.target.id==='mDrwClose') close(); return; }
+    var href = el.getAttribute('data-href');
+    var cat  = el.getAttribute('data-cat');
+    close();
+    setTimeout(function(){
+      var t = document.querySelector(href);
+      if(t) t.scrollIntoView({behavior:'smooth'});
+      if(cat){
+        window.currentFilter = cat;
+        document.querySelectorAll('#productsFilter .filter-btn').forEach(function(b){
+          b.classList.toggle('active', b.dataset.filter===cat);
         });
+        if(typeof renderProducts==='function') renderProducts();
+      }
+    }, 150);
+  });
 
-        // Links click
-        document.querySelectorAll('#mobDrawer .mob-item').forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                var href = this.getAttribute('href');
-                var cat  = this.dataset.catFilter;
-                closeDrawer();
-                if (href && href.length > 1 && href.startsWith('#')) {
-                    e.preventDefault();
-                    setTimeout(function() {
-                        var el = document.querySelector(href);
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                        if (cat) {
-                            window.currentFilter = cat;
-                            document.querySelectorAll('#productsFilter .filter-btn').forEach(function(b) {
-                                b.classList.toggle('active', b.dataset.filter === cat);
-                            });
-                            if (typeof renderProducts === 'function') renderProducts();
-                        }
-                    }, 200);
-                }
-            });
-        });
-    })();
-    </script>
-
+  // تحديث اللغة داخل الدراور
+  document.addEventListener('langChanged', function(e){
+    var lang = e.detail;
+    drw.querySelectorAll('[data-'+lang+']').forEach(function(el){
+      el.textContent = el.getAttribute('data-'+lang);
+    });
+  });
+})();
+</script>
 </body>
 </html>
