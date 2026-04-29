@@ -474,9 +474,12 @@
     }
     @media (max-width: 768px) {
         :root { --section-py: 60px; }
-        .main-nav, .lang-switcher { display: none; }
+        .main-nav { display: none; }
         .mobile-menu-btn { display: flex; }
         .header-actions { gap: 4px; }
+        .lang-btn { padding: 6px 10px; font-size: 12px; gap: 4px; }
+        .lang-btn .fa-chevron-down { display: none; }
+        .lang-dropdown { right: auto; left: 0; }
         .action-btn { width: 38px; height: 38px; }
         .logo img { width: 52px; height: 52px; }
         .logo-name { font-size: 18px; }
