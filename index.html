@@ -1805,11 +1805,15 @@
             drawer.classList.add('open');
             overlay.classList.add('open');
             document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
         }
         function closeDrawer() {
             drawer.classList.remove('open');
             overlay.classList.remove('open');
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
         }
 
         if (menuBtn)  menuBtn.addEventListener('click', openDrawer);
