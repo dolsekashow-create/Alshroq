@@ -478,11 +478,6 @@
         .mobile-menu-btn { display: flex; }
         .header-actions { gap: 4px; }
         .action-btn { width: 38px; height: 38px; }
-        .lang-switcher { display: block; }
-        .lang-btn { padding: 6px 10px; font-size: 12px; gap: 4px; }
-        .lang-btn .fa-chevron-down { display: none; }
-        .lang-dropdown { right: 0; left: auto; min-width: 130px; }
-        [dir="ltr"] .lang-dropdown { right: auto; left: 0; }
         .logo img { width: 52px; height: 52px; }
         .logo-name { font-size: 18px; }
         .logo-tagline { display: none; }
@@ -503,36 +498,13 @@
         .cart-sidebar { width: 100vw; right: -100vw; }
         [dir="ltr"] .cart-sidebar { left: -100vw; }
     }
-    @media (max-width: 420px) {
-        .header-inner { gap: 8px; padding: 12px 0; }
-        .header-actions { gap: 2px; }
-        .action-btn { width: 36px; height: 36px; font-size: 14px; }
-        .mobile-menu-btn { width: 36px; height: 36px; font-size: 16px; }
-        .lang-btn { padding: 5px 8px; font-size: 11px; }
-        .lang-btn #currentLang { font-weight: 700; }
-        .logo img { width: 44px; height: 44px; }
-        .logo-name { font-size: 16px; }
-    }
 
-    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 300px; max-width: 85vw; height: 100vh; background: var(--color-white); z-index: 2300; padding: 0; box-shadow: var(--shadow-lg); overflow-y: auto; }
+    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 280px; height: 100vh; background: var(--color-white); z-index: 1100; padding: 80px 24px 24px; box-shadow: var(--shadow-lg); overflow-y: auto; }
     [dir="ltr"] .mobile-menu-open .main-nav { right: auto; left: 0; }
-    .mobile-nav-header { display: none; }
-    .mobile-menu-open .mobile-nav-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; background: linear-gradient(135deg, var(--color-red-dark), var(--color-red)); color: var(--color-white); border-bottom: 3px solid var(--color-gold); position: sticky; top: 0; z-index: 2; }
-    .mobile-nav-header h3 { font-size: 17px; font-weight: 700; margin: 0; color: var(--color-white); }
-    .mobile-nav-close { width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.18); color: var(--color-white); display: flex; align-items: center; justify-content: center; font-size: 16px; transition: var(--transition); border: none; cursor: pointer; }
-    .mobile-nav-close:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(90deg); }
-    .mobile-menu-open .main-nav > ul { padding: 16px; }
-    .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; display: flex; }
-    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; cursor: pointer; }
-    .mobile-menu-open .main-nav .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; padding: 4px 0; min-width: auto; border-top: none; border-right: 2px solid var(--color-gold); margin: 4px 8px; background: var(--color-bg-soft); border-radius: var(--radius-sm); }
-    [dir="ltr"] .mobile-menu-open .main-nav .dropdown { border-right: none; border-left: 2px solid var(--color-gold); }
-    .mobile-menu-open .main-nav .dropdown ul { display: flex; flex-direction: column; gap: 0; padding: 0; }
-    .mobile-menu-open .main-nav .dropdown a { padding: 10px 14px; font-size: 14px; }
-    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2200; opacity: 0; transition: opacity 0.3s ease; cursor: pointer; }
+    .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; }
+    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
     .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
-    .mobile-menu-open { overflow: hidden; }
-    .mobile-menu-open .whatsapp-float, .mobile-menu-open .scroll-top { opacity: 0; visibility: hidden; pointer-events: none; }
-    .mobile-menu-open .main-header { z-index: 2400; }
     </style>
 </head>
 <body>
@@ -548,23 +520,19 @@
                 </a>
 
                 <nav class="main-nav">
-                    <div class="mobile-nav-header">
-                        <h3 data-ar="القائمة" data-en="Menu" data-ru="Меню">القائمة</h3>
-                        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
-                    </div>
                     <ul>
-                        <li><a href="#home" data-ar="الرئيسية" data-en="Home" data-ru="Главная" data-ru="Главная">الرئيسية</a></li>
+                        <li><a href="#home" data-ar="الرئيسية" data-en="Home" data-ru="Главная" data-de="Startseite" data-it="Home" data-ru="Главная">الرئيسية</a></li>
                         <li class="has-dropdown">
-                            <a href="#shop" data-ar="المتجر" data-en="Shop" data-ru="Магазин" data-ru="Магазин">المتجر <i class="fas fa-chevron-down"></i></a>
+                            <a href="#shop" data-ar="المتجر" data-en="Shop" data-ru="Магазин" data-de="Shop" data-it="Negozio" data-ru="Магазин">المتجر <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown">
-                                <li><a href="#products" data-cat-filter="oils" class="category-link-filter" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-ru="Масла">الزيوت</a></li>
-                                <li><a href="#products" data-cat-filter="creams" class="category-link-filter" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-ru="Кремы">الكريمات</a></li>
-                                <li><a href="#products" data-cat-filter="ointments" class="category-link-filter" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-ru="Мази">الدهانات</a></li>
-                                <li><a href="#products" data-cat-filter="butter" class="category-link-filter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-ru="Масло ши">الزبدة</a></li>
+                                <li><a href="#products" data-cat-filter="oils" class="category-link-filter" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-de="Öle" data-it="Oli" data-ru="Масла">الزيوت</a></li>
+                                <li><a href="#products" data-cat-filter="creams" class="category-link-filter" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-de="Cremes" data-it="Creme" data-ru="Кремы">الكريمات</a></li>
+                                <li><a href="#products" data-cat-filter="ointments" class="category-link-filter" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-de="Salben" data-it="Unguenti" data-ru="Мази">الدهانات</a></li>
+                                <li><a href="#products" data-cat-filter="butter" class="category-link-filter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-de="Butter" data-it="Burro" data-ru="Масло ши">الزبدة</a></li>
                             </ul>
                         </li>
-                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-ru="О нас">من نحن</a></li>
-                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" data-ru="Контакты">تواصل معنا</a></li>
+                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-de="Über uns" data-it="Chi siamo" data-ru="О нас">من نحن</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" data-de="Kontakt" data-it="Contatti" data-ru="Контакты">تواصل معنا</a></li>
                     </ul>
                 </nav>
 
@@ -579,6 +547,8 @@
                             <li data-lang="ar">العربية</li>
                             <li data-lang="en">English</li>
                             <li data-lang="ru">Русский</li>
+                            <li data-lang="de">Deutsch</li>
+                            <li data-lang="it">Italiano</li>
                         </ul>
                     </div>
                     <button class="action-btn" id="searchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
@@ -599,20 +569,20 @@
         </div>
         <div class="hero-content">
             <div class="container">
-                <div class="hero-badge" data-ar="✨ منتجات طبيعية 100%" data-en="✨ 100% Natural Products" data-ru="✨ 100% натуральные" data-ru="✨ 100% натуральные">✨ منتجات طبيعية 100%</div>
+                <div class="hero-badge" data-ar="✨ منتجات طبيعية 100%" data-en="✨ 100% Natural Products" data-ru="✨ 100% натуральные" data-de="✨ 100% natürliche Produkte" data-it="✨ Prodotti 100% naturali" data-ru="✨ 100% натуральные">✨ منتجات طبيعية 100%</div>
                 <h1 class="hero-title">
                     <span class="hero-title-sub" id="heroSiteName" data-ar="الشروق أورجانيك" data-en="Al Shorouq Organic" data-ru="Аль Шурук Органик">الشروق أورجانيك</span>
-                    <span class="hero-title-main" data-ar="نقاء الطبيعة في كل قطرة" data-en="Pure Nature in Every Drop" data-ru="Природная чистота в каждой капле" data-ru="Природная чистота в каждой капле">نقاء الطبيعة في كل قطرة</span>
+                    <span class="hero-title-main" data-ar="نقاء الطبيعة في كل قطرة" data-en="Pure Nature in Every Drop" data-de="Reine Natur in jedem Tropfen" data-it="Natura pura in ogni goccia" data-ru="Природная чистота в каждой капле" data-ru="Природная чистота в каждой капле">نقاء الطبيعة في كل قطرة</span>
                 </h1>
                 <p class="hero-desc" data-ar="منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم" data-en="Products worth trying.. Premium natural oils extracted from carefully selected seeds and herbs from around the world" data-ru="Продукты, достойные внимания — лучшие масла из отборных семян и трав со всего мира">منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية المستخلصة من بذور وأعشاب مختارة من جميع أنحاء العالم</p>
                 <div class="hero-actions">
-                    <a href="#shop" class="btn btn-primary" data-ar="تسوق الآن" data-en="Shop Now" data-ru="Купить сейчас" data-ru="Купить сейчас">تسوق الآن</a>
-                    <a href="#about" class="btn btn-outline" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-ru="О нас">من نحن</a>
+                    <a href="#shop" class="btn btn-primary" data-ar="تسوق الآن" data-en="Shop Now" data-ru="Купить сейчас" data-de="Jetzt kaufen" data-it="Acquista ora" data-ru="Купить сейчас">تسوق الآن</a>
+                    <a href="#about" class="btn btn-outline" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-de="Über uns" data-it="Chi siamo" data-ru="О нас">من نحن</a>
                 </div>
             </div>
         </div>
         <div class="hero-scroll">
-            <span data-ar="اكتشف المزيد" data-en="Discover More" data-ru="Узнать больше" data-ru="Узнать больше">اكتشف المزيد</span>
+            <span data-ar="اكتشف المزيد" data-en="Discover More" data-ru="Узнать больше" data-de="Mehr entdecken" data-it="Scopri di più" data-ru="Узнать больше">اكتشف المزيد</span>
             <div class="scroll-line"></div>
         </div>
     </section>
@@ -620,10 +590,10 @@
     <section class="features-strip">
         <div class="container">
             <div class="features-grid">
-                <div class="feature-item"><i class="fas fa-leaf"></i><div><h4 data-ar="طبيعي 100%" data-en="100% Natural" data-ru="100% натуральный" data-ru="100% натуральный">طبيعي 100%</h4><p data-ar="بدون مواد حافظة" data-en="No preservatives" data-ru="Без консервантов" data-ru="Без консервантов">بدون مواد حافظة</p></div></div>
-                <div class="feature-item"><i class="fas fa-truck"></i><div><h4 data-ar="شحن سريع" data-en="Fast Shipping" data-ru="Быстрая доставка" data-ru="Быстрая доставка">شحن سريع</h4><p data-ar="لكل المحافظات" data-en="All governorates" data-ru="По всем городам" data-ru="По всем городам">لكل المحافظات</p></div></div>
-                <div class="feature-item"><i class="fas fa-shield-alt"></i><div><h4 data-ar="جودة مضمونة" data-en="Quality Assured" data-ru="Гарантированное качество" data-ru="Гарантированное качество">جودة مضمونة</h4><p data-ar="منتجات معتمدة" data-en="Certified products" data-ru="Сертифицированные товары" data-ru="Сертифицированные товары">منتجات معتمدة</p></div></div>
-                <div class="feature-item"><i class="fas fa-headset"></i><div><h4 data-ar="دعم 24/7" data-en="24/7 Support" data-ru="Поддержка 24/7" data-ru="Поддержка 24/7">دعم 24/7</h4><p data-ar="خدمة عملاء متميزة" data-en="Premium support" data-ru="Отличное обслуживание" data-ru="Отличное обслуживание">خدمة عملاء متميزة</p></div></div>
+                <div class="feature-item"><i class="fas fa-leaf"></i><div><h4 data-ar="طبيعي 100%" data-en="100% Natural" data-ru="100% натуральный" data-de="100% natürlich" data-it="100% naturale" data-ru="100% натуральный">طبيعي 100%</h4><p data-ar="بدون مواد حافظة" data-en="No preservatives" data-ru="Без консервантов" data-de="Ohne Konservierungsstoffe" data-it="Senza conservanti" data-ru="Без консервантов">بدون مواد حافظة</p></div></div>
+                <div class="feature-item"><i class="fas fa-truck"></i><div><h4 data-ar="شحن سريع" data-en="Fast Shipping" data-ru="Быстрая доставка" data-de="Schneller Versand" data-it="Spedizione veloce" data-ru="Быстрая доставка">شحن سريع</h4><p data-ar="لكل المحافظات" data-en="All governorates" data-ru="По всем городам" data-de="Alle Regionen" data-it="Tutte le province" data-ru="По всем городам">لكل المحافظات</p></div></div>
+                <div class="feature-item"><i class="fas fa-shield-alt"></i><div><h4 data-ar="جودة مضمونة" data-en="Quality Assured" data-ru="Гарантированное качество" data-de="Qualität garantiert" data-it="Qualità garantita" data-ru="Гарантированное качество">جودة مضمونة</h4><p data-ar="منتجات معتمدة" data-en="Certified products" data-ru="Сертифицированные товары" data-de="Zertifizierte Produkte" data-it="Prodotti certificati" data-ru="Сертифицированные товары">منتجات معتمدة</p></div></div>
+                <div class="feature-item"><i class="fas fa-headset"></i><div><h4 data-ar="دعم 24/7" data-en="24/7 Support" data-ru="Поддержка 24/7" data-de="24/7 Support" data-it="Supporto 24/7" data-ru="Поддержка 24/7">دعم 24/7</h4><p data-ar="خدمة عملاء متميزة" data-en="Premium support" data-ru="Отличное обслуживание" data-de="Premium-Service" data-it="Supporto premium" data-ru="Отличное обслуживание">خدمة عملاء متميزة</p></div></div>
             </div>
         </div>
     </section>
@@ -648,9 +618,9 @@
     <section class="categories" id="shop">
         <div class="container">
             <div class="section-header">
-                <span class="section-eyebrow" data-ar="تسوق حسب الفئة" data-en="Shop by Category" data-ru="По категориям">تسوق حسب الفئة</span>
-                <h2 class="section-title" data-ar="فئات منتجاتنا" data-en="Our Product Categories" data-ru="Наши категории">فئات منتجاتنا</h2>
-                <p class="section-desc" data-ar="اكتشف مجموعتنا الكاملة من المنتجات الطبيعية" data-en="Discover our full range of natural products" data-ru="Откройте весь ассортимент натуральных продуктов">اكتشف مجموعتنا الكاملة من المنتجات الطبيعية</p>
+                <span class="section-eyebrow" data-ar="تسوق حسب الفئة" data-en="Shop by Category" data-ru="По категориям" data-de="Nach Kategorie einkaufen" data-it="Acquista per categoria">تسوق حسب الفئة</span>
+                <h2 class="section-title" data-ar="فئات منتجاتنا" data-en="Our Product Categories" data-ru="Наши категории" data-de="Unsere Produktkategorien" data-it="Le nostre categorie">فئات منتجاتنا</h2>
+                <p class="section-desc" data-ar="اكتشف مجموعتنا الكاملة من المنتجات الطبيعية" data-en="Discover our full range of natural products" data-ru="Откройте весь ассортимент натуральных продуктов" data-de="Entdecken Sie unser vollständiges Sortiment" data-it="Scopri la nostra gamma completa">اكتشف مجموعتنا الكاملة من المنتجات الطبيعية</p>
             </div>
             <div class="categories-grid">
                 <a href="#products" data-cat-filter="oils" class="category-card category-large category-link-filter">
@@ -666,7 +636,7 @@
                     <div class="category-image cream-bg"><div class="category-icon"><i class="fas fa-pump-medical"></i></div></div>
                     <div class="category-content">
                         <span class="category-count" id="catCountCreams" data-ar="0 منتج" data-en="0 products" data-ru="0 товаров">0 منتج</span>
-                        <h3 data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-ru="Кремы">الكريمات</h3>
+                        <h3 data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-de="Cremes" data-it="Creme" data-ru="Кремы">الكريمات</h3>
                         <p data-ar="كريمات للعناية بالبشرة" data-en="Skincare creams" data-ru="Кремы по уходу за кожей">كريمات للعناية بالبشرة</p>
                         <span class="category-link" data-ar="تسوق ←" data-en="Shop →" data-ru="Смотреть →">تسوق ←</span>
                     </div>
@@ -675,7 +645,7 @@
                     <div class="category-image ointment-bg"><div class="category-icon"><i class="fas fa-prescription-bottle"></i></div></div>
                     <div class="category-content">
                         <span class="category-count" id="catCountOintments" data-ar="0 منتج" data-en="0 products" data-ru="0 товаров">0 منتج</span>
-                        <h3 data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-ru="Мази">الدهانات</h3>
+                        <h3 data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-de="Salben" data-it="Unguenti" data-ru="Мази">الدهانات</h3>
                         <p data-ar="دهانات علاجية طبيعية" data-en="Natural therapeutic ointments" data-ru="Натуральные лечебные мази">دهانات علاجية طبيعية</p>
                         <span class="category-link" data-ar="تسوق ←" data-en="Shop →" data-ru="Смотреть →">تسوق ←</span>
                     </div>
@@ -701,10 +671,10 @@
             </div>
             <div class="products-filter" id="productsFilter">
                 <button class="filter-btn active" data-filter="all" data-ar="الكل" data-en="All" data-ru="Все">الكل</button>
-                <button class="filter-btn" data-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-ru="Масла">الزيوت</button>
-                <button class="filter-btn" data-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-ru="Кремы">الكريمات</button>
-                <button class="filter-btn" data-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-ru="Мази">الدهانات</button>
-                <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-ru="Масло ши">الزبدة</button>
+                <button class="filter-btn" data-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-de="Öle" data-it="Oli" data-ru="Масла">الزيوت</button>
+                <button class="filter-btn" data-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-de="Cremes" data-it="Creme" data-ru="Кремы">الكريمات</button>
+                <button class="filter-btn" data-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-de="Salben" data-it="Unguenti" data-ru="Мази">الدهانات</button>
+                <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-de="Butter" data-it="Burro" data-ru="Масло ши">الزبدة</button>
             </div>
             <div class="products-grid" id="productsGrid"></div>
             <div id="showMoreWrap" style="display:none; text-align:center; margin-top:48px;">
@@ -727,10 +697,10 @@
             </div>
             <div class="all-products-filter" id="allProductsFilter">
                 <button class="filter-btn active" data-filter="all" data-ar="الكل" data-en="All" data-ru="Все">الكل</button>
-                <button class="filter-btn" data-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла">الزيوت</button>
-                <button class="filter-btn" data-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы">الكريمات</button>
-                <button class="filter-btn" data-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази">الدهانات</button>
-                <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши">الزبدة</button>
+                <button class="filter-btn" data-filter="oils" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-de="Öle" data-it="Oli">الزيوت</button>
+                <button class="filter-btn" data-filter="creams" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-de="Cremes" data-it="Creme">الكريمات</button>
+                <button class="filter-btn" data-filter="ointments" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-de="Salben" data-it="Unguenti">الدهانات</button>
+                <button class="filter-btn" data-filter="butter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-de="Butter" data-it="Burro">الزبدة</button>
             </div>
             <div class="all-products-scroll">
                 <div class="all-products-grid" id="allProductsGrid"></div>
@@ -742,7 +712,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-content">
-                    <span class="section-eyebrow" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-ru="О нас">من نحن</span>
+                    <span class="section-eyebrow" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-de="Über uns" data-it="Chi siamo" data-ru="О нас">من نحن</span>
                     <h2 class="section-title" id="aboutTitle" data-ar="شركة الشروق أورجانيك" data-en="Al Shorouq Organic Company" data-ru="Компания Аль Шурук Органик">شركة الشروق أورجانيك</h2>
                     <p data-ar="من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية." data-en="One of the leading companies in extracting and packaging natural oils, where we select the best types of seeds and herbs from different countries around the world to provide the best types of natural oils." data-ru="Одна из ведущих компаний по производству и упаковке натуральных масел. Мы отбираем лучшие семена и травы со всего мира для производства высококачественных натуральных масел.">من الشركات الرائدة في مجال استخلاص و تعبئة الزيوت الطبيعية، حيث نقوم بانتقاء و اختيار أفضل أنواع البذور والأعشاب من مختلف دول العالم للمساعدة في تقديم أفضل أنواع الزيوت الطبيعية.</p>
                     <ul class="about-features">
@@ -780,7 +750,7 @@
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-header">
-                <span class="section-eyebrow" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" data-ru="Контакты">تواصل معنا</span>
+                <span class="section-eyebrow" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" data-de="Kontakt" data-it="Contatti" data-ru="Контакты">تواصل معنا</span>
                 <h2 class="section-title" data-ar="نحن هنا لخدمتك" data-en="We're Here to Serve You" data-ru="Мы здесь для вас" data-ru="Мы здесь для вас">نحن هنا لخدمتك</h2>
             </div>
             <div class="contact-grid">
@@ -822,17 +792,17 @@
                 <div class="footer-col">
                     <h4 data-ar="الفئات" data-en="Categories" data-ru="Категории" data-ru="Категории">الفئات</h4>
                     <ul>
-                        <li><a href="#products" data-cat-filter="oils" class="category-link-filter" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-ru="Масла">الزيوت</a></li>
-                        <li><a href="#products" data-cat-filter="creams" class="category-link-filter" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-ru="Кремы">الكريمات</a></li>
-                        <li><a href="#products" data-cat-filter="ointments" class="category-link-filter" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-ru="Мази">الدهانات</a></li>
-                        <li><a href="#products" data-cat-filter="butter" class="category-link-filter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-ru="Масло ши">الزبدة</a></li>
+                        <li><a href="#products" data-cat-filter="oils" class="category-link-filter" data-ar="الزيوت" data-en="Oils" data-ru="Масла" data-de="Öle" data-it="Oli" data-ru="Масла">الزيوت</a></li>
+                        <li><a href="#products" data-cat-filter="creams" class="category-link-filter" data-ar="الكريمات" data-en="Creams" data-ru="Кремы" data-de="Cremes" data-it="Creme" data-ru="Кремы">الكريمات</a></li>
+                        <li><a href="#products" data-cat-filter="ointments" class="category-link-filter" data-ar="الدهانات" data-en="Ointments" data-ru="Мази" data-de="Salben" data-it="Unguenti" data-ru="Мази">الدهانات</a></li>
+                        <li><a href="#products" data-cat-filter="butter" class="category-link-filter" data-ar="الزبدة" data-en="Butter" data-ru="Масло ши" data-de="Butter" data-it="Burro" data-ru="Масло ши">الزبدة</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 data-ar="روابط مفيدة" data-en="Useful Links" data-ru="Полезные ссылки" data-ru="Полезные ссылки">روابط مفيدة</h4>
                     <ul>
-                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-ru="О нас">من نحن</a></li>
-                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" data-ru="Контакты">تواصل معنا</a></li>
+                        <li><a href="#about" data-ar="من نحن" data-en="About Us" data-ru="О нас" data-de="Über uns" data-it="Chi siamo" data-ru="О нас">من نحن</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact" data-ru="Контакты" data-de="Kontakt" data-it="Contatti" data-ru="Контакты">تواصل معنا</a></li>
                         <li><a href="admin.html" data-ar="لوحة التحكم" data-en="Admin Panel" data-ru="Панель управления" data-ru="Панель управления">لوحة التحكم</a></li>
                         <li><a href="#" data-ar="سياسة الخصوصية" data-en="Privacy Policy" data-ru="Политика конфиденциальности" data-ru="Политика конфиденциальности">سياسة الخصوصية</a></li>
                     </ul>
@@ -899,12 +869,12 @@
 
     // ===== Default Data =====
     const defaultProducts = [
-        { id: 1, nameAr: 'زيت حبة البركة', nameEn: 'Black Seed Oil', nameRu: 'Масло чёрного тмина', cat: 'oils', price: 280, oldPrice: 350, rating: 5, reviews: 24, badge: '-20%', icon: 'fa-tint', placeholder: 'oil-1', descAr: 'زيت حبة البركة الطبيعي المعصور على البارد، يعزز المناعة ويغذي البشرة.', descEn: 'Natural cold-pressed black seed oil, boosts immunity and nourishes skin.', descRu: 'Натуральное масло черного тмина холодного отжима, укрепляет иммунитет и питает кожу.' },
-        { id: 2, nameAr: 'زيت الجرجير', nameEn: 'Arugula Oil', nameRu: 'Масло рукколы', cat: 'oils', price: 220, oldPrice: null, rating: 5, reviews: 18, badge: null, icon: 'fa-tint', placeholder: 'oil-2', descAr: 'زيت الجرجير الطبيعي يقوي بصيلات الشعر ويمنع التساقط.', descEn: 'Natural arugula oil strengthens hair follicles and prevents hair loss.', descRu: 'Натуральное масло рукколы укрепляет волосяные фолликулы и предотвращает выпадение волос.' },
-        { id: 3, nameAr: 'كريم الكولاجين', nameEn: 'Collagen Cream', nameRu: 'Коллагеновый крем', cat: 'creams', price: 180, oldPrice: null, rating: 4.5, reviews: 12, badge: 'new', icon: 'fa-pump-medical', placeholder: 'cream-1', descAr: 'كريم الكولاجين لبشرة شابة ومشدودة وخالية من التجاعيد.', descEn: 'Collagen cream for youthful, firm and wrinkle-free skin.', descRu: 'Коллагеновый крем для молодой, упругой кожи без морщин.' },
-        { id: 4, nameAr: 'زبدة الشيا', nameEn: 'Shea Butter', nameRu: 'Масло ши', cat: 'butter', price: 170, oldPrice: 200, rating: 5, reviews: 31, badge: '-15%', icon: 'fa-cookie-bite', placeholder: 'butter-1', descAr: 'زبدة الشيا الخام لترطيب عميق للبشرة والشعر.', descEn: 'Raw shea butter for deep moisturizing of skin and hair.', descRu: 'Сырое масло ши для глубокого увлажнения кожи и волос.' },
-        { id: 5, nameAr: 'دهان مسكن للآلام', nameEn: 'Pain Relief Ointment', nameRu: 'Мазь от боли', cat: 'ointments', price: 250, oldPrice: null, rating: 5, reviews: 45, badge: null, icon: 'fa-prescription-bottle', placeholder: 'ointment-1', descAr: 'دهان طبيعي مسكن لآلام المفاصل والعضلات.', descEn: 'Natural ointment for joint and muscle pain relief.', descRu: 'Натуральная мазь для снятия болей в суставах и мышцах.' },
-        { id: 6, nameAr: 'زيت الأرغان', nameEn: 'Argan Oil', nameRu: 'Аргановое масло', cat: 'oils', price: 320, oldPrice: null, rating: 4.5, reviews: 22, badge: 'new', icon: 'fa-tint', placeholder: 'oil-3', descAr: 'زيت الأرغان المغربي الأصلي للبشرة والشعر.', descEn: 'Original Moroccan argan oil for skin and hair.', descRu: 'Оригинальное марокканское аргановое масло для кожи и волос.' }
+        { id: 1, nameAr: 'زيت حبة البركة', nameEn: 'Black Seed Oil', nameRu: 'Масло чёрного тмина', nameDe: 'Schwarzkümmelöl', nameIt: 'Olio di Nigella', cat: 'oils', price: 280, oldPrice: 350, rating: 5, reviews: 24, badge: '-20%', icon: 'fa-tint', placeholder: 'oil-1', descAr: 'زيت حبة البركة الطبيعي المعصور على البارد، يعزز المناعة ويغذي البشرة.', descEn: 'Natural cold-pressed black seed oil, boosts immunity and nourishes skin.', descRu: 'Натуральное масло черного тмина холодного отжима, укрепляет иммунитет и питает кожу.', descDe: 'Natürliches kaltgepresstes Schwarzkümmelöl, stärkt die Immunität und nährt die Haut.', descIt: 'Olio di nigella naturale pressato a freddo, rafforza l'immunità e nutre la pelle.' },
+        { id: 2, nameAr: 'زيت الجرجير', nameEn: 'Arugula Oil', nameRu: 'Масло рукколы', nameDe: 'Rucola-Öl', nameIt: 'Olio di Rucola', cat: 'oils', price: 220, oldPrice: null, rating: 5, reviews: 18, badge: null, icon: 'fa-tint', placeholder: 'oil-2', descAr: 'زيت الجرجير الطبيعي يقوي بصيلات الشعر ويمنع التساقط.', descEn: 'Natural arugula oil strengthens hair follicles and prevents hair loss.', descRu: 'Натуральное масло рукколы укрепляет волосяные фолликулы и предотвращает выпадение волос.', descDe: 'Natürliches Rucola-Öl stärkt Haarfollikel und verhindert Haarausfall.', descIt: 'L'olio di rucola naturale rafforza i follicoli piliferi e previene la caduta dei capelli.' },
+        { id: 3, nameAr: 'كريم الكولاجين', nameEn: 'Collagen Cream', nameRu: 'Коллагеновый крем', nameDe: 'Kollagen-Creme', nameIt: 'Crema al Collagene', cat: 'creams', price: 180, oldPrice: null, rating: 4.5, reviews: 12, badge: 'new', icon: 'fa-pump-medical', placeholder: 'cream-1', descAr: 'كريم الكولاجين لبشرة شابة ومشدودة وخالية من التجاعيد.', descEn: 'Collagen cream for youthful, firm and wrinkle-free skin.', descRu: 'Коллагеновый крем для молодой, упругой кожи без морщин.', descDe: 'Kollagen-Creme für jugendliche, straffe und faltenfreie Haut.', descIt: 'Crema al collagene per una pelle giovane, soda e senza rughe.' },
+        { id: 4, nameAr: 'زبدة الشيا', nameEn: 'Shea Butter', nameRu: 'Масло ши', nameDe: 'Sheabutter', nameIt: 'Burro di Karitè', cat: 'butter', price: 170, oldPrice: 200, rating: 5, reviews: 31, badge: '-15%', icon: 'fa-cookie-bite', placeholder: 'butter-1', descAr: 'زبدة الشيا الخام لترطيب عميق للبشرة والشعر.', descEn: 'Raw shea butter for deep moisturizing of skin and hair.', descRu: 'Сырое масло ши для глубокого увлажнения кожи и волос.', descDe: 'Rohe Sheabutter zur tiefen Feuchtigkeitspflege von Haut und Haaren.', descIt: 'Burro di karitè grezzo per un'idratazione profonda di pelle e capelli.' },
+        { id: 5, nameAr: 'دهان مسكن للآلام', nameEn: 'Pain Relief Ointment', nameRu: 'Мазь от боли', nameDe: 'Schmerzsalbe', nameIt: 'Pomata Antidolore', cat: 'ointments', price: 250, oldPrice: null, rating: 5, reviews: 45, badge: null, icon: 'fa-prescription-bottle', placeholder: 'ointment-1', descAr: 'دهان طبيعي مسكن لآلام المفاصل والعضلات.', descEn: 'Natural ointment for joint and muscle pain relief.', descRu: 'Натуральная мазь для снятия болей в суставах и мышцах.', descDe: 'Natürliche Salbe zur Linderung von Gelenk- und Muskelschmerzen.', descIt: 'Pomata naturale per il sollievo dal dolore articolare e muscolare.' },
+        { id: 6, nameAr: 'زيت الأرغان', nameEn: 'Argan Oil', nameRu: 'Аргановое масло', nameDe: 'Arganöl', nameIt: 'Olio di Argan', cat: 'oils', price: 320, oldPrice: null, rating: 4.5, reviews: 22, badge: 'new', icon: 'fa-tint', placeholder: 'oil-3', descAr: 'زيت الأرغان المغربي الأصلي للبشرة والشعر.', descEn: 'Original Moroccan argan oil for skin and hair.', descRu: 'Оригинальное марокканское аргановое масло для кожи и волос.', descDe: 'Originales marokkanisches Arganöl für Haut und Haare.', descIt: 'Olio di argan marocchino originale per pelle e capelli.' }
     ];
 
     const defaultSettings = {
@@ -926,6 +896,8 @@
         const browserLang = (navigator.language || navigator.userLanguage || 'ar').toLowerCase();
         if (browserLang.startsWith('ar')) return 'ar';
         if (browserLang.startsWith('ru')) return 'ru';
+        if (browserLang.startsWith('de')) return 'de';
+        if (browserLang.startsWith('it')) return 'it';
         return 'en';
     }
     let currentLanguage = detectLanguage();
@@ -951,12 +923,12 @@
             if (!prodErr && prods && prods.length > 0) {
                 products = prods.map(p => ({
                     id: p.id,
-                    nameAr: p.name_ar, nameEn: p.name_en, nameRu: p.name_ru || p.name_en,
+                    nameAr: p.name_ar, nameEn: p.name_en, nameRu: p.name_ru || p.name_en, nameDe: p.name_de || p.name_en, nameIt: p.name_it || p.name_en,
                     cat: p.cat, price: p.price, oldPrice: p.old_price,
                     rating: p.rating, reviews: p.reviews, badge: p.badge,
                     icon: p.icon, placeholder: p.placeholder,
                     imageUrl: p.image_url || null,
-                    descAr: p.desc_ar, descEn: p.desc_en, descRu: p.desc_ru || p.desc_en
+                    descAr: p.desc_ar, descEn: p.desc_en, descRu: p.desc_ru || p.desc_en, descDe: p.desc_de || p.desc_en, descIt: p.desc_it || p.desc_en
                 }));
                 localStorage.setItem('shorouq-products', JSON.stringify(products));
             }
@@ -1001,7 +973,7 @@
     }
 
 
-    const langConfig = { ar: { dir: 'rtl', code: 'AR' }, en: { dir: 'ltr', code: 'EN' }, ru: { dir: 'ltr', code: 'RU' } };
+    const langConfig = { ar: { dir: 'rtl', code: 'AR' }, en: { dir: 'ltr', code: 'EN' }, ru: { dir: 'ltr', code: 'RU' }, de: { dir: 'ltr', code: 'DE' }, it: { dir: 'ltr', code: 'IT' } };
 
     // ===== Language System =====
     function applyLanguage(lang) {
@@ -1015,14 +987,15 @@
         const currentLangEl = document.getElementById('currentLang');
         if (currentLangEl) currentLangEl.textContent = config.code;
 
-        document.title = lang === 'ar' 
-            ? siteSettings.fullNameAr
+        document.title = lang === 'ar' ? siteSettings.fullNameAr
             : lang === 'ru' ? 'Аль Шурук Органик'
+            : lang === 'de' ? 'Al Shorouq Organik'
+            : lang === 'it' ? 'Al Shorouq Organico'
             : siteSettings.fullNameEn;
 
         document.querySelectorAll('[data-ar], [data-en]').forEach(el => {
             // For Russian: use data-ru if available, fallback to data-en
-            const text = el.dataset[lang] || (lang === 'ru' ? el.dataset.en : undefined);
+            const text = el.dataset[lang] || (['ru','de','it'].includes(lang) ? el.dataset.en : undefined);
             if (text) {
                 const icons = el.querySelectorAll('i');
                 el.textContent = text;
@@ -1101,7 +1074,7 @@
             butter: { ar: 'زبدة', en: 'Butter', ru: 'Масло ши' }
         };
         const currency = lang === 'ar' ? 'ج.م' : 'EGP';
-        const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
+        const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : lang === 'de' ? (p.nameDe || p.nameEn) : lang === 'it' ? (p.nameIt || p.nameEn) : p.nameEn;
         const cat = catNames[p.cat] ? (catNames[p.cat][lang] || catNames[p.cat]['en']) : p.cat;
         const isInWishlist = wishlist.includes(p.id);
         const badgeText = p.badge === 'new' ? (lang === 'ar' ? 'جديد' : lang === 'ru' ? 'НОВИНКА' : 'NEW') : p.badge;
@@ -1141,7 +1114,7 @@
                     </div>
                     <button class="add-to-cart-full" data-product-id="${p.id}">
                         <i class="fas fa-shopping-bag"></i>
-                        <span>${lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : 'Add to Cart'}</span>
+                        <span>${lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : lang === 'de' ? 'In den Warenkorb' : lang === 'it' ? 'Aggiungi al carrello' : 'Add to Cart'}</span>
                     </button>
                 </div>
             </article>`;
@@ -1157,7 +1130,7 @@
         if (filtered.length === 0) {
             grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--color-text-light);">
                 <i class="fas fa-box-open" style="font-size: 60px; margin-bottom: 16px; display: block;"></i>
-                <p>${lang === 'ar' ? 'لا توجد منتجات في هذه الفئة' : lang === 'ru' ? 'Нет товаров в этой категории' : 'No products in this category'}</p>
+                <p>${lang === 'ar' ? 'لا توجد منتجات في هذه الفئة' : lang === 'ru' ? 'Нет товаров в этой категории' : lang === 'de' ? 'Keine Produkte in dieser Kategorie' : lang === 'it' ? 'Nessun prodotto in questa categoria' : 'No products in this category'}</p>
             </div>`;
             if (showMoreWrap) showMoreWrap.style.display = 'none';
             return;
@@ -1185,7 +1158,7 @@
         if (filtered.length === 0) {
             grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--color-text-light);">
                 <i class="fas fa-box-open" style="font-size: 60px; margin-bottom: 16px; display: block;"></i>
-                <p>${lang === 'ar' ? 'لا توجد منتجات في هذه الفئة' : lang === 'ru' ? 'Нет товаров в этой категории' : 'No products in this category'}</p>
+                <p>${lang === 'ar' ? 'لا توجد منتجات في هذه الفئة' : lang === 'ru' ? 'Нет товаров в этой категории' : lang === 'de' ? 'Keine Produkte in dieser Kategorie' : lang === 'it' ? 'Nessun prodotto in questa categoria' : 'No products in this category'}</p>
             </div>`;
             return;
         }
@@ -1297,12 +1270,12 @@
             wishlist.push(productId);
             btn.classList.add('active');
             icon.classList.replace('far', 'fas');
-            showToast(currentLanguage === 'ar' ? '❤️ تمت الإضافة إلى المفضلة' : currentLanguage === 'ru' ? '❤️ Добавлено в избранное' : '❤️ Added to wishlist');
+            showToast(currentLanguage === 'ar' ? '❤️ تمت الإضافة إلى المفضلة' : currentLanguage === 'ru' ? '❤️ Добавлено в избранное' : currentLanguage === 'de' ? '❤️ Zur Wunschliste hinzugefügt' : currentLanguage === 'it' ? '❤️ Aggiunto ai preferiti' : '❤️ Added to wishlist');
         } else {
             wishlist.splice(idx, 1);
             btn.classList.remove('active');
             icon.classList.replace('fas', 'far');
-            showToast(currentLanguage === 'ar' ? 'تم الحذف من المفضلة' : currentLanguage === 'ru' ? 'Удалено из избранного' : 'Removed from wishlist');
+            showToast(currentLanguage === 'ar' ? 'تم الحذف من المفضلة' : currentLanguage === 'ru' ? 'Удалено из избранного' : currentLanguage === 'de' ? 'Von der Wunschliste entfernt' : currentLanguage === 'it' ? 'Rimosso dai preferiti' : 'Removed from wishlist');
         }
         localStorage.setItem('shorouq-wishlist', JSON.stringify(wishlist));
     }
@@ -1315,7 +1288,7 @@
         if (existing) existing.qty++;
         else cart.push({ id: productId, qty: 1 });
         saveCart(); renderCart(); updateCartCount();
-        showToast(currentLanguage === 'ar' ? '🛒 تمت الإضافة إلى السلة' : currentLanguage === 'ru' ? '🛒 Добавлено в корзину' : '🛒 Added to cart');
+        showToast(currentLanguage === 'ar' ? '🛒 تمت الإضافة إلى السلة' : currentLanguage === 'ru' ? '🛒 Добавлено в корзину' : currentLanguage === 'de' ? '🛒 In den Warenkorb gelegt' : currentLanguage === 'it' ? '🛒 Aggiunto al carrello' : '🛒 Added to cart');
     }
 
     function removeFromCart(productId) {
@@ -1364,7 +1337,7 @@
         body.innerHTML = cart.map(item => {
             const p = products.find(pr => pr.id === item.id);
             if (!p) return '';
-            const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
+            const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : lang === 'de' ? (p.nameDe || p.nameEn) : lang === 'it' ? (p.nameIt || p.nameEn) : p.nameEn;
             total += p.price * item.qty;
             return `
                 <div class="cart-item">
@@ -1394,11 +1367,11 @@
         if (!p) return;
         const lang = currentLanguage;
         const currency = lang === 'ar' ? 'ج.م' : 'EGP'; // same for all non-AR
-        const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
-        const desc = lang === 'ar' ? p.descAr : lang === 'ru' ? (p.descRu || p.descEn) : p.descEn;
+        const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : lang === 'de' ? (p.nameDe || p.nameEn) : lang === 'it' ? (p.nameIt || p.nameEn) : p.nameEn;
+        const desc = lang === 'ar' ? p.descAr : lang === 'ru' ? (p.descRu || p.descEn) : lang === 'de' ? (p.descDe || p.descEn) : lang === 'it' ? (p.descIt || p.descEn) : p.descEn;
         const catNames = { oils: { ar: 'زيوت', en: 'Oils', ru: 'Масла' }, creams: { ar: 'كريمات', en: 'Creams', ru: 'Кремы' }, ointments: { ar: 'دهانات', en: 'Ointments', ru: 'Мази' }, butter: { ar: 'زبدة', en: 'Butter', ru: 'Масло ши' } };
         const cat = catNames[p.cat] ? (catNames[p.cat][lang] || catNames[p.cat]['en']) : p.cat;
-        const addText = lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : 'Add to Cart';
+        const addText = lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : lang === 'de' ? 'In den Warenkorb' : lang === 'it' ? 'Aggiungi al carrello' : 'Add to Cart';
 
         document.getElementById('quickViewContent').innerHTML = `
             <button class="quick-view-close" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
@@ -1455,7 +1428,7 @@
         const currency = lang === 'ar' ? 'ج.م' : 'EGP'; // same for all non-AR
         const catNames = { oils: { ar: 'زيوت', en: 'Oils', ru: 'Масла' }, creams: { ar: 'كريمات', en: 'Creams', ru: 'Кремы' }, ointments: { ar: 'دهانات', en: 'Ointments', ru: 'Мази' }, butter: { ar: 'زبدة', en: 'Butter', ru: 'Масло ши' } };
         resultsEl.innerHTML = results.map(p => {
-            const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
+            const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : lang === 'de' ? (p.nameDe || p.nameEn) : lang === 'it' ? (p.nameIt || p.nameEn) : p.nameEn;
             const cat = catNames[p.cat] ? (catNames[p.cat][lang] || catNames[p.cat]['en']) : p.cat;
             return `
                 <div class="search-result-item" onclick="closeSearchAndOpen(${p.id})">
@@ -1514,37 +1487,16 @@
         const overlay = document.createElement('div');
         overlay.className = 'mobile-overlay';
         document.body.appendChild(overlay);
-
-        const closeMobileMenu = () => {
-            document.body.classList.remove('mobile-menu-open');
-            const icon = mobileMenuBtn?.querySelector('i');
-            if (icon) icon.classList.replace('fa-times', 'fa-bars');
-        };
-        const openMobileMenu = () => {
-            document.body.classList.add('mobile-menu-open');
-            const icon = mobileMenuBtn?.querySelector('i');
-            if (icon) icon.classList.replace('fa-bars', 'fa-times');
-        };
-
-        mobileMenuBtn?.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (document.body.classList.contains('mobile-menu-open')) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
+        mobileMenuBtn?.addEventListener('click', function() {
+            document.body.classList.toggle('mobile-menu-open');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
-        const mobileNavClose = document.getElementById('mobileNavClose');
-        mobileNavClose?.addEventListener('click', closeMobileMenu);
-        overlay.addEventListener('click', closeMobileMenu);
-
-        // Close menu when any link inside it is clicked
-        document.querySelectorAll('.main-nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (document.body.classList.contains('mobile-menu-open')) {
-                    setTimeout(closeMobileMenu, 150);
-                }
-            });
+        overlay.addEventListener('click', () => {
+            document.body.classList.remove('mobile-menu-open');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
         });
 
         // Smooth scroll
@@ -1670,7 +1622,7 @@
             cart.forEach(item => {
                 const p = products.find(pr => pr.id === item.id);
                 if (p) {
-                    const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : p.nameEn;
+                    const name = lang === 'ar' ? p.nameAr : lang === 'ru' ? (p.nameRu || p.nameEn) : lang === 'de' ? (p.nameDe || p.nameEn) : lang === 'it' ? (p.nameIt || p.nameEn) : p.nameEn;
                     msg += `• ${name} x${item.qty} = ${p.price * item.qty} ${lang === 'ar' ? 'ج.م' : 'EGP'}%0A`;
                     total += p.price * item.qty;
                 }
@@ -1798,5 +1750,70 @@
     })();
 
     </script>
+
+<div id="mDrw" style="display:none;position:fixed;inset:0;z-index:99999;background:#fff;flex-direction:column;overflow-y:auto;"></div>
+<div id="mOvl" style="display:none;position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.5);"></div>
+
+<script>
+(function(){
+  var btn  = document.getElementById('mobileMenuBtn');
+  var drw  = document.getElementById('mDrw');
+  var ovl  = document.getElementById('mOvl');
+
+  // بناء محتوى الدراور
+  drw.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;min-height:60px;background:#fff;border-bottom:3px solid #C9A961;position:sticky;top:0;z-index:2;">
+      <span style="font-family:Cairo,sans-serif;font-weight:900;font-size:18px;color:#2C2825;" id="mDrwTitle">القائمة</span>
+      <button id="mDrwClose" style="width:40px;height:40px;border-radius:50%;background:#F8F4EB;border:none;cursor:pointer;font-size:20px;color:#2C2825;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+    <a data-href="#home" class="mdi" style="display:flex;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;" data-ar="الرئيسية" data-en="Home" data-ru="Главная" data-de="Startseite" data-it="Home">الرئيسية</a>
+    <div style="border-bottom:1px solid #E8E0D0;">
+      <div style="display:flex;justify-content:space-between;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;">
+        <span data-ar="المتجر" data-en="Shop" data-ru="Магازин">المتجر</span><span>▾</span>
+      </div>
+      <div style="background:#F8F4EB;border-right:4px solid #C9A961;">
+        <a data-href="#products" data-cat="oils"      class="mdi mdc" style="display:flex;padding:15px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;" data-ar="الزيوت"    data-en="Oils"      data-ru="Масла">الزيوت</a>
+        <a data-href="#products" data-cat="creams"    class="mdi mdc" style="display:flex;padding:15px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;" data-ar="الكريمات"  data-en="Creams"    data-ru="Кремы">الكريمات</a>
+        <a data-href="#products" data-cat="ointments" class="mdi mdc" style="display:flex;padding:15px 40px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;" data-ar="الدهانات"  data-en="Ointments" data-ru="Мази">الدهانات</a>
+        <a data-href="#products" data-cat="butter"    class="mdi mdc" style="display:flex;padding:15px 40px;font-family:Cairo,sans-serif;font-size:15px;font-weight:600;color:#5C5550;text-decoration:none;"                                  data-ar="الزبدة"    data-en="Butter"    data-ru="Масло ши">الزبدة</a>
+      </div>
+    </div>
+    <a data-href="#about"   class="mdi" style="display:flex;padding:20px 24px;border-bottom:1px solid #E8E0D0;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;" data-ar="من نحن"      data-en="About Us" data-ru="О нас">من نحن</a>
+    <a data-href="#contact" class="mdi" style="display:flex;padding:20px 24px;font-family:Cairo,sans-serif;font-size:17px;font-weight:700;color:#2C2825;text-decoration:none;" data-ar="تواصل معنا" data-en="Contact"  data-ru="Контакты">تواصل معنا</a>
+  `;
+
+  function open()  { drw.style.display='flex'; ovl.style.display='block'; document.body.style.overflow='hidden'; }
+  function close() { drw.style.display='none'; ovl.style.display='none';  document.body.style.overflow=''; }
+
+  if(btn) btn.addEventListener('click', open);
+  ovl.addEventListener('click', close);
+  drw.addEventListener('click', function(e){
+    var el = e.target.closest('.mdi');
+    if(!el) { if(e.target.id==='mDrwClose') close(); return; }
+    var href = el.getAttribute('data-href');
+    var cat  = el.getAttribute('data-cat');
+    close();
+    setTimeout(function(){
+      var t = document.querySelector(href);
+      if(t) t.scrollIntoView({behavior:'smooth'});
+      if(cat){
+        window.currentFilter = cat;
+        document.querySelectorAll('#productsFilter .filter-btn').forEach(function(b){
+          b.classList.toggle('active', b.dataset.filter===cat);
+        });
+        if(typeof renderProducts==='function') renderProducts();
+      }
+    }, 150);
+  });
+
+  // تحديث اللغة داخل الدراور
+  document.addEventListener('langChanged', function(e){
+    var lang = e.detail;
+    drw.querySelectorAll('[data-'+lang+']').forEach(function(el){
+      el.textContent = el.getAttribute('data-'+lang);
+    });
+  });
+})();
+</script>
 </body>
 </html>
