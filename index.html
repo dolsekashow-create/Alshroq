@@ -514,7 +514,7 @@
         .logo-name { font-size: 16px; }
     }
 
-    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 300px; max-width: 85vw; height: 100vh; background: var(--color-white); z-index: 1100; padding: 0; box-shadow: var(--shadow-lg); overflow-y: auto; }
+    .mobile-menu-open .main-nav { display: block; position: fixed; top: 0; right: 0; width: 300px; max-width: 85vw; height: 100vh; background: var(--color-white); z-index: 2300; padding: 0; box-shadow: var(--shadow-lg); overflow-y: auto; }
     [dir="ltr"] .mobile-menu-open .main-nav { right: auto; left: 0; }
     .mobile-nav-header { display: none; }
     .mobile-menu-open .mobile-nav-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; background: linear-gradient(135deg, var(--color-red-dark), var(--color-red)); color: var(--color-white); border-bottom: 3px solid var(--color-gold); position: sticky; top: 0; z-index: 2; }
@@ -523,13 +523,16 @@
     .mobile-nav-close:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(90deg); }
     .mobile-menu-open .main-nav > ul { padding: 16px; }
     .mobile-menu-open .main-nav ul { flex-direction: column; align-items: stretch; gap: 4px; display: flex; }
-    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; }
+    .mobile-menu-open .main-nav a { width: 100%; padding: 14px 18px; justify-content: space-between; cursor: pointer; }
     .mobile-menu-open .main-nav .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; padding: 4px 0; min-width: auto; border-top: none; border-right: 2px solid var(--color-gold); margin: 4px 8px; background: var(--color-bg-soft); border-radius: var(--radius-sm); }
     [dir="ltr"] .mobile-menu-open .main-nav .dropdown { border-right: none; border-left: 2px solid var(--color-gold); }
     .mobile-menu-open .main-nav .dropdown ul { display: flex; flex-direction: column; gap: 0; padding: 0; }
     .mobile-menu-open .main-nav .dropdown a { padding: 10px 14px; font-size: 14px; }
-    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1050; opacity: 0; transition: opacity 0.3s ease; }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2200; opacity: 0; transition: opacity 0.3s ease; cursor: pointer; }
     .mobile-menu-open .mobile-overlay { display: block; opacity: 1; }
+    .mobile-menu-open { overflow: hidden; }
+    .mobile-menu-open .whatsapp-float, .mobile-menu-open .scroll-top { opacity: 0; visibility: hidden; pointer-events: none; }
+    .mobile-menu-open .main-header { z-index: 2400; }
     </style>
 </head>
 <body>
@@ -1511,22 +1514,37 @@
         const overlay = document.createElement('div');
         overlay.className = 'mobile-overlay';
         document.body.appendChild(overlay);
-        mobileMenuBtn?.addEventListener('click', function() {
-            document.body.classList.toggle('mobile-menu-open');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+
+        const closeMobileMenu = () => {
+            document.body.classList.remove('mobile-menu-open');
+            const icon = mobileMenuBtn?.querySelector('i');
+            if (icon) icon.classList.replace('fa-times', 'fa-bars');
+        };
+        const openMobileMenu = () => {
+            document.body.classList.add('mobile-menu-open');
+            const icon = mobileMenuBtn?.querySelector('i');
+            if (icon) icon.classList.replace('fa-bars', 'fa-times');
+        };
+
+        mobileMenuBtn?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (document.body.classList.contains('mobile-menu-open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
         });
         const mobileNavClose = document.getElementById('mobileNavClose');
-        mobileNavClose?.addEventListener('click', () => {
-            document.body.classList.remove('mobile-menu-open');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.replace('fa-times', 'fa-bars');
-        });
-        overlay.addEventListener('click', () => {
-            document.body.classList.remove('mobile-menu-open');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.replace('fa-times', 'fa-bars');
+        mobileNavClose?.addEventListener('click', closeMobileMenu);
+        overlay.addEventListener('click', closeMobileMenu);
+
+        // Close menu when any link inside it is clicked
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (document.body.classList.contains('mobile-menu-open')) {
+                    setTimeout(closeMobileMenu, 150);
+                }
+            });
         });
 
         // Smooth scroll
