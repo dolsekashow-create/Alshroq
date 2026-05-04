@@ -573,11 +573,35 @@
                             <input type="text" id="s-heroVideoId" placeholder="AEyHBmvgHfs">
                         </div>
                         <div class="form-group">
-                            <label data-ar="معرّف فيديو العرض (YouTube ID)" data-en="Showcase Video ID (YouTube)">معرّف فيديو العرض (YouTube ID)</label>
+                            <label data-ar="معرّف فيديو العرض الأول (YouTube ID)" data-en="First Showcase Video ID (YouTube)">معرّف فيديو العرض الأول (YouTube ID)</label>
                             <input type="text" id="s-showcaseVideoId" placeholder="MIXS8hn9w7Y">
                         </div>
                     </div>
-                    <p style="font-size:12px;color:var(--text-soft);margin-top:12px;" data-ar="مثال: رابط الفيديو https://youtube.com/watch?v=AEyHBmvgHfs — المعرّف هو: AEyHBmvgHfs" data-en="Example: for https://youtube.com/watch?v=AEyHBmvgHfs — the ID is: AEyHBmvgHfs">مثال: رابط الفيديو https://youtube.com/watch?v=AEyHBmvgHfs — المعرّف هو: AEyHBmvgHfs</p>
+
+                    <!-- Second Video -->
+                    <div style="margin-top:20px; padding:16px; background:#f9fafb; border-radius:10px; border:1px dashed var(--border);">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                            <i class="fab fa-youtube" style="color:#ff0000;font-size:20px;"></i>
+                            <h3 style="font-size:14px;font-weight:800;" data-ar="الفيديو الثاني (تحت الأول)" data-en="Second Video (below the first)">الفيديو الثاني (تحت الأول)</h3>
+                        </div>
+                        <div class="form-group">
+                            <label data-ar="معرّف فيديو العرض الثاني (YouTube ID)" data-en="Second Showcase Video ID (YouTube)">معرّف فيديو العرض الثاني (YouTube ID)</label>
+                            <input type="text" id="s-secondVideoId" placeholder="MIXS8hn9w7Y" style="margin-top:6px;">
+                        </div>
+                        <p style="font-size:12px;color:var(--text-soft);margin-top:8px;">
+                            <i class="fas fa-info-circle"></i>
+                            <span data-ar="اتركه فارغاً لإخفاء الفيديو الثاني" data-en="Leave empty to hide the second video">اتركه فارغاً لإخفاء الفيديو الثاني</span>
+                        </p>
+                        <!-- Preview -->
+                        <div id="secondVideoPreview" style="margin-top:14px; display:none;">
+                            <p style="font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text-soft);" data-ar="معاينة:" data-en="Preview:">معاينة:</p>
+                            <div style="position:relative;width:100%;max-width:400px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.12);">
+                                <iframe id="secondVideoPreviewFrame" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="font-size:12px;color:var(--text-soft);margin-top:16px;" data-ar="مثال: رابط الفيديو https://youtube.com/watch?v=MIXS8hn9w7Y — المعرّف هو: MIXS8hn9w7Y" data-en="Example: for https://youtube.com/watch?v=MIXS8hn9w7Y — the ID is: MIXS8hn9w7Y">مثال: رابط الفيديو https://youtube.com/watch?v=MIXS8hn9w7Y — المعرّف هو: MIXS8hn9w7Y</p>
                     <div class="form-actions" style="margin-top:20px;">
                         <button class="btn btn-primary" onclick="saveSettings()">
                             <i class="fas fa-save"></i>
@@ -853,7 +877,7 @@ const defaultSettings = {
     whatsapp: '201064540290', phone: '01064540290', email: 'niposoft@gmail.com',
     announceAr: '🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%',
     announceEn: '🌿 Free shipping on orders over 1000 EGP - 100% Natural Products',
-    heroVideoId: 'AEyHBmvgHfs', showcaseVideoId: 'MIXS8hn9w7Y',
+    heroVideoId: 'AEyHBmvgHfs', showcaseVideoId: 'MIXS8hn9w7Y', secondVideoId: 'MIXS8hn9w7Y',
     heroTextAr: 'نقاء الطبيعة في كل قطرة', heroTextEn: 'Pure Nature in Every Drop',
     heroDescAr: 'منتجات تستحق التجربة .. أفضل أنواع الزيوت الطبيعية',
     heroDescEn: 'Products worth trying.. Premium natural oils'
@@ -1219,6 +1243,12 @@ function loadSettingsForm() {
     document.getElementById('s-email').value = s.email || '';
     document.getElementById('s-heroVideoId').value = s.heroVideoId || '';
     document.getElementById('s-showcaseVideoId').value = s.showcaseVideoId || '';
+    const sv2 = s.secondVideoId || '';
+    document.getElementById('s-secondVideoId').value = sv2;
+    if (sv2) {
+        document.getElementById('secondVideoPreview').style.display = 'block';
+        document.getElementById('secondVideoPreviewFrame').src = `https://www.youtube.com/embed/${sv2}?rel=0&modestbranding=1`;
+    }
     document.getElementById('s-announceAr').value = s.announceAr || '';
     document.getElementById('s-announceEn').value = s.announceEn || '';
 }
@@ -1245,6 +1275,16 @@ function saveSettings() {
     settings.email = document.getElementById('s-email').value.trim() || settings.email;
     settings.heroVideoId = document.getElementById('s-heroVideoId').value.trim() || settings.heroVideoId;
     settings.showcaseVideoId = document.getElementById('s-showcaseVideoId').value.trim() || settings.showcaseVideoId;
+    settings.secondVideoId = document.getElementById('s-secondVideoId').value.trim();
+    // Update preview
+    const sv2Val = settings.secondVideoId;
+    const previewDiv = document.getElementById('secondVideoPreview');
+    if (sv2Val) {
+        previewDiv.style.display = 'block';
+        document.getElementById('secondVideoPreviewFrame').src = `https://www.youtube.com/embed/${sv2Val}?rel=0&modestbranding=1`;
+    } else {
+        previewDiv.style.display = 'none';
+    }
     settings.announceAr = document.getElementById('s-announceAr').value.trim() || settings.announceAr;
     settings.announceEn = document.getElementById('s-announceEn').value.trim() || settings.announceEn;
     localStorage.setItem('shorouq-settings', JSON.stringify(settings));
