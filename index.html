@@ -612,6 +612,15 @@
                 <div class="video-decoration video-deco-1"></div>
                 <div class="video-decoration video-deco-2"></div>
             </div>
+
+            <!-- Second Video -->
+            <div class="video-wrapper" id="secondVideoWrapper" style="margin-top: 48px;">
+                <div class="video-frame">
+                    <iframe id="secondVideoIframe" src="https://www.youtube.com/embed/MIXS8hn9w7Y?rel=0&modestbranding=1" title="Al Shorouq Organic - Video 2" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-decoration video-deco-1"></div>
+                <div class="video-decoration video-deco-2"></div>
+            </div>
         </div>
     </section>
 
@@ -885,7 +894,7 @@
         announceAr: '🌿 شحن مجاني للطلبات فوق 1000 جنيه - منتجات طبيعية 100%',
         announceEn: '🌿 Free shipping on orders over 1000 EGP - 100% Natural Products',
         announceRu: '🌿 Бесплатная доставка от 1000 EGP — 100% натуральные продукты',
-        heroVideoId: 'AEyHBmvgHfs', showcaseVideoId: 'MIXS8hn9w7Y'
+        heroVideoId: 'AEyHBmvgHfs', showcaseVideoId: 'MIXS8hn9w7Y', secondVideoId: 'MIXS8hn9w7Y'
     };
 
     // ===== State =====
@@ -1060,6 +1069,15 @@
         const showV = document.querySelector('.video-frame iframe');
         if (showV) {
             showV.src = `https://www.youtube.com/embed/${siteSettings.showcaseVideoId}?rel=0&modestbranding=1`;
+        }
+        const secondV = document.getElementById('secondVideoIframe');
+        if (secondV) {
+            if (siteSettings.secondVideoId) {
+                secondV.src = `https://www.youtube.com/embed/${siteSettings.secondVideoId}?rel=0&modestbranding=1`;
+                document.getElementById('secondVideoWrapper').style.display = 'block';
+            } else {
+                document.getElementById('secondVideoWrapper').style.display = 'none';
+            }
         }
     }
 
