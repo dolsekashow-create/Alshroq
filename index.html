@@ -1392,7 +1392,13 @@
         const catNames = { oils: { ar: 'زيوت', en: 'Oils', ru: 'Масла' }, creams: { ar: 'كريمات', en: 'Creams', ru: 'Кремы' }, ointments: { ar: 'دهانات', en: 'Ointments', ru: 'Мази' }, butter: { ar: 'زبدة', en: 'Butter', ru: 'Масло ши' } };
         const cat = catNames[p.cat] ? (catNames[p.cat][lang] || catNames[p.cat]['en']) : p.cat;
         const addText = lang === 'ar' ? 'أضف إلى السلة' : lang === 'ru' ? 'В корзину' : lang === 'de' ? 'In den Warenkorb' : lang === 'it' ? 'Aggiungi al carrello' : 'Add to Cart';
-        const qvImgSrc = productImages[p.id] || p.imageUrl || '';
+        let qvImgSrc = '';
+        try {
+            const productImages = JSON.parse(localStorage.getItem('shorouq-product-images') || '{}');
+            qvImgSrc = productImages[p.id] || p.imageUrl || '';
+        } catch (err) {
+            qvImgSrc = p.imageUrl || '';
+        }
 
         document.getElementById('quickViewContent').innerHTML = `
             <button class="quick-view-close" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
