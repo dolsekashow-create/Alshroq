@@ -228,9 +228,10 @@
     .product-badge { position: absolute; top: 16px; right: 16px; background: var(--color-red); color: var(--color-white); padding: 6px 12px; border-radius: var(--radius-full); font-size: 11px; font-weight: 800; z-index: 2; box-shadow: var(--shadow-red); }
     [dir="rtl"] .product-badge { right: auto; left: 16px; }
     .product-badge.new { background: var(--color-green); }
-    .product-actions { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; gap: 8px; opacity: 0; transition: var(--transition); z-index: 2; }
-    .product-card:hover .product-actions { opacity: 1; }
-    .product-actions button { width: 42px; height: 42px; border-radius: 50%; background: var(--color-white); color: var(--color-text); font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: var(--transition); }
+    .product-actions { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; gap: 8px; opacity: 0; transition: var(--transition); z-index: 5; pointer-events: none; }
+    .product-card:hover .product-actions { opacity: 1; pointer-events: auto; }
+    .product-actions button { width: 42px; height: 42px; border-radius: 50%; background: var(--color-white); color: var(--color-text); font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); transition: var(--transition); cursor: pointer; border: none; pointer-events: auto; }
+    @media (hover: none) { .product-actions { opacity: 1 !important; pointer-events: auto !important; } }
     .product-actions button:hover { background: var(--color-red); color: var(--color-white); transform: scale(1.1); }
     .product-actions button.active { background: var(--color-red); color: var(--color-white); }
     .product-info { padding: 20px 24px 24px; }
